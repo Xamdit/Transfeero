@@ -188,8 +188,13 @@ class Core(
             lazyPasswordsStorage,
             trackingProtectionPolicyFactory.createTrackingProtectionPolicy(),
         ).also { runtime ->
-            // Install the Transfeero Kiosk Cookie Burner extension
-            runtime.webExtensionController.install("resource://android/assets/extensions/kiosk-cookie-burner/")
+            // Install all built-in extensions from assets/extensions
+            val extensions = context.assets.list("extensions")
+            android.util.Log.d("FenixCore", "Found extensions in assets: ${extensions?.joinToString()}")
+            extensions?.forEach { extDir ->
+                android.util.Log.d("FenixCore", "Installing extension from assets: $extDir")
+                runtime.webExtensionController.install("resource://android/assets/extensions/$extDir/")
+            }
         }
     }
 

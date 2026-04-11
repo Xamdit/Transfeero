@@ -324,10 +324,9 @@ class Settings(private val appContext: Context) : PreferencesHolder {
         default = true,
     )
 
-    var shouldUseLightTheme by booleanPreference(
-        appContext.getPreferenceKey(R.string.pref_key_light_theme),
-        default = true,
-    )
+    var shouldUseLightTheme: Boolean
+        get() = true
+        set(_) {}
 
     var shouldUseAutoSize by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_accessibility_auto_size),
@@ -518,15 +517,13 @@ class Settings(private val appContext: Context) : PreferencesHolder {
         }
     }
 
-    var shouldUseDarkTheme by booleanPreference(
-        appContext.getPreferenceKey(R.string.pref_key_dark_theme),
-        default = false,
-    )
+    var shouldUseDarkTheme: Boolean
+        get() = false
+        set(_) {}
 
-    var shouldFollowDeviceTheme by booleanPreference(
-        appContext.getPreferenceKey(R.string.pref_key_follow_device_theme),
-        default = false,
-    )
+    var shouldFollowDeviceTheme: Boolean
+        get() = false
+        set(_) {}
 
     var shouldUseHttpsOnly by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_https_only),
@@ -662,20 +659,14 @@ class Settings(private val appContext: Context) : PreferencesHolder {
         default = false,
     )
 
-    val useStandardTrackingProtection by booleanPreference(
-        appContext.getPreferenceKey(R.string.pref_key_tracking_protection_standard_option),
-        true,
-    )
+    val useStandardTrackingProtection: Boolean
+        get() = true
 
-    val useStrictTrackingProtection by booleanPreference(
-        appContext.getPreferenceKey(R.string.pref_key_tracking_protection_strict_default),
-        false,
-    )
+    val useStrictTrackingProtection: Boolean
+        get() = false
 
-    val useCustomTrackingProtection by booleanPreference(
-        appContext.getPreferenceKey(R.string.pref_key_tracking_protection_custom_option),
-        false,
-    )
+    val useCustomTrackingProtection: Boolean
+        get() = false
 
     @VisibleForTesting(otherwise = PRIVATE)
     fun setStrictETP() {
