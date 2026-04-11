@@ -221,7 +221,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
             val megazordSetup = finishSetupMegazord()
 
             setDayNightTheme()
-            components.strictMode.enableStrictMode(true)
+            // components.strictMode.enableStrictMode(true) // Disabled to prevent crash on Vivo devices
             warmBrowsersCache()
 
             initializeWebExtensionSupport()
