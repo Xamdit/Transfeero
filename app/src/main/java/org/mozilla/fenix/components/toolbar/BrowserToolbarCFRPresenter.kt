@@ -50,7 +50,7 @@ private const val CFR_TO_ANCHOR_VERTICAL_PADDING = -6
  * @param toolbar will serve as anchor for the CFRs
  * @param sessionId optional custom tab id used to identify the custom tab in which to show a CFR.
  */
-class BrowserToolbarCFRPresenter(
+class BrowserToolbarCFRPresenter @Suppress("UNUSED_PARAMETER") constructor(
     private val context: Context,
     private val browserStore: BrowserStore,
     private val settings: Settings,

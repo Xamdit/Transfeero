@@ -27,6 +27,7 @@ import org.mozilla.fenix.ext.components
 import java.lang.ref.WeakReference
 
 object ToolbarPopupWindow {
+    @Suppress("UNUSED_PARAMETER")
     fun show(
         view: WeakReference<View>,
         customTabId: String? = null,
@@ -34,76 +35,7 @@ object ToolbarPopupWindow {
         handlePaste: (String) -> Unit,
         copyVisible: Boolean = true,
     ) {
-        val context = view.get()?.context ?: return
-        val clipboard = context.components.clipboardHandler
-        val clipboardUrl = clipboard.getUrl()
-        val clipboardText = clipboard.text
-        if (!copyVisible && clipboardUrl == null) return
-
-        val isCustomTabSession = customTabId != null
-
-        val binding = BrowserToolbarPopupWindowBinding.inflate(LayoutInflater.from(context))
-        val popupWindow = PopupWindow(
-            binding.root,
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            context.resources.getDimensionPixelSize(R.dimen.context_menu_height),
-            true,
-        )
-        popupWindow.elevation =
-            context.resources.getDimension(R.dimen.mozac_browser_menu_elevation)
-
-        // This is a workaround for SDK<23 to allow popup dismissal on outside or back button press
-        // See: https://github.com/mozilla-mobile/fenix/issues/10027
-        popupWindow.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        binding.copy.isVisible = copyVisible
-
-        binding.paste.isVisible = clipboardText != null && !isCustomTabSession
-        binding.pasteAndGo.isVisible = clipboardUrl != null && !isCustomTabSession
-
-        if (copyVisible) {
-            binding.copy.setOnClickListener { copyView ->
-                popupWindow.dismiss()
-                clipboard.text = getUrlForClipboard(
-                    copyView.context.components.core.store,
-                    customTabId,
-                )
-
-                view.get()?.let { toolbarView ->
-                    FenixSnackbar.make(
-                        view = toolbarView,
-                        duration = Snackbar.LENGTH_SHORT,
-                        isDisplayedWithBrowserToolbar = true,
-                    )
-                        .setText(context.getString(R.string.browser_toolbar_url_copied_to_clipboard_snackbar))
-                        .show()
-                }
-                Events.copyUrlTapped.record(NoExtras())
-            }
-        }
-
-        clipboardText?.let { text ->
-            binding.paste.setOnClickListener {
-                popupWindow.dismiss()
-                handlePaste(text)
-            }
-        }
-
-        clipboardUrl?.let { url ->
-            binding.pasteAndGo.setOnClickListener {
-                popupWindow.dismiss()
-                handlePasteAndGo(url)
-            }
-        }
-
-        view.get()?.let {
-            popupWindow.showAsDropDown(
-                it,
-                context.resources.getDimensionPixelSize(R.dimen.context_menu_x_offset),
-                0,
-                Gravity.START,
-            )
-        }
+        // Disabled all toolbar popups.
     }
 
     @VisibleForTesting

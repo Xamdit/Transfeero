@@ -186,6 +186,7 @@ class Core(
             context,
             lazyAutofillStorage,
             lazyPasswordsStorage,
+            trackingProtectionPolicyFactory.createTrackingProtectionPolicy(),
         ).also { runtime ->
             // Install the Transfeero Kiosk Cookie Burner extension
             runtime.webExtensionController.install("resource://android/assets/extensions/kiosk-cookie-burner/")

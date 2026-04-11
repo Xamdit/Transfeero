@@ -8,6 +8,7 @@ import android.content.Context
 import android.os.StrictMode
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible

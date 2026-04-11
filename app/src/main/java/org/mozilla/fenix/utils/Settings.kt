@@ -550,6 +550,7 @@ class Settings(private val appContext: Context) : PreferencesHolder {
 
     var shouldUseCookieBanner: Boolean
         get() = true
+        @Suppress("UNUSED_PARAMETER")
         set(value) {}
 
     var userOptOutOfReEngageCookieBannerDialog by booleanPreference(

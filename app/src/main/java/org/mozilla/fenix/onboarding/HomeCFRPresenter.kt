@@ -42,17 +42,8 @@ class HomeCFRPresenter(
      * if any.
      */
     fun show(): Boolean {
-        return when (val result = getCFRToShow()) {
-            is Result.SyncedTab -> {
-                showSyncedTabCFR(view = result.view)
-                true
-            }
-            is Result.JumpBackIn -> {
-                showJumpBackInCFR(view = result.view)
-                true
-            }
-            else -> false
-        }
+        // Disabled all Home Screen tooltips.
+        return false
     }
 
     private fun showSyncedTabCFR(view: View) {
