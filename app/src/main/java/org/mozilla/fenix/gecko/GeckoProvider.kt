@@ -58,6 +58,12 @@ object GeckoProvider {
             .contentBlocking(policy.toContentBlockingSetting())
             .debugLogging(Config.channel.isDebug)
             .aboutConfigEnabled(Config.channel.isBeta || Config.channel.isNightlyOrDebug)
+            .also {
+                if (Config.channel.isNightlyOrDebug) {
+                    // Disable remote settings signature verification to avoid InvalidSignatureError in debug builds
+                    it.configBool("services.settings.check_signatures", false)
+                }
+            }
             .build()
 
         val settings = context.components.settings

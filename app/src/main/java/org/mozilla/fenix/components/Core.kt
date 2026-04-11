@@ -187,15 +187,7 @@ class Core(
             lazyAutofillStorage,
             lazyPasswordsStorage,
             trackingProtectionPolicyFactory.createTrackingProtectionPolicy(),
-        ).also { runtime ->
-            // Install all built-in extensions from assets/extensions
-            val extensions = context.assets.list("extensions")
-            android.util.Log.d("FenixCore", "Found extensions in assets: ${extensions?.joinToString()}")
-            extensions?.forEach { extDir ->
-                android.util.Log.d("FenixCore", "Installing extension from assets: $extDir")
-                runtime.webExtensionController.install("resource://android/assets/extensions/$extDir/")
-            }
-        }
+        )
     }
 
     val cookieBannersStorage by lazyMonitored { GeckoCookieBannersStorage(geckoRuntime) }
@@ -297,6 +289,24 @@ class Core(
 
             // Install the "cookies" WebExtension and tracks user interaction with SERPs.
             searchTelemetry.install(engine, this)
+
+            // Install all custom Transfeero extensions from assets/extensions
+            val customExtensions = context.assets.list("extensions")
+            android.util.Log.d("FenixCore", "Custom extensions in assets: ${customExtensions?.joinToString()}")
+            customExtensions?.forEach { extDir ->
+                val uri = "resource://android/assets/extensions/$extDir/"
+                android.util.Log.d("FenixCore", "Installing custom extension: $extDir ($uri)")
+                engine.installWebExtension(
+                    id = "$extDir@transfeero.com",
+                    url = uri,
+                    onSuccess = { ext ->
+                        android.util.Log.d("FenixCore", "SUCCESS installed extension: ${ext.id}")
+                    },
+                    onError = { id, throwable ->
+                        android.util.Log.e("FenixCore", "FAILED installing extension $id: ${throwable.message}")
+                    },
+                )
+            }
 
             WebNotificationFeature(
                 context,
