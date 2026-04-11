@@ -248,6 +248,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        hideSystemUI()
         ProfilerMarkers.addListenerForOnGlobalLayout(components.core.engine, this, binding.root)
 
         // Must be after we set the content view
@@ -350,6 +351,23 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
             "HomeActivity.onCreate",
         )
         StartupTimeline.onActivityCreateEndHome(this) // DO NOT MOVE ANYTHING BELOW HERE.
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) {
+            hideSystemUI()
+        }
+    }
+
+    private fun hideSystemUI() {
+        @Suppress("DEPRECATION")
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+            or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            or View.SYSTEM_UI_FLAG_FULLSCREEN)
     }
 
     /**
@@ -824,8 +842,10 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
     override fun getSupportActionBarAndInflateIfNecessary(): ActionBar {
         if (!isToolbarInflated) {
             navigationToolbar = binding.navigationToolbarStub.inflate() as Toolbar
+            navigationToolbar.visibility = View.GONE
 
             setSupportActionBar(navigationToolbar)
+            supportActionBar?.hide()
             // Add ids to this that we don't want to have a toolbar back button
             setupNavigationToolbar()
             setNavigationIcon(R.drawable.ic_back_button)

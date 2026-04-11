@@ -128,6 +128,8 @@ class BrowserToolbarView(
                 )
 
                 display.hint = context.getString(R.string.search_hint)
+
+                visibility = View.GONE
             }
 
             val menuToolbar: ToolbarMenu

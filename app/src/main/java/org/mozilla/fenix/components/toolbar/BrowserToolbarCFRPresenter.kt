@@ -68,22 +68,7 @@ class BrowserToolbarCFRPresenter(
      */
     @Suppress("MagicNumber")
     fun start() {
-        if (settings.shouldShowTotalCookieProtectionCFR) {
-            tcpCfrScope = browserStore.flowScoped { flow ->
-                flow
-                    .mapNotNull { it.findCustomTabOrSelectedTab(sessionId)?.content?.progress }
-                    // The "transformWhile" below ensures that the 100% progress is only collected once.
-                    .transformWhile { progress ->
-                        emit(progress)
-                        progress != 100
-                    }
-                    .filter { it == 100 }
-                    .collect {
-                        tcpCfrScope?.cancel()
-                        showTcpCfr()
-                    }
-            }
-        }
+        // TCP CFR Tooltip is disabled.
     }
 
     /**

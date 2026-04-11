@@ -32,11 +32,9 @@ import mozilla.components.feature.contextmenu.ContextMenuCandidate
 import mozilla.components.feature.readerview.ReaderViewFeature
 import mozilla.components.feature.tab.collections.TabCollection
 import mozilla.components.feature.tabs.WindowFeature
-import mozilla.components.lib.state.ext.consumeFlow
 import mozilla.components.service.glean.private.NoExtras
 import mozilla.components.support.base.feature.UserInteractionHandler
 import mozilla.components.support.base.feature.ViewBoundFeatureWrapper
-import mozilla.components.support.ktx.kotlinx.coroutines.flow.ifAnyChanged
 import org.mozilla.fenix.GleanMetrics.ReaderMode
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.FenixSnackbar
@@ -47,6 +45,10 @@ import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.ext.requireComponents
 import org.mozilla.fenix.ext.runIfFragmentIsAttached
+import kotlinx.coroutines.flow.map
+import mozilla.components.browser.state.selector.selectedTab
+import mozilla.components.lib.state.ext.consumeFlow
+import mozilla.components.support.ktx.kotlinx.coroutines.flow.ifAnyChanged
 import org.mozilla.fenix.ext.settings
 import org.mozilla.fenix.nimbus.FxNimbus
 import org.mozilla.fenix.settings.quicksettings.protections.cookiebanners.dialog.CookieBannerReEngagementDialogUtils
@@ -74,6 +76,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
     override fun initializeUI(view: View, tab: SessionState) {
         super.initializeUI(view, tab)
         browserToolbarView.view.visibility = View.GONE
+        observeLoadingProgress(requireComponents.core.store)
 
 
         val context = requireContext()
@@ -512,5 +515,21 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
         }
     }
 
+    private fun observeLoadingProgress(store: BrowserStore) {
+        consumeFlow(store) { flow ->
+            flow.map { state -> state.selectedTab }.ifAnyChanged { tab ->
+                arrayOf(tab?.content?.loading, tab?.content?.progress)
+            }.collect { tab ->
+                if (tab == null) return@collect
+                val progressBarId = resources.getIdentifier("browser_progress_bar", "id", requireContext().packageName)
+                val progressBar = view?.findViewById<ProgressBar>(progressBarId)
+                if (tab.content.loading) {
+                    progressBar?.visibility = View.VISIBLE
+                    progressBar?.progress = tab.content.progress
+                } else {
+                    progressBar?.visibility = View.GONE
+                }
+            }
+        }
     }
 }
