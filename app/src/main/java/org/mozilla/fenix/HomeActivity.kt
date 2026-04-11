@@ -268,7 +268,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         // Unless the activity is recreated, navigate to home first (without rendering it)
         // to add it to the back stack.
         if (savedInstanceState == null) {
-            openToBrowserAndLoad("https://control.transfeero.com", newTab = true, from = BrowserDirection.FromGlobal)
+            openToBrowserAndLoad("https://control.transfeero.com/login?redirect=http%3A%2F%2Fcontrol.transfeero.com%2Fnew_rides", newTab = true, from = BrowserDirection.FromGlobal)
         }
 
         if (settings().showHomeOnboardingDialog && onboarding.userHasBeenOnboarded()) {
