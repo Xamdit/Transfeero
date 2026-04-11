@@ -58,13 +58,6 @@ object GeckoProvider {
             .contentBlocking(policy.toContentBlockingSetting())
             .debugLogging(Config.channel.isDebug)
             .aboutConfigEnabled(Config.channel.isBeta || Config.channel.isNightlyOrDebug)
-            .also {
-                if (Config.channel.isNightlyOrDebug) {
-                    // Disable remote settings signature verification to avoid InvalidSignatureError in debug builds
-                    // We use arguments() instead of configFilePath() to avoid startup crashes related to invalid URI schemes.
-                    it.arguments(arrayOf("-setpref", "services.settings.check_signatures=false"))
-                }
-            }
             .build()
 
         val settings = context.components.settings
