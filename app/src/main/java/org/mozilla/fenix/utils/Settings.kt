@@ -548,13 +548,9 @@ class Settings(private val appContext: Context) : PreferencesHolder {
         default = false,
     )
 
-    var shouldUseCookieBanner by lazyFeatureFlagPreference(
-        appContext.getPreferenceKey(R.string.pref_key_cookie_banner_v1),
-        featureFlag = true,
-        default = { true },
-    )
-    get() = true
-    set(value) {}
+    var shouldUseCookieBanner: Boolean
+        get() = true
+        set(value) {}
 
     var userOptOutOfReEngageCookieBannerDialog by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_cookie_banner_re_engage_dialog_dismissed),

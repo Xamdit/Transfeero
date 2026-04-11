@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -509,5 +510,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
                 )
             }
         }
+    }
+
     }
 }

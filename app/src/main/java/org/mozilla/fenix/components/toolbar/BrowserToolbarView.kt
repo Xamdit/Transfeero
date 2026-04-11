@@ -65,7 +65,6 @@ class BrowserToolbarView(
             customTabSession?.config?.externalAppType == ExternalAppType.TRUSTED_WEB_ACTIVITY
 
     init {
-        view.visibility = View.GONE
         val isCustomTabSession = customTabSession != null
 
         view.display.setOnUrlLongClickListener {
@@ -185,11 +184,9 @@ class BrowserToolbarView(
     }
 
     fun expand() {
-        view.visibility = View.GONE
     }
 
     fun collapse() {
-        view.visibility = View.GONE
     }
 
     fun dismissMenu() {
