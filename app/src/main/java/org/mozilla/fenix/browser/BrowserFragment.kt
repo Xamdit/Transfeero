@@ -8,9 +8,9 @@ import android.content.Context
 import android.os.StrictMode
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -47,6 +47,10 @@ import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.ext.requireComponents
 import org.mozilla.fenix.ext.runIfFragmentIsAttached
+import kotlinx.coroutines.flow.map
+import mozilla.components.browser.state.selector.selectedTab
+import mozilla.components.lib.state.ext.consumeFlow
+import mozilla.components.support.ktx.kotlinx.coroutines.flow.ifAnyChanged
 import org.mozilla.fenix.ext.settings
 import org.mozilla.fenix.nimbus.FxNimbus
 import org.mozilla.fenix.settings.quicksettings.protections.cookiebanners.dialog.CookieBannerReEngagementDialogUtils
@@ -73,6 +77,8 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
     @Suppress("LongMethod")
     override fun initializeUI(view: View, tab: SessionState) {
         super.initializeUI(view, tab)
+        browserToolbarView.view.visibility = View.GONE
+        observeLoadingProgress(requireComponents.core.store)
         browserToolbarView.view.visibility = View.GONE
 
 
@@ -512,5 +518,21 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
         }
     }
 
+    private fun observeLoadingProgress(store: BrowserStore) {
+        consumeFlow(store) { flow ->
+            flow.map { state -> state.selectedTab }.ifAnyChanged { tab ->
+                arrayOf(tab?.content?.loading, tab?.content?.progress)
+            }.collect { tab ->
+                if (tab == null) return@collect
+                val progressBarId = resources.getIdentifier("browser_progress_bar", "id", requireContext().packageName)
+                val progressBar = view?.findViewById<ProgressBar>(progressBarId)
+                if (tab.content.loading) {
+                    progressBar?.visibility = View.VISIBLE
+                    progressBar?.progress = tab.content.progress
+                } else {
+                    progressBar?.visibility = View.GONE
+                }
+            }
+        }
     }
 }

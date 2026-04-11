@@ -545,12 +545,14 @@ class Settings(private val appContext: Context) : PreferencesHolder {
 
     var shouldUseTrackingProtection by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_tracking_protection),
-        default = false,
+        default = true,
     )
 
-    var shouldUseCookieBanner: Boolean
-        get() = true
-        set(value) {}
+    var shouldUseCookieBanner by lazyFeatureFlagPreference(
+        appContext.getPreferenceKey(R.string.pref_key_cookie_banner_v1),
+        featureFlag = true,
+        default = { false },
+    )
 
     var userOptOutOfReEngageCookieBannerDialog by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_cookie_banner_re_engage_dialog_dismissed),
@@ -570,7 +572,7 @@ class Settings(private val appContext: Context) : PreferencesHolder {
     )
 
     val shouldShowCookieBannerUI: Boolean
-        get() = true
+        get() = cookieBannersSection[CookieBannersSection.FEATURE_UI] == 1
 
     /**
      * Indicates after how many hours a cookie banner dialog should be shown again
@@ -696,14 +698,14 @@ class Settings(private val appContext: Context) : PreferencesHolder {
 
     val blockCookiesInCustomTrackingProtection by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_tracking_protection_custom_cookies),
-        false,
+        true,
     )
 
     val enabledTotalCookieProtection: Boolean
-        get() = false
+        get() = Config.channel.isNightlyOrDebug || mr2022Sections[Mr2022Section.TCP_FEATURE] == true
 
     private val enabledTotalCookieProtectionCFR: Boolean
-        get() = false
+        get() = Config.channel.isNightlyOrDebug || mr2022Sections[Mr2022Section.TCP_CFR] == true
 
     /**
      * Indicates if the total cookie protection CRF should be shown.
@@ -711,7 +713,7 @@ class Settings(private val appContext: Context) : PreferencesHolder {
     var shouldShowTotalCookieProtectionCFR by lazyFeatureFlagPreference(
         appContext.getPreferenceKey(R.string.pref_key_should_show_total_cookie_protection_popup),
         featureFlag = true,
-        default = { false },
+        default = { enabledTotalCookieProtectionCFR },
     )
 
     val blockCookiesSelectionInCustomTrackingProtection by stringPreference(
@@ -1553,7 +1555,14 @@ class Settings(private val appContext: Context) : PreferencesHolder {
      * Get the current mode for cookie banner handling
      */
     fun getCookieBannerHandling(): CookieBannerHandlingMode {
-        return CookieBannerHandlingMode.REJECT_OR_ACCEPT_ALL
+        return when (shouldUseCookieBanner) {
+            true -> CookieBannerHandlingMode.REJECT_ALL
+            false -> if (shouldEnabledCookieBannerDetectOnlyMode()) {
+                CookieBannerHandlingMode.REJECT_ALL
+            } else {
+                CookieBannerHandlingMode.DISABLED
+            }
+        }
     }
 
     /**
