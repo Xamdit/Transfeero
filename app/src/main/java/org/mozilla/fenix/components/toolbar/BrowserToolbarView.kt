@@ -65,6 +65,7 @@ class BrowserToolbarView(
             customTabSession?.config?.externalAppType == ExternalAppType.TRUSTED_WEB_ACTIVITY
 
     init {
+        view.visibility = View.GONE
         val isCustomTabSession = customTabSession != null
 
         view.display.setOnUrlLongClickListener {
@@ -184,25 +185,11 @@ class BrowserToolbarView(
     }
 
     fun expand() {
-        // expand only for normal tabs and custom tabs not for PWA or TWA
-        if (isPwaTabOrTwaTab) {
-            return
-        }
-
-        (view.layoutParams as? CoordinatorLayout.LayoutParams)?.apply {
-            (behavior as? BrowserToolbarBehavior)?.forceExpand(view)
-        }
+        view.visibility = View.GONE
     }
 
     fun collapse() {
-        // collapse only for normal tabs and custom tabs not for PWA or TWA. Mirror expand()
-        if (isPwaTabOrTwaTab) {
-            return
-        }
-
-        (view.layoutParams as? CoordinatorLayout.LayoutParams)?.apply {
-            (behavior as? BrowserToolbarBehavior)?.forceCollapse(view)
-        }
+        view.visibility = View.GONE
     }
 
     fun dismissMenu() {

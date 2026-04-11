@@ -23,9 +23,24 @@ echo "Fenix (Firefox for Android) Debug Test Script"
 echo "==========================================="
 
 # Check for connected devices
-DEVICE_COUNT=$($ADB devices | grep -v "List" | grep "device" | wc -l)
+ALL_DEVICES=$($ADB devices | grep -v "List" | grep -v "^$" || true)
+DEVICE_COUNT=$(echo "$ALL_DEVICES" | grep -w "device" | wc -l)
+
 if [ "$DEVICE_COUNT" -eq 0 ]; then
-    echo "ERROR: No devices connected. Please connect a device via USB or start an emulator."
+    if [ ! -z "$ALL_DEVICES" ]; then
+        echo "==========================================="
+        echo "ERROR: Device(s) found but they are not ready."
+        echo "-------------------------------------------"
+        echo "$ALL_DEVICES"
+        echo "-------------------------------------------"
+        echo "Suggestions:"
+        echo "1. Check your device for a 'Allow USB debugging?' prompt."
+        echo "2. Try reconnecting the USB cable."
+        echo "3. Run: $ADB kill-server && $ADB devices"
+        echo "==========================================="
+    else
+        echo "ERROR: No devices connected. Please connect a device via USB or start an emulator."
+    fi
     exit 1
 fi
 
