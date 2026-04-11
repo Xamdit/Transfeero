@@ -104,3 +104,11 @@ test_artifacts/
 
 # Web extensions: manifest.json files are generated
 manifest.json
+
+# Fenix Build & Temp Artifacts
+output/
+build_error.log
+*.apk
+!app/src/main/assets/extensions/**/*.apk
+
+

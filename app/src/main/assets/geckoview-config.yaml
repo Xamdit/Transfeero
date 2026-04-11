@@ -1,0 +1,2 @@
+preferences:
+  services.settings.check_signatures: false

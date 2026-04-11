@@ -60,8 +60,8 @@ object GeckoProvider {
             .aboutConfigEnabled(Config.channel.isBeta || Config.channel.isNightlyOrDebug)
             .also {
                 if (Config.channel.isNightlyOrDebug) {
-                    // Disable remote settings signature verification to avoid InvalidSignatureError in debug builds
-                    it.configBool("services.settings.check_signatures", false)
+                    // Load configuration to disable remote settings signature verification
+                    it.configFilePath("resource://android/assets/geckoview-config.yaml")
                 }
             }
             .build()
