@@ -62,7 +62,7 @@ if [ -z "$APK_PATH" ] || [ ! -f "$APK_PATH" ]; then
 fi
 
 echo "Installing $APK_PATH..."
-$ADB install -r "$APK_PATH"
+$ADB install -r -t "$APK_PATH"
 
 if [ "$CLEAR_DATA" = true ]; then
     echo "Clearing application data (--clear)..."

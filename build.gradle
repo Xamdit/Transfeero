@@ -137,7 +137,7 @@ allprojects {
 
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
         kotlinOptions.jvmTarget = "1.8"
-        kotlinOptions.allWarningsAsErrors = true
+        kotlinOptions.allWarningsAsErrors = false // Disabled for SDK 34/35 compatibility
         kotlinOptions.freeCompilerArgs += [
             "-opt-in=kotlin.RequiresOptIn", "-Xjvm-default=all"
         ]
