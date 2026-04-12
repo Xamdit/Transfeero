@@ -138,10 +138,10 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
             return
         }
 
-        Log.d("FenixLog", "StartupStep: 0. Application.onCreate start")
+        android.util.Log.d("FenixLog", "StartupStep: 0. Application.onCreate start")
         // DO NOT ADD ANYTHING ABOVE HERE.
         setupInMainProcessOnly()
-        Log.d("FenixLog", "StartupStep: 10. Application.onCreate end")
+        android.util.Log.d("FenixLog", "StartupStep: 10. Application.onCreate end")
         // DO NOT ADD ANYTHING UNDER HERE.
 
         // DO NOT MOVE ANYTHING BELOW THIS elapsedRealtimeNanos CALL.
@@ -200,14 +200,14 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
 
     @CallSuper
     open fun setupInMainProcessOnly() {
-        Log.d("FenixLog", "StartupStep: 1. setupInMainProcessOnly start")
+        android.util.Log.d("FenixLog", "StartupStep: 1. setupInMainProcessOnly start")
         // ⚠️ DO NOT ADD ANYTHING ABOVE THIS LINE.
         // Especially references to the engine/BrowserStore which can alter the app initialization.
         // See: https://github.com/mozilla-mobile/fenix/issues/26320
         //
         // We can initialize Nimbus before Glean because Glean will queue messages
         // before it's initialized.
-        Log.d("FenixLog", "StartupStep: 2. Initialize Nimbus")
+        android.util.Log.d("FenixLog", "StartupStep: 2. Initialize Nimbus")
         initializeNimbus()
 
         ProfilerMarkerFactProcessor.create { components.core.engine.profiler }.register()
@@ -219,19 +219,19 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
             }
 
             // We need to always initialize Glean and do it early here.
-            Log.d("FenixLog", "StartupStep: 3. Initialize Glean")
+            android.util.Log.d("FenixLog", "StartupStep: 3. Initialize Glean")
             initializeGlean()
 
             // Attention: Do not invoke any code from a-s in this scope.
-            Log.d("FenixLog", "StartupStep: 4. finishSetupMegazord")
+            android.util.Log.d("FenixLog", "StartupStep: 4. finishSetupMegazord")
             val megazordSetup = finishSetupMegazord()
 
-            Log.d("FenixLog", "StartupStep: 5. setDayNightTheme")
+            android.util.Log.d("FenixLog", "StartupStep: 5. setDayNightTheme")
             setDayNightTheme()
             // components.strictMode.enableStrictMode(true) // Disabled to prevent crash on Vivo devices
             warmBrowsersCache()
 
-            Log.d("FenixLog", "StartupStep: 6. initializeWebExtensionSupport")
+            android.util.Log.d("FenixLog", "StartupStep: 6. initializeWebExtensionSupport")
             initializeWebExtensionSupport()
             if (FeatureFlags.storageMaintenanceFeature) {
                 // Make sure to call this function before registering a storage worker
@@ -241,11 +241,11 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
                 // for the periodic task.
                 GlobalPlacesDependencyProvider.initialize(components.core.historyStorage)
             }
-            Log.d("FenixLog", "StartupStep: 7. restoreBrowserState")
+            android.util.Log.d("FenixLog", "StartupStep: 7. restoreBrowserState")
             restoreBrowserState()
-            Log.d("FenixLog", "StartupStep: 8. restoreDownloads")
+            android.util.Log.d("FenixLog", "StartupStep: 8. restoreDownloads")
             restoreDownloads()
-            Log.d("FenixLog", "StartupStep: 9. restoreMessaging")
+            android.util.Log.d("FenixLog", "StartupStep: 9. restoreMessaging")
             restoreMessaging()
 
             // Just to make sure it is impossible for any application-services pieces

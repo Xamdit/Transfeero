@@ -16,11 +16,13 @@
 
 **Latest Progress**:
 - แก้ไข Build Failed ใน `GeckoProvider.kt` โดยใช้ `arguments` และ `configFilePath` เรียบร้อยแล้ว
-- บิลด์ผ่านและสามารถผลิต APK ได้สำเร็จ
-- ปรับปรุง `disable-chat.js` ให้ครอบคลุมการซ่อน Intercom Messenger Frame
-- ตรวจสอบ Selectors ของหน้า Login `control.transfeero.com` แล้วว่าตรงกับ `auto-login.js`
+- บิลด์ผ่านและสามารถผลิต APK ได้สำเร็จ รองรับ Android 8-15 (API 26-34)
+- ปรับปรุง `accept-cookie.js` ให้รองรับ Shadow DOM และ CookieYes selectors อย่างสมบูรณ์
+- Hard-disable `StrictMode` ใน `StrictModeManager.kt` เพื่อแก้ปัญหา App Crash บนบางอุปกรณ์ (เช่น Vivo)
+- เพิ่ม Diagnostic Logs (StartupStep 0-10) ใน `FenixApplication.kt` เพื่อระบุตำแหน่งที่แอป Crash เมื่อ Restart
 - ตั้งค่าระบบ Workflow `/complete-work` และ `/resume-work` ผ่าน `.agents/workflows/`
 
 **Pending Issues**:
-- `InvalidSignatureError` ยังปรากฏใน Log ของ GeckoView (แม้แอปจะทำงานได้) ต้องหาวิธีแก้ในระดับ Deep config ต่อไปหากต้องการความสมบูรณ์
-- ต้องทดสอบการทำงานของ `accept-ride.js` บนหน้างานจริงเมื่อมี Booking เข้ามา
+- ตรวจสอบ Logcat เพื่อหาค่า "StartupStep" สุดท้ายก่อนที่แอปจะ Crash เมื่อ Restart (เพื่อระบุ Module ที่มีปัญหา)
+- `InvalidSignatureError` ยังปรากฏใน Log ของ GeckoView ต้องหาวิธีแก้ในระดับ Deep config ต่อไปหากต้องการความสมบูรณ์
+- ทดสอบการทำงานของ `accept-cookie.js` บน Shadow DOM ของจริงในอุปกรณ์เป้าหมาย
