@@ -61,6 +61,9 @@ open class StrictModeManager(
      * @param setPenaltyDeath boolean value to decide setting the penaltyDeath as a penalty.
      */
     fun enableStrictMode(setPenaltyDeath: Boolean) {
+        // Hard-disabled to prevent startup crashes on certain devices (e.g. Vivo).
+        return
+        /*
         if (isEnabledByBuildConfig) {
             val threadPolicy = StrictMode.ThreadPolicy.Builder()
                 .detectAll()
@@ -85,6 +88,7 @@ open class StrictModeManager(
             }
             StrictMode.setVmPolicy(builder.build())
         }
+        */
     }
 
     /**
