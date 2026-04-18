@@ -679,6 +679,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
                 when (Config.channel.isMozillaOnline) {
                     true -> "MozillaOnline"
                     false -> "Mozilla"
+                    else -> "Mozilla"
                 },
             )
 
@@ -746,6 +747,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
                 when (settings.toolbarPosition) {
                     ToolbarPosition.BOTTOM -> CustomizationFragment.Companion.Position.BOTTOM.name
                     ToolbarPosition.TOP -> CustomizationFragment.Companion.Position.TOP.name
+                    else -> ""
                 },
             )
 

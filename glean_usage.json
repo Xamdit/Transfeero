@@ -1,0 +1,994 @@
+{
+  "props": {
+    "Activation": [
+      "identifier",
+      "activationId"
+    ],
+    "Addons": [
+      "openAddonInToolbarMenu",
+      "openAddonsInSettings",
+      "find",
+      "joinToString",
+      "installedAddons",
+      "size",
+      "hasEnabledAddons",
+      "hasInstalledAddons",
+      "enabledAddons",
+      "toTypedArray"
+    ],
+    "Addresses": [
+      "managementAddTapped",
+      "autofillPromptShown",
+      "autofillPromptDismissed",
+      "formDetected",
+      "autofilled",
+      "updated",
+      "autofillPromptExpanded",
+      "saved",
+      "deleted",
+      "managementAddressTapped"
+    ],
+    "AndroidAutofill": [
+      "supported",
+      "unlockCancelled",
+      "requestMatchingLogins",
+      "enabled",
+      "searchItemSelected",
+      "confirmCancelled",
+      "searchDisplayed",
+      "confirmSuccessful",
+      "unlockSuccessful",
+      "requestNoMatchingLogins"
+    ],
+    "AppTheme": [
+      "darkThemeSelected"
+    ],
+    "Autoplay": [
+      "visitedSetting",
+      "settingChanged"
+    ],
+    "Awesomebar": [
+      "searchEngineSuggestions",
+      "searchSuggestionClicked",
+      "bookmarkSuggestions",
+      "clipboardSuggestionClicked",
+      "syncedTabsSuggestions",
+      "shortcutsSuggestions",
+      "openedTabSuggestionClicked",
+      "clipboardSuggestions",
+      "bookmarkSuggestionClicked",
+      "searchTermSuggestionClicked",
+      "historySuggestions",
+      "sessionSuggestions",
+      "searchActionClicked",
+      "historySuggestionClicked"
+    ],
+    "BookmarksManagement": [
+      "edited",
+      "shared",
+      "moved",
+      "folderAdd",
+      "searchResultTapped",
+      "openInPrivateTab",
+      "openInNewTab",
+      "searchIconTapped",
+      "multiRemoved",
+      "folderRemove",
+      "open",
+      "openInPrivateTabs",
+      "copied",
+      "openInNewTabs",
+      "removed"
+    ],
+    "BrowserSearch": [
+      "withAds",
+      "inContent",
+      "adClicks"
+    ],
+    "Collections": [
+      "getDefaultCollectionNumber",
+      "renameButton",
+      "renamed",
+      "size",
+      "tabRestored",
+      "firstOrNull",
+      "addTabButton",
+      "removed",
+      "tabSelectOpened",
+      "contains",
+      "tabRemoved",
+      "toMutableSet",
+      "shared",
+      "allTabsRestored",
+      "map",
+      "saveButton",
+      "longPress",
+      "isEmpty",
+      "saved",
+      "tabsAdded"
+    ],
+    "ContextMenu": [
+      "itemTapped"
+    ],
+    "ContextualMenu": [
+      "shareTapped",
+      "copyTapped",
+      "searchTapped",
+      "selectAllTapped"
+    ],
+    "CookieBanners": [
+      "allowReEngagementDialog",
+      "optOutReEngagementDialog",
+      "exceptionRemoved",
+      "visitedSetting",
+      "notNowReEngagementDialog",
+      "exceptionAdded",
+      "settingChanged",
+      "visitedReEngagementDialog",
+      "visitedPanel"
+    ],
+    "CreditCards": [
+      "managementAddTapped",
+      "autofillPromptShown",
+      "autofillPromptDismissed",
+      "formDetected",
+      "savePromptCreate",
+      "savePromptShown",
+      "autofilled",
+      "autofillPromptExpanded",
+      "savePromptUpdate",
+      "saved",
+      "deleted",
+      "modified",
+      "managementCardTapped"
+    ],
+    "CustomizeHome": [
+      "recentlySaved",
+      "recentlyVisited",
+      "sponsoredPocket",
+      "jumpBackIn",
+      "preferenceToggled",
+      "contile",
+      "mostVisitedSites",
+      "pocket",
+      "openingScreen"
+    ],
+    "EngineTab": [],
+    "ErrorPage": [
+      "visitedError"
+    ],
+    "Events": [
+      "toolbarMenuVisible",
+      "preferenceToggled",
+      "recentlyClosedTabsOpened",
+      "normalAndPrivateUriCount",
+      "saveToPdfFailure",
+      "browserToolbarHomeTapped",
+      "marketingNotificationAllowed",
+      "tabViewChanged",
+      "copyUrlTapped",
+      "defaultBrowserNotifTapped",
+      "reEngagementNotifTapped",
+      "performedSearch",
+      "saveToPdfTapped",
+      "defaultBrowserChanged",
+      "searchBarTapped",
+      "shareToApp",
+      "appOpened",
+      "defaultBrowserNotifShown",
+      "reEngagementNotifShown",
+      "syncedTabOpened",
+      "formDataFailure",
+      "browserMenuAction",
+      "openedLink",
+      "whatsNewTapped",
+      "enteredUrl"
+    ],
+    "FirstSession": [
+      "campaign",
+      "adgroup",
+      "distributionId",
+      "network",
+      "creative",
+      "timestamp"
+    ],
+    "GleanBuildInfo": [
+      "buildInfo"
+    ],
+    "History": [
+      "removedAll",
+      "openedItemsInNewTabs",
+      "opened",
+      "removedTodayAndYesterday",
+      "toPendingDeletionHistory",
+      "Regular",
+      "filteredByBlocklist",
+      "searchResultTapped",
+      "removePromptCancelled",
+      "removed",
+      "searchIconTapped",
+      "removePromptOpened",
+      "Item",
+      "shared",
+      "searchTermGroupRemoveAll",
+      "filterNot",
+      "Group",
+      "apply",
+      "searchTermGroupTapped",
+      "Metadata",
+      "searchTermGroupRemoveTab",
+      "searchTermGroupOpenTab",
+      "MetaData",
+      "recentSearchesTapped",
+      "invoke",
+      "openedItem",
+      "removedLastHour"
+    ],
+    "HomeMenu": [
+      "Item"
+    ],
+    "HomeScreen": [
+      "homeScreenViewCount",
+      "customizeHomeClicked",
+      "homeScreenDisplayed"
+    ],
+    "LoginDialog": [
+      "displayed",
+      "neverSave",
+      "saved",
+      "cancelled"
+    ],
+    "Logins": [
+      "saveEditedLogin",
+      "saveLoginsSettingChanged",
+      "deleteSavedLogin",
+      "openLoginEditor",
+      "openLogins",
+      "viewPasswordLogin",
+      "openIndividualLogin",
+      "copyLogin"
+    ],
+    "MediaNotification": [
+      "play",
+      "pause"
+    ],
+    "MediaState": [
+      "fullscreen",
+      "play",
+      "pause",
+      "pictureInPicture",
+      "stop"
+    ],
+    "Messaging": [
+      "messageExpired",
+      "malformed",
+      "messageShown",
+      "messageDismissed",
+      "messageClicked"
+    ],
+    "Metrics": [
+      "searchWidgetInstalled",
+      "ReaderMode",
+      "welcomeGetStartedClicked",
+      "HomeMenu",
+      "kills",
+      "hasEnabledAddons",
+      "inactiveTabsCount",
+      "telemetryEnabled",
+      "Logins",
+      "autoCloseSeen",
+      "History",
+      "FirstSession",
+      "Collections",
+      "Events",
+      "SearchShortcuts",
+      "ReviewPrompt",
+      "recentlyUsedPwaCount",
+      "UnifiedSearch",
+      "topSitesCount",
+      "Autoplay",
+      "welcomeCloseClicked",
+      "Awesomebar",
+      "openLinksInAppEnabled",
+      "Pings",
+      "enabled",
+      "RecentSearches",
+      "RecentTabs",
+      "bookmarksSuggestion",
+      "adjustAdGroup",
+      "defaultWallpaper",
+      "Activation",
+      "Preferences",
+      "mobileBookmarksCount",
+      "tabsOpenCount",
+      "PerfStartup",
+      "killForegroundAge",
+      "heightPixels",
+      "toolbarPositionSetting",
+      "TrackingProtection",
+      "TopSites",
+      "mozillaProducts",
+      "GleanBuildInfo",
+      "welcomeCardImpression",
+      "browsingHistorySuggestion",
+      "syncSkipClicked",
+      "AndroidAutofill",
+      "foregroundMetrics",
+      "startReasonActivityError",
+      "signedInSync",
+      "Metrics",
+      "hasInstalledAddons",
+      "CreditCards",
+      "StorageStats",
+      "toolbarPosition",
+      "report",
+      "hasDesktopBookmarks",
+      "etpCustomCookiesSelection",
+      "BrowserSearch",
+      "RecentlyClosedTabs",
+      "TabsTray",
+      "supported",
+      "Tabs",
+      "Messaging",
+      "hasOpenTabs",
+      "hasMobileBookmarks",
+      "EngineTab",
+      "RecentBookmarks",
+      "shown",
+      "SearchWidget",
+      "RecentSyncedTabs",
+      "density",
+      "ProgressiveWebApp",
+      "notificationsAllowed",
+      "enabledAddons",
+      "Tab",
+      "VoiceSearch",
+      "searchShortcutsEnabled",
+      "Addons",
+      "adjustCampaign",
+      "SyncAuth",
+      "LoginDialog",
+      "adjustNetwork",
+      "syncCardImpression",
+      "hasTopSites",
+      "CustomizeHome",
+      "RecentlyVisitedHomepage",
+      "SyncedTabs",
+      "Onboarding",
+      "syncCloseClicked",
+      "PerfAwesomebar",
+      "queryStatsDuration",
+      "defaultMozBrowser",
+      "killBackgroundAge",
+      "closeTabSetting",
+      "ErrorPage",
+      "BookmarksManagement",
+      "syncItems",
+      "defaultBrowser",
+      "SyncAccount",
+      "AppTheme",
+      "densityDpi",
+      "ToolbarSettings",
+      "ContextualMenu",
+      "installedAddons",
+      "voiceSearchEnabled",
+      "CookieBanners",
+      "studiesEnabled",
+      "distributionId",
+      "StartOnHome",
+      "Addresses",
+      "MediaNotification",
+      "cacheBytes",
+      "marketingNotificationAllowed",
+      "inactiveTabsEnabled",
+      "SitePermissions",
+      "accessibilityServices",
+      "syncSignInClicked",
+      "widthPixels",
+      "ContextMenu",
+      "searchSuggestionsEnabled",
+      "Pocket",
+      "clipboardSuggestionsEnabled",
+      "startReasonProcessError",
+      "hasRecentPwas",
+      "HomeScreen",
+      "userTheme",
+      "appBytes",
+      "tabViewSetting",
+      "remoteDebuggingEnabled",
+      "dataDirBytes",
+      "desktopBookmarksCount",
+      "enhancedTrackingProtection",
+      "SearchDefaultEngine",
+      "settingsItemClicked",
+      "adjustCreative",
+      "searchCount",
+      "contextId",
+      "MediaState",
+      "Wallpapers",
+      "installSource",
+      "contextId",
+      "hasInstalledAddons",
+      "installedAddons",
+      "hasEnabledAddons",
+      "enabledAddons",
+      "supported",
+      "enabled",
+      "searchSuggestionsEnabled",
+      "remoteDebuggingEnabled",
+      "studiesEnabled",
+      "telemetryEnabled",
+      "browsingHistorySuggestion",
+      "bookmarksSuggestion",
+      "clipboardSuggestionsEnabled",
+      "searchShortcutsEnabled",
+      "voiceSearchEnabled",
+      "openLinksInAppEnabled",
+      "signedInSync",
+      "syncItems",
+      "toolbarPositionSetting",
+      "enhancedTrackingProtection",
+      "etpCustomCookiesSelection",
+      "accessibilityServices",
+      "userTheme",
+      "inactiveTabsEnabled",
+      "settingsItemClicked",
+      "impression",
+      "click",
+      "shown",
+      "welcomeCloseClicked",
+      "welcomeGetStartedClicked",
+      "welcomeCardImpression"
+    ],
+    "Onboarding": [
+      "prefToggledToolbarPosition",
+      "notifPppPositiveBtnClick",
+      "finish",
+      "syncCfrImplicitDismissal",
+      "notifPppCloseClick",
+      "synCfrShown",
+      "prefToggledTrackingProt",
+      "prefToggledThemePicker",
+      "notifPppImpression",
+      "privacyNotice",
+      "syncCfrExplicitDismissal",
+      "notifPppNegativeBtnClick",
+      "fxaManualSignin"
+    ],
+    "PerfAwesomebar": [
+      "searchEngineSuggestions",
+      "bookmarkSuggestions",
+      "syncedTabsSuggestions",
+      "shortcutsSuggestions",
+      "clipboardSuggestions",
+      "historySuggestions",
+      "sessionSuggestions"
+    ],
+    "PerfStartup": [
+      "startupType",
+      "coldMainAppToFirstFrame",
+      "coldViewAppToFirstFrame",
+      "coldUnknwnAppToFirstFrame",
+      "applicationOnCreate"
+    ],
+    "Pings": [
+      "activation",
+      "topsitesImpression",
+      "spoc",
+      "firstSession",
+      "spocReasonCodes"
+    ],
+    "Pocket": [
+      "homeRecsLearnMoreClicked",
+      "spocShim",
+      "homeRecsSpocShown",
+      "homeRecsDiscoverClicked",
+      "homeRecsStoryClicked",
+      "homeRecsSpocClicked",
+      "pocketTopSiteRemoved",
+      "homeRecsCategoryClicked",
+      "pocketTopSiteClicked",
+      "homeRecsShown"
+    ],
+    "Preferences": [
+      "getBoolean",
+      "remoteDebuggingEnabled",
+      "clipboardSuggestionsEnabled",
+      "registerOnSharedPreferenceChangeListener",
+      "unregisterOnSharedPreferenceChangeListener",
+      "edit",
+      "searchShortcutsEnabled",
+      "openLinksInAppEnabled",
+      "studiesPreferenceEnabled",
+      "voiceSearchEnabled",
+      "studiesEnabled",
+      "signedInSync",
+      "bookmarksSuggestion",
+      "browsingHistorySuggestion",
+      "searchSuggestionsEnabled",
+      "OnSharedPreferenceChangeListener",
+      "telemetryEnabled"
+    ],
+    "ProgressiveWebApp": [
+      "homescreenTap",
+      "installTap"
+    ],
+    "ReaderMode": [
+      "appearance",
+      "available",
+      "opened",
+      "closed"
+    ],
+    "RecentBookmarks": [
+      "recentBookmarksCount",
+      "bookmarkClicked",
+      "showAllBookmarks"
+    ],
+    "RecentSearches": [
+      "groupDeleted"
+    ],
+    "RecentSyncedTabs": [
+      "recentSyncedTabShown",
+      "recentSyncedTabOpened",
+      "showAllSyncedTabsClicked",
+      "latestSyncedTabIsStale",
+      "recentSyncedTabTimeToLoad"
+    ],
+    "RecentTabs": [
+      "showAllClicked",
+      "jumpBackInCfrShown",
+      "jumpBackInCfrCancelled",
+      "jumpBackInCfrDismissed",
+      "recentTabOpened",
+      "inProgressMediaTabOpened",
+      "sectionVisible"
+    ],
+    "RecentlyClosedTabs": [
+      "openTab",
+      "menuClose",
+      "deleteTab",
+      "menuDelete",
+      "opened",
+      "menuShare",
+      "enterMultiselect",
+      "menuOpenInPrivateTab",
+      "closed",
+      "exitMultiselect",
+      "menuOpenInNormalTab",
+      "showFullHistory"
+    ],
+    "RecentlyVisitedHomepage": [
+      "historyHighlightOpened",
+      "searchGroupOpened"
+    ],
+    "ReviewPrompt": [
+      "promptAttempt"
+    ],
+    "SearchDefaultEngine": [
+      "apply"
+    ],
+    "SearchShortcuts": [
+      "selected",
+      "onPreferenceChangeListener"
+    ],
+    "SearchWidget": [
+      "newTabButton",
+      "voiceButton"
+    ],
+    "SitePermissions": [
+      "get",
+      "origin",
+      "update",
+      "toggle",
+      "permissionsAllowed",
+      "permissionsDenied",
+      "AutoplayStatus",
+      "promptShown",
+      "Status"
+    ],
+    "StartOnHome": [
+      "openTabsTray"
+    ],
+    "StorageStats": [],
+    "SyncAccount": [
+      "syncNow",
+      "signInToSendTab",
+      "opened",
+      "sendTab"
+    ],
+    "SyncAuth": [
+      "otherExternal",
+      "useEmail",
+      "opened",
+      "signUp",
+      "signOut",
+      "closed",
+      "scanPairing",
+      "paired",
+      "signIn",
+      "recovered",
+      "useEmailProblem"
+    ],
+    "SyncedTabs": [
+      "recentSyncedTabShown",
+      "recentSyncedTabOpened",
+      "showAllSyncedTabsClicked",
+      "syncedTabsSuggestionClicked",
+      "latestSyncedTabIsStale",
+      "ordinal",
+      "recentSyncedTabTimeToLoad"
+    ],
+    "Tab": [
+      "device",
+      "Tab",
+      "content",
+      "invoke",
+      "isNormalTabInactive",
+      "url",
+      "state",
+      "tab",
+      "mediaPause",
+      "value",
+      "collectAsState",
+      "id",
+      "displayTitle",
+      "readerState",
+      "displayURL",
+      "mediaPlay",
+      "setOnClickListener"
+    ],
+    "Tabs": [
+      "deleteTab",
+      "menuDelete",
+      "filter",
+      "indexOf",
+      "opened",
+      "forEach",
+      "filteredByBlocklist",
+      "size",
+      "run",
+      "isNotEmpty",
+      "setOnCheckedChangeListener",
+      "showAllSyncedTabsClicked",
+      "value",
+      "firstOrNull",
+      "menuOpenInNormalTab",
+      "remove",
+      "sectionVisible",
+      "toTypedArray",
+      "menuClose",
+      "contains",
+      "recentSyncedTabShown",
+      "addAll",
+      "recentSyncedTabOpened",
+      "recentTabOpened",
+      "menuOpenInPrivateTab",
+      "filterOutTab",
+      "forEachIndexed",
+      "toString",
+      "toMutableSet",
+      "sortedByDescending",
+      "first",
+      "jumpBackInCfrShown",
+      "jumpBackInCfrCancelled",
+      "enterMultiselect",
+      "toComposeList",
+      "jumpBackInCfrDismissed",
+      "closed",
+      "exitMultiselect",
+      "syncedTabsSuggestionClicked",
+      "isChecked",
+      "latestSyncedTabIsStale",
+      "getInactiveTabs",
+      "showFullHistory",
+      "showAllClicked",
+      "openTab",
+      "map",
+      "menuShare",
+      "toList",
+      "invoke",
+      "isEmpty",
+      "inProgressMediaTabOpened",
+      "maxByOrNull",
+      "count",
+      "settingOpened",
+      "ordinal",
+      "recentSyncedTabTimeToLoad"
+    ],
+    "TabsTray": [
+      "closeSelectedTabs",
+      "enterMultiselectMode",
+      "accessPoint",
+      "opened",
+      "menuOpened",
+      "Delegate",
+      "closeInactiveTab",
+      "autoCloseDimissed",
+      "saveToCollection",
+      "selectedTabsToCollection",
+      "autoCloseTurnOnClicked",
+      "privateModeTapped",
+      "newTabTapped",
+      "closeAllInactiveTabs",
+      "inactiveTabsCfrDismissed",
+      "hasInactiveTabs",
+      "closed",
+      "inactiveTabsExpanded",
+      "closeAllTabs",
+      "newPrivateTabTapped",
+      "bookmarkSelectedTabs",
+      "openedExistingTab",
+      "inactiveTabsCollapsed",
+      "openInactiveTab",
+      "inactiveTabsCfrVisible",
+      "shareAllTabs",
+      "shareSelectedTabs",
+      "inactiveTabsCfrSettings",
+      "normalModeTapped",
+      "closedExistingTab",
+      "syncedModeTapped"
+    ],
+    "ToolbarSettings": [
+      "changedPosition"
+    ],
+    "TopSites": [
+      "contileSettings",
+      "contileTileId",
+      "contileAdvertiser",
+      "contileReportingUrl",
+      "remove",
+      "contileImpression",
+      "openInNewTab",
+      "googleTopSiteRemoved",
+      "topSites",
+      "openBaiduSearchAttribution",
+      "openFrecency",
+      "baiduTopSiteRemoved",
+      "openInPrivateTab",
+      "openGoogleSearchAttribution",
+      "openPinned",
+      "openContileTopSite",
+      "contileSponsorsAndPrivacy",
+      "swipeCarousel",
+      "openContileInPrivateTab",
+      "contileClick",
+      "openDefault",
+      "longPress",
+      "sort",
+      "contextId"
+    ],
+    "TrackingProtection": [
+      "isEnabled",
+      "etpTrackerList",
+      "invoke",
+      "tcpCfrShown",
+      "tcpSumoLinkClicked",
+      "onClickListener",
+      "panelSettings",
+      "tcpCfrExplicitDismissal",
+      "isChecked",
+      "exceptionAdded",
+      "tcpCfrImplicitDismissal",
+      "etpSettings",
+      "etpSettingChanged"
+    ],
+    "UnifiedSearch": [
+      "searchMenuTapped",
+      "engineSelected"
+    ],
+    "VoiceSearch": [
+      "tapped"
+    ],
+    "Wallpapers": [
+      "learnMoreLinkClick",
+      "map",
+      "filter",
+      "find",
+      "getWallpapersForOnboarding",
+      "wallpaperSelected",
+      "wallpaperSettingsOpened",
+      "size",
+      "take",
+      "onboardingClosed",
+      "onboardingExploreMoreClick",
+      "onboardingOpened",
+      "getAvailableWallpapers"
+    ],
+    "NimbusMessagingController": [],
+    "TabCounterBuilder": []
+  },
+  "extras": {
+    "Activation": {},
+    "Addons": {
+      "OpenAddonInToolbarMenuExtra": []
+    },
+    "Addresses": {},
+    "AndroidAutofill": {},
+    "AppTheme": {
+      "DarkThemeSelectedExtra": []
+    },
+    "Autoplay": {
+      "SettingChangedExtra": []
+    },
+    "Awesomebar": {},
+    "BookmarksManagement": {},
+    "BrowserSearch": {},
+    "Collections": {
+      "SavedExtra": [],
+      "TabsAddedExtra": [],
+      "SaveButtonExtra": []
+    },
+    "ContextMenu": {
+      "ItemTappedExtra": []
+    },
+    "ContextualMenu": {},
+    "CookieBanners": {},
+    "CreditCards": {},
+    "CustomizeHome": {},
+    "EngineTab": {},
+    "ErrorPage": {
+      "VisitedErrorExtra": []
+    },
+    "Events": {
+      "AppOpenedExtra": [],
+      "OpenedLinkExtra": [],
+      "PreferenceToggledExtra": [],
+      "TabViewChangedExtra": [],
+      "SearchBarTappedExtra": [],
+      "EnteredUrlExtra": [
+        "autocomplete"
+      ],
+      "PerformedSearchExtra": [],
+      "BrowserMenuActionExtra": [],
+      "ShareToAppExtra": []
+    },
+    "FirstSession": {},
+    "GleanBuildInfo": {},
+    "History": {
+      "RecentSearchesTappedExtra": [],
+      "OpenedItemExtra": [
+        "timeGroup",
+        "isRemote"
+      ]
+    },
+    "HomeMenu": {},
+    "HomeScreen": {},
+    "LoginDialog": {},
+    "Logins": {
+      "SaveLoginsSettingChangedExtra": []
+    },
+    "MediaNotification": {},
+    "MediaState": {},
+    "Messaging": {
+      "MalformedExtra": [],
+      "MessageDismissedExtra": [],
+      "MessageShownExtra": [],
+      "MessageExpiredExtra": [],
+      "MessageClickedExtra": [
+        "actionUuid",
+        "messageKey"
+      ]
+    },
+    "Metrics": {},
+    "Onboarding": {
+      "PrefToggledTrackingProtExtra": [],
+      "PrefToggledThemePickerExtra": [],
+      "PrefToggledToolbarPositionExtra": []
+    },
+    "PerfAwesomebar": {},
+    "PerfStartup": {},
+    "Pings": {},
+    "Pocket": {
+      "HomeRecsSpocShownExtra": [
+        "spocId"
+      ],
+      "HomeRecsCategoryClickedExtra": [
+        "selectedTotal",
+        "newState",
+        "categoryName"
+      ],
+      "HomeRecsStoryClickedExtra": [
+        "timesShown",
+        "position"
+      ],
+      "HomeRecsSpocClickedExtra": [
+        "spocId"
+      ]
+    },
+    "Preferences": {},
+    "ProgressiveWebApp": {},
+    "ReaderMode": {},
+    "RecentBookmarks": {},
+    "RecentSearches": {},
+    "RecentSyncedTabs": {},
+    "RecentTabs": {},
+    "RecentlyClosedTabs": {},
+    "RecentlyVisitedHomepage": {},
+    "ReviewPrompt": {
+      "PromptAttemptExtra": [
+        "promptWasDisplayed",
+        "numberOfAppLaunches",
+        "localDatetime"
+      ]
+    },
+    "SearchDefaultEngine": {},
+    "SearchShortcuts": {
+      "SelectedExtra": [
+        "source",
+        "name",
+        "themeCollection"
+      ]
+    },
+    "SearchWidget": {},
+    "SitePermissions": {
+      "PromptShownExtra": [],
+      "PermissionsAllowedExtra": [],
+      "PermissionsDeniedExtra": []
+    },
+    "StartOnHome": {},
+    "StorageStats": {},
+    "SyncAccount": {},
+    "SyncAuth": {},
+    "SyncedTabs": {},
+    "Tab": {
+      "ForegroundMetricsExtra": []
+    },
+    "Tabs": {},
+    "TabsTray": {
+      "HasInactiveTabsExtra": [],
+      "EnterMultiselectModeExtra": [],
+      "ShareSelectedTabsExtra": [
+        "tabCount"
+      ],
+      "SelectedTabsToCollectionExtra": [
+        "tabCount"
+      ],
+      "BookmarkSelectedTabsExtra": [
+        "tabCount"
+      ],
+      "ClosedExistingTabExtra": [],
+      "CloseSelectedTabsExtra": [
+        "tabCount"
+      ],
+      "OpenedExistingTabExtra": []
+    },
+    "ToolbarSettings": {
+      "ChangedPositionExtra": []
+    },
+    "TopSites": {
+      "ContileClickExtra": [
+        "source",
+        "position"
+      ],
+      "LongPressExtra": [],
+      "ContileImpressionExtra": [
+        "source",
+        "position"
+      ],
+      "SwipeCarouselExtra": []
+    },
+    "TrackingProtection": {
+      "EtpSettingChangedExtra": []
+    },
+    "UnifiedSearch": {
+      "EngineSelectedExtra": []
+    },
+    "VoiceSearch": {},
+    "Wallpapers": {
+      "LearnMoreLinkClickExtra": [
+        "collectionName",
+        "url"
+      ],
+      "WallpaperSelectedExtra": [
+        "source",
+        "name",
+        "themeCollection"
+      ],
+      "OnboardingClosedExtra": [
+        "isSelected"
+      ]
+    },
+    "NimbusMessagingController": {},
+    "TabCounterBuilder": {}
+  }
+}

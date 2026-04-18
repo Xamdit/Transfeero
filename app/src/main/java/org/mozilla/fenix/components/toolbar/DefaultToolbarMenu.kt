@@ -177,21 +177,6 @@ open class DefaultToolbarMenu(
     } ?: false
     // End of predicates //
 
-    private val installToHomescreen = BrowserMenuHighlightableItem(
-        label = context.getString(R.string.browser_menu_install_on_homescreen),
-        startImageResource = R.drawable.mozac_ic_add_to_home_screen,
-        iconTintColorResource = primaryTextColor(),
-        highlight = BrowserMenuHighlight.LowPriority(
-            label = context.getString(R.string.browser_menu_install_on_homescreen),
-            notificationTint = getColor(context, R.color.fx_mobile_icon_color_information),
-        ),
-        isCollapsingMenuLimit = true,
-        isHighlighted = {
-            !context.settings().installPwaOpened
-        },
-    ) {
-        onItemTapped.invoke(ToolbarMenu.Item.InstallPwaToHomeScreen)
-    }
 
     @VisibleForTesting
     internal val newTabItem = BrowserMenuImageText(
@@ -266,14 +251,6 @@ open class DefaultToolbarMenu(
         iconTintColorResource = primaryTextColor(),
     )
 
-    private val addToHomeScreenItem = BrowserMenuImageText(
-        label = context.getString(R.string.browser_menu_add_to_homescreen),
-        imageResource = R.drawable.mozac_ic_add_to_home_screen,
-        iconTintColorResource = primaryTextColor(),
-        isCollapsingMenuLimit = true,
-    ) {
-        onItemTapped.invoke(ToolbarMenu.Item.AddToHomeScreen)
-    }
 
     private val addRemoveTopSitesItem = TwoStateBrowserMenuImageText(
         primaryLabel = context.getString(R.string.browser_menu_add_to_shortcuts),
@@ -377,8 +354,6 @@ open class DefaultToolbarMenu(
                 openInApp.apply { visible = ::shouldShowOpenInApp },
                 reportSiteIssuePlaceholder,
                 BrowserMenuDivider(),
-                addToHomeScreenItem.apply { visible = ::canAddToHomescreen },
-                installToHomescreen.apply { visible = ::canInstall },
                 addRemoveTopSitesItem,
                 saveToCollectionItem,
                 BrowserMenuDivider(),

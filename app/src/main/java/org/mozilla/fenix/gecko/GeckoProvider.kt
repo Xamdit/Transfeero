@@ -60,6 +60,7 @@ object GeckoProvider {
             .aboutConfigEnabled(Config.channel.isBeta || Config.channel.isNightlyOrDebug)
             .build()
 
+/*
         if (!org.mozilla.fenix.utils.AppConfig.remoteSettingsEnabled) {
              runtimeSettings.arguments.addAll(listOf(
                 "--setpref", "services.settings.server=",
@@ -72,6 +73,7 @@ object GeckoProvider {
                 "--setpref", "toolkit.telemetry.server="
             ))
         }
+*/
  
         val geckoRuntime = GeckoRuntime.create(context, runtimeSettings)
 
