@@ -1,0 +1,3295 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ride | Transfeero Partner</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <meta content="Transfeero Partner Dashboard" name="description" />
+    <!-- meta theme color -->
+    <meta name="theme-color" content="#2a3042" />
+    <meta content="Transfeero" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+    <!-- Responsive Table css -->
+    <link
+      href="./rwd-table.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
+    <style>
+
+
+      .booking_single_box_title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        display: block;
+        color: #bababa;
+      }
+
+      .b_options {
+        display: block;
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+
+      #amendment_action {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border: 3px solid #f4b45a;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .payout {
+        margin-top: 10px;
+        font-size: 25px;
+        display: block;
+      }
+
+
+
+      .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .pickup-time-updated {
+        color: #d64747;
+        font-weight: 700;
+      }
+
+      .pickup-time-original {
+        margin-left: 8px;
+        opacity: 0.82;
+        text-decoration: line-through;
+      }
+    </style>
+
+    <!-- Bootstrap Css -->
+    <link
+      href="bootstrap.min.css"
+      id="bootstrap-style"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Icons Css -->
+    <link href="icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link
+      href="app.min.css"
+      id="app-style"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- App js -->
+    <script src="/assets/js/luxon.min.js"></script>
+
+    <script
+      src="https://kit.fontawesome.com/67df8bf3e8.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+      integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tippy.js/6.3.7/tippy.min.css"
+      integrity="sha512-HbPh+j4V7pXprvQMt2dtmK/zCEsUeZWYXRln4sOwmoyHPQAPqy/k9lIquKUyKNpNbDGAY06UdiDHcEkBc72yCQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
+      integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/tippy.js/6.3.7/tippy.umd.min.js"
+      integrity="sha512-2TtfktSlvvPzopzBA49C+MX6sdc7ykHGbBQUTH8Vk78YpkXVD5r6vrNU+nOmhhl1MyTWdVfxXdZfyFsvBvOllw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script>
+      function truncateString(str, num) {
+        if (str.length > num) {
+          return str.slice(0, num) + "...";
+        } else {
+          return str;
+        }
+      }
+    </script>
+
+    <style>
+      @font-face {
+        font-family: "EuclidFlexReg";
+        src: url("/assets/fonts/EuclidCircularA-Light-WebXL.woff2");
+        font-weight: 300;
+      }
+
+      @font-face {
+        font-family: "EuclidFlexReg";
+        src: url("/assets/fonts/EuclidCircularA-Regular-WebXL.woff2");
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: "EuclidFlexReg";
+        src: url("/assets/fonts/EuclidCircularA-Medium-WebXL.woff2");
+        font-weight: 500;
+      }
+
+      @font-face {
+        font-family: "EuclidFlexReg";
+        src: url("/assets/fonts/EuclidCircularA-Semibold-WebXL.woff2");
+        font-weight: 600;
+      }
+
+      body {
+        font-family: "EuclidFlexReg", sans-serif;
+      }
+
+      .the_single_border {
+        border-radius: 4px;
+        outline: 1px solid rgb(240 240 240);
+        padding: 13px;
+        margin-top: 5px;
+        margin-bottom: 18px;
+      }
+
+
+
+      .table-responsive {
+        border-radius: 3px;
+        border: 0px !important;
+        margin-bottom: 20px;
+      }
+      .route_line {
+        border-left: 2px solid #212121;
+        margin-top: 1px;
+        color: #fff;
+        margin-left: 14px;
+        position: absolute;
+        height: 0%;
+        -webkit-animation: increase 4s;
+        -moz-animation: increase 4s;
+        -o-animation: increase 4s;
+        animation: increase 4s;
+        animation-fill-mode: forwards;
+
+        animation-iteration-count: infinite;
+        z-index: 9;
+      }
+
+      .route_line_fix {
+        border-left: 2px solid #bdbdbd;
+        margin-top: 1px;
+        color: #fff;
+        margin-left: 14px;
+        position: absolute;
+        z-index: 1;
+        height: 100%;
+      }
+
+      @keyframes increase {
+        100% {
+          height: 100%;
+        }
+      }
+
+      .chat-app .people-list {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 20px;
+        z-index: 7;
+      }
+
+      .people-list {
+        -moz-transition: 0.5s;
+        -o-transition: 0.5s;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+      }
+
+      .people-list .chat-list li {
+        padding: 10px 15px;
+        list-style: none;
+        border-radius: 3px;
+      }
+
+      .people-list .chat-list li:hover {
+        background: #efefef;
+        cursor: pointer;
+      }
+
+      .people-list .chat-list li.active {
+        background: #efefef;
+      }
+
+      .people-list .chat-list li .name {
+        font-size: 15px;
+      }
+
+      .people-list .chat-list img {
+        width: 45px;
+        border-radius: 50%;
+      }
+
+      .people-list img {
+        float: left;
+        border-radius: 50%;
+      }
+
+      .people-list .about {
+        float: left;
+        padding-left: 8px;
+      }
+
+      .people-list .status {
+        color: #999;
+        font-size: 13px;
+      }
+
+      .chat .chat-header {
+        padding: 15px 20px;
+        border-bottom: 2px solid #f4f7f6;
+      }
+
+      .chat .chat-header img {
+        float: left;
+        border-radius: 40px;
+        width: 40px;
+      }
+
+      .chat .chat-header .chat-about {
+        float: left;
+        padding-left: 10px;
+      }
+
+      .chat .chat-history {
+        overflow: scroll;
+        height: 400px;
+        padding: 20px;
+        border-bottom: 2px solid #fff;
+        font-size: 14px;
+      }
+
+      .chat .chat-history ul {
+        padding: 0;
+      }
+
+      .chat .chat-history ul li {
+        list-style: none;
+        margin-bottom: 30px;
+      }
+
+      .chat .chat-history ul li:last-child {
+        margin-bottom: 0px;
+      }
+
+      .chat .chat-history .message-data {
+        margin-bottom: 15px;
+      }
+
+      .chat .chat-history .message-data img {
+        border-radius: 40px;
+        width: 40px;
+      }
+
+      .chat .chat-history .message-data-time {
+        color: #434651;
+        padding-left: 6px;
+      }
+
+      .chat .chat-history .message-data-time_partner {
+        color: #434651;
+        padding-left: 6px;
+        width: 100%;
+        text-align: right;
+        float: right;
+      }
+
+      .chat .chat-history .message {
+        color: #444;
+        padding: 18px 20px;
+        line-height: 26px;
+        font-size: 14px;
+        border-radius: 7px;
+        display: inline-block;
+        position: relative;
+      }
+
+      .chat .chat-history .message:after {
+        bottom: 100%;
+        left: 7%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-bottom-color: #fff;
+        border-width: 10px;
+        margin-left: -10px;
+      }
+
+      .chat .chat-history .my-message {
+        background: #efefef;
+      }
+
+      .chat .chat-history .my-message:after {
+        bottom: 100%;
+        left: 30px;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-bottom-color: #efefef;
+        border-width: 10px;
+        margin-left: -10px;
+      }
+
+      .chat .chat-history .other-message {
+        background: #e8f1f3;
+        text-align: left;
+        padding: 14px;
+      }
+
+      .chat .chat-history .other-message:after {
+        border-bottom-color: #e8f1f3;
+        left: 93%;
+      }
+
+      .chat .chat-message {
+        padding: 20px;
+      }
+
+      .online,
+      .offline,
+      .me {
+        margin-right: 2px;
+        font-size: 8px;
+        vertical-align: middle;
+      }
+
+      .online {
+        color: #86c541;
+      }
+
+      .offline {
+        color: #e47297;
+      }
+
+      .me {
+        color: #1d8ecd;
+      }
+
+      .float-right {
+        float: right;
+      }
+
+      .partner_info_desc {
+        font-size: 10px;
+        color: #6c757d;
+        font-weight: 300;
+        margin-top: 5px;
+        display: block;
+      }
+
+      .autoselez {
+        -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+        -moz-animation: fadein 1s; /* Firefox < 16 */
+        -ms-animation: fadein 1s; /* Internet Explorer */
+        -o-animation: fadein 1s; /* Opera < 12.1 */
+        animation: fadein 1s;
+      }
+
+      @keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Firefox < 16 */
+      @-moz-keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Safari, Chrome and Opera > 12.1 */
+      @-webkit-keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Internet Explorer */
+      @-ms-keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+
+      .status_blue {
+        color: #ffc736;
+      }
+      .status_green {
+        color: #81de96;
+      }
+      .status_dark {
+        color: #71b0fc;
+      }
+      .status_red {
+        color: #ce2b37;
+      }
+
+      .status_green_back {
+        background-color: #81de96;
+        color: #fff;
+        font-size: 13px;
+        padding: 3px 5px;
+        border-radius: 4px;
+        font-weight: 700;
+        top: -3px;
+        position: relative;
+      }
+
+      .status_blue_back {
+        background-color: #ffc736;
+        color: #fff;
+        font-size: 13px;
+        padding: 3px 5px;
+        border-radius: 4px;
+        font-weight: 700;
+        top: -3px;
+        position: relative;
+      }
+      .status_dark_back {
+        background-color: #71b0fc;
+        color: #fff;
+        font-size: 13px;
+        padding: 3px 5px;
+        border-radius: 4px;
+        font-weight: 700;
+        top: -3px;
+        position: relative;
+      }
+      .status_red_back {
+        background-color: #ce2b37;
+        color: #fff;
+        font-size: 13px;
+        padding: 3px 5px;
+        border-radius: 4px;
+        font-weight: 700;
+        top: -3px;
+        position: relative;
+      }
+
+      .label_booking_row {
+        color: grey;
+        font-weight: 300;
+        display: block;
+        margin-bottom: 7px;
+        margin-top: 5px;
+      }
+
+      .rides-list-surface .rides-toolbar {
+        align-items: center;
+        row-gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .rides-list-surface .rides-toolbar h3 {
+        margin-bottom: 0;
+      }
+
+      .rides-list-surface .rides-toolbar .input-group {
+        max-width: 460px;
+        margin-left: auto;
+      }
+
+      .rides-list-surface .rides-toolbar .form-control {
+        border-radius: 10px 0 0 10px;
+        border-color: #dbe3f1;
+        font-size: 14px;
+      }
+
+      .rides-list-surface .rides-toolbar .btn {
+        border-color: #dbe3f1;
+        font-weight: 500;
+      }
+
+      .rides-list-surface .rides-toolbar .btn.btn-primary {
+        border-color: #4f6ad7;
+      }
+
+      .rides-list-surface .rides-toolbar .btn.btn-light {
+        background-color: #f8fafc;
+        color: #51607a;
+      }
+
+      .rides-list-surface .rides-toolbar .btn.icon-btn {
+        min-width: 40px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .rides-list-surface .rides-toolbar .btn.icon-btn.is-active {
+        background-color: #eaf0ff;
+        border-color: #c7d6fb;
+        color: #3552a5;
+      }
+
+      .rides-list-surface .rides-empty-state .autoselez,
+      .rides-list-surface .no_reservations .alert {
+        border: 1px dashed #d7dfef;
+        border-radius: 12px;
+        background: linear-gradient(180deg, #f8fafe 0%, #f3f7ff 100%);
+        color: #4b5a75;
+        font-weight: 500;
+        margin-bottom: 24px;
+      }
+
+      .rides-list-surface .autoselez.ride-list-card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #e4ebf7;
+        box-shadow: 0 8px 24px rgba(30, 41, 59, 0.08);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          border-color 0.2s ease;
+        padding: 20px 22px !important;
+        border-left-width: 0;
+      }
+
+      .rides-list-surface .autoselez.ride-list-card::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 5px;
+        background: #d8e1f4;
+      }
+
+      .rides-list-surface .autoselez.ride-list-card.ride-status-blue::before {
+        background: #ffc736;
+      }
+
+      .rides-list-surface .autoselez.ride-list-card.ride-status-green::before {
+        background: #81de96;
+      }
+
+      .rides-list-surface .autoselez.ride-list-card.ride-status-dark::before {
+        background: #71b0fc;
+      }
+
+      .rides-list-surface .autoselez.ride-list-card.ride-status-red::before {
+        background: #ce2b37;
+      }
+
+      .rides-list-surface .autoselez.ride-list-card.ride-status-orange::before {
+        background: #f9b442;
+      }
+
+      .rides-list-surface .autoselez.ride-list-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(30, 41, 59, 0.12);
+        border-color: #cfdaf2;
+      }
+
+      .rides-list-surface .the_booking.ride-card-clickable {
+        border-radius: 10px;
+        padding: 2px 0;
+        outline: none;
+      }
+
+      .rides-list-surface .the_booking .booking_id {
+        font-size: 24px;
+        font-weight: 700;
+        color: #152238;
+        letter-spacing: 0.01em;
+      }
+
+      .rides-list-surface .the_booking .booking_date {
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        color: #31425c;
+        margin-top: 4px;
+      }
+
+      .rides-list-surface .the_booking .color_status {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        margin-right: 4px;
+      }
+
+      .rides-list-surface .the_booking .partner_payout {
+        font-size: 24px;
+        font-weight: 700;
+        color: #1e3562;
+      }
+
+      .rides-list-surface .the_booking .currency {
+        color: #6a7890;
+        font-weight: 600;
+      }
+
+      .rides-list-surface .the_booking.ride-card-clickable:focus {
+        box-shadow: 0 0 0 3px rgba(86, 112, 214, 0.22);
+      }
+
+      .rides-list-surface .the_booking > [class*="col-"] {
+        position: relative;
+      }
+
+      .rides-list-surface
+        .the_booking
+        > [class*="col-"]
+        + [class*="col-"]::before {
+        content: "";
+        position: absolute;
+        left: -6px;
+        top: 8px;
+        bottom: 8px;
+        width: 1px;
+        background: linear-gradient(
+          180deg,
+          rgba(208, 218, 236, 0) 0%,
+          rgba(208, 218, 236, 1) 20%,
+          rgba(208, 218, 236, 1) 80%,
+          rgba(208, 218, 236, 0) 100%
+        );
+      }
+
+      .rides-list-surface .ride-meta-chip {
+        border-radius: 999px !important;
+        border: 1px solid #d7dfef !important;
+        background: #f8fafc;
+        color: #3e4a5f;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 3px 10px !important;
+        margin-right: 6px;
+        margin-top: 6px;
+        font-size: 12px !important;
+        font-weight: 500;
+        line-height: 1.2;
+      }
+
+      .rides-list-surface .ride-note-chip {
+        border-style: dashed !important;
+        max-width: 100%;
+      }
+
+      .rides-list-surface .booking_pickup.ride-route,
+      .rides-list-surface .booking_dropoff.ride-route {
+        display: block;
+        line-height: 1.45;
+        color: #425169;
+      }
+
+      .rides-list-surface .booking_pickup.ride-route strong,
+      .rides-list-surface .booking_dropoff.ride-route strong {
+        color: #152238;
+        font-weight: 600;
+      }
+
+      .rides-list-surface .pagination {
+        gap: 6px;
+        margin-top: 4px;
+      }
+
+      .rides-list-surface .pagination > li > a,
+      .rides-list-surface .pagination > li > span {
+        border-radius: 8px !important;
+        border-color: #d8e1f0 !important;
+        color: #000;
+        font-weight: 500;
+        padding: 6px 10px;
+      }
+
+      .page-link.active,
+      .active > .page-link {
+        color: #fff !important;
+      }
+
+      .rides-list-surface.rides-compact-mode .autoselez.ride-list-card {
+        padding: 14px !important;
+        margin-bottom: 14px !important;
+      }
+
+      .rides-list-surface.rides-compact-mode .label_booking_row {
+        margin-bottom: 4px;
+        font-size: 12px;
+      }
+
+      .rides-list-surface.rides-compact-mode .booking_date {
+        font-size: 14px !important;
+      }
+
+      .rides-list-surface.rides-compact-mode .ride-meta-chip {
+        font-size: 11px !important;
+        margin-top: 4px;
+        padding: 2px 8px !important;
+      }
+
+      .booking-detail-page .booking-header-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 4px 0 18px;
+      }
+
+      .booking-detail-page .booking-header-strip .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        padding: 8px 12px;
+        box-shadow: 0 6px 14px rgba(15, 23, 42, 0.08);
+      }
+
+      .booking-detail-page .booking-header-strip .badge.font-size-18 {
+        font-size: 13px !important;
+        line-height: 1.15;
+      }
+
+      .booking-detail-page .booking-header-strip #vip_status {
+        background: #f2b34b !important;
+        border: 1px solid #dc9b35;
+        color: #fff !important;
+      }
+
+      .booking-detail-page .booking-header-strip #vip_status i {
+        font-size: 12px;
+      }
+
+      .booking-detail-page .booking-main-card,
+      .booking-detail-page .booking-side-card {
+        border: 1px solid #dfe8f7;
+        border-radius: 16px;
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .booking-detail-page .booking-main-card .card-body,
+      .booking-detail-page .booking-side-card .card-body {
+        padding: 22px;
+      }
+
+      .booking-detail-page .booking-info-grid {
+        row-gap: 12px;
+      }
+
+      .booking-detail-page .booking-soft-panel {
+        margin-top: 20px;
+        padding: 12px 14px;
+        border: 1px solid #dce6f7;
+        border-radius: 12px;
+        background: #f8fbff;
+      }
+
+      .booking-detail-page .booking-route-stack {
+        display: grid;
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .booking-detail-page .booking-route-stop {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        position: relative;
+      }
+
+      .booking-detail-page .booking-route-stop + .booking-route-stop::before {
+        content: "";
+        position: absolute;
+        left: 9px;
+        top: -12px;
+        height: 12px;
+        border-left: 2px dashed #c6d7f2;
+      }
+
+      .booking-detail-page .booking-route-icon {
+        width: 20px;
+        flex: 0 0 20px;
+        margin-top: 2px;
+        text-align: center;
+        color: #4d73c8;
+      }
+
+      .booking-detail-page .booking-route-stop.end .booking-route-icon {
+        color: #f1a447;
+      }
+
+      .booking-detail-page .booking-route-address {
+        line-height: 1.45;
+        color: #485971;
+      }
+
+      .booking-detail-page .booking-route-address strong {
+        color: #1d2c44;
+      }
+
+      .booking-detail-page .booking-facts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 16px 0 8px;
+      }
+
+      .booking-detail-page .booking-fact-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        border: 1px solid #d9e3f3;
+        border-radius: 999px;
+        background: #f8fbff;
+        color: #41516a;
+        padding: 5px 12px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .booking-detail-page .booking-fact-pill i {
+        color: #5674a9;
+      }
+
+      .booking-detail-page .booking-extra-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .booking-detail-page .booking-extra-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border: 1px solid #d9e3f3;
+        border-radius: 999px;
+        background: #fff;
+        color: #42526b;
+        padding: 5px 12px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .booking-detail-page .booking-extra-count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        background: #ffecee;
+        color: #b53346;
+        font-weight: 700;
+        padding: 0 8px;
+      }
+
+      .booking-detail-page .booking-payout-value {
+        margin-top: 8px;
+        display: inline-flex;
+        align-items: baseline;
+        gap: 5px;
+        flex-wrap: wrap;
+        font-size: 34px;
+        line-height: 1.1;
+        font-weight: 700;
+        color: #1e2f4d;
+      }
+
+      .booking-detail-page .booking-payout-note {
+        display: block;
+        margin-top: 8px;
+        color: #64728a;
+        font-size: 12px;
+        line-height: 1.35;
+      }
+
+      .booking-detail-page .booking-side-card {
+        position: sticky;
+        top: 92px;
+      }
+
+      .booking-detail-page .booking-action-block {
+        border: 1px solid #dbe4f5;
+        border-radius: 12px;
+        padding: 12px;
+        margin-top: 12px;
+        background: #f9fbff;
+      }
+
+      .booking-detail-page .booking-action-block hr {
+        margin: 12px 0;
+      }
+
+      .booking-detail-page .booking-action-btn {
+        width: 100%;
+      }
+
+      .booking-detail-page #accept_info {
+        display: block;
+        margin-top: 8px;
+        color: #6c7890;
+      }
+
+      @media (max-width: 991px) {
+        .rides-list-surface .rides-toolbar .input-group {
+          max-width: 100%;
+          margin-left: 0;
+        }
+
+        .rides-list-surface
+          .the_booking
+          > [class*="col-"]
+          + [class*="col-"]::before {
+          display: none;
+        }
+
+        .booking-detail-page .booking-main-card .card-body,
+        .booking-detail-page .booking-side-card .card-body {
+          padding: 16px;
+        }
+
+        .booking-detail-page .booking-side-card {
+          position: static;
+        }
+
+        .booking-detail-page .booking-header-strip .badge {
+          font-size: 11px;
+          padding: 7px 10px;
+        }
+
+        .booking-detail-page .booking-payout-value {
+          font-size: 28px;
+        }
+      }
+    </style>
+
+    <!-- JAVASCRIPT -->
+    <script src="/assets/libs/jquery/jquery.min.js"></script>
+    <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="/assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="/assets/libs/node-waves/waves.min.js"></script>
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-WPRF5JHN");
+    </script>
+    <!-- End Google Tag Manager -->
+  </head>
+
+  <body data-sidebar="dark">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-WPRF5JHN"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <script>
+      if (window.innerWidth < 600) {
+        document.querySelector("body").setAttribute("data-topbar", "dark");
+      }
+    </script>
+
+    <div id="layout-wrapper">
+      <header id="page-topbar">
+        <div class="navbar-header">
+          <div class="d-flex">
+            <!-- LOGO -->
+            <div class="navbar-brand-box">
+              <a href="/index" class="logo logo-dark">
+                <span class="logo-sm">
+                  <img
+                    src="/assets/images/SVG/QUADRATO.svg"
+                    alt=""
+                    height="32"
+                  />
+                </span>
+                <span class="logo-lg">
+                  <img
+                    src="/assets/images/logo_transfeero_final_white.png"
+                    alt=""
+                    height="27"
+                  />
+                </span>
+              </a>
+
+              <a href="/index" class="logo logo-light">
+                <span class="logo-sm">
+                  <img
+                    src="/assets/images/SVG/QUADRATO.svg"
+                    alt=""
+                    height="32"
+                  />
+                </span>
+                <span class="logo-lg">
+                  <img
+                    src="/assets/images/logo_transfeero_final_white.png"
+                    alt=""
+                    height="29"
+                  />
+                </span>
+              </a>
+            </div>
+
+            <button
+              type="button"
+              class="btn btn-sm px-3 font-size-16 header-item waves-effect"
+              id="vertical-menu-btn"
+            >
+              <i class="fa fa-fw fa-bars"></i>
+            </button>
+          </div>
+
+          <div class="d-flex">
+            <div class="dropdown d-inline-block">
+              <button
+                type="button"
+                class="btn header-item waves-effect"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <img
+                  src="/assets/images/flags/us.jpg"
+                  alt="Header Language"
+                  height="16"
+                />
+                <!-- <span class="align-middle">English</span> -->
+              </button>
+              <div class="dropdown-menu dropdown-menu-end">
+                <!-- item-->
+                <a
+                  href="?clang=en"
+                  class="dropdown-item notify-item language"
+                  data-lang="en"
+                >
+                  <img
+                    src="/assets/images/flags/us.jpg"
+                    alt="user-image"
+                    class="me-1"
+                    height="12"
+                  />
+                  <span class="align-middle">English</span>
+                </a>
+
+                <a
+                  href="?clang=it"
+                  class="dropdown-item notify-item language"
+                  data-lang="it"
+                >
+                  <img
+                    src="/assets/images/flags/italy.jpg"
+                    alt="user-image"
+                    class="me-1"
+                    height="12"
+                  />
+                  <span class="align-middle">Italian</span>
+                </a>
+
+                <a
+                  href="?clang=de"
+                  class="dropdown-item notify-item language"
+                  data-lang="de"
+                >
+                  <img
+                    src="/assets/images/flags/germany.jpg"
+                    alt="user-image"
+                    class="me-1"
+                    height="12"
+                  />
+                  <span class="align-middle">German</span>
+                </a>
+
+                <a
+                  href="?clang=ja"
+                  class="dropdown-item notify-item language"
+                  data-lang="ja"
+                >
+                  <img
+                    src="/assets/images/flags/japan.png"
+                    alt="user-image"
+                    class="me-1"
+                    height="16"
+                  />
+                  <span class="align-middle">Japanese</span>
+                </a>
+
+                <a
+                  href="?clang=es"
+                  class="dropdown-item notify-item language"
+                  data-lang="es"
+                >
+                  <img
+                    src="/assets/images/flags/spain.jpg"
+                    alt="user-image"
+                    class="me-1"
+                    height="12"
+                  />
+                  <span class="align-middle">Spanish</span>
+                </a>
+
+                <a
+                  href="?clang=pt"
+                  class="dropdown-item notify-item language"
+                  data-lang="pt"
+                >
+                  <img
+                    src="/assets/images/flags/portugal.png"
+                    alt="user-image"
+                    class="me-1"
+                    height="16"
+                  />
+                  <span class="align-middle">Portuguese</span>
+                </a>
+
+                <a
+                  href="?clang=fr"
+                  class="dropdown-item notify-item language"
+                  data-lang="fr"
+                >
+                  <img
+                    src="/assets/images/flags/french.jpg"
+                    alt="user-image"
+                    class="me-1"
+                    height="12"
+                  />
+                  <span class="align-middle">French</span>
+                </a>
+
+                <a
+                  href="?clang=zh"
+                  class="dropdown-item notify-item language"
+                  data-lang="zh"
+                >
+                  <img
+                    src="/assets/images/flags/cn.png"
+                    alt="user-image"
+                    class="me-1"
+                    height="12"
+                  />
+                  <span class="align-middle">Chinese</span>
+                </a>
+
+                <a
+                  href="?clang=ar"
+                  class="dropdown-item notify-item language"
+                  data-lang="ar"
+                >
+                  <img
+                    src="/assets/images/flags/ar.png"
+                    alt="user-image"
+                    class="me-1"
+                    height="12"
+                  />
+                  <span class="align-middle">Arabic</span>
+                </a>
+
+                <a
+                  href="?clang=hi"
+                  class="dropdown-item notify-item language"
+                  data-lang="hi"
+                >
+                  <img
+                    src="/assets/images/flags/in.png"
+                    alt="user-image"
+                    class="me-1"
+                    height="12"
+                  />
+                  <span class="align-middle">Hindi</span>
+                </a>
+
+                <a
+                  href="?clang=bg"
+                  class="dropdown-item notify-item language"
+                  data-lang="bg"
+                >
+                  <img
+                    src="/assets/images/flags/bg.png"
+                    alt="user-image"
+                    class="me-1"
+                    height="12"
+                  />
+                  <span class="align-middle">Bulgarian</span>
+                </a>
+
+                <a
+                  href="?clang=ru"
+                  class="dropdown-item notify-item language"
+                  data-lang="ru"
+                >
+                  <img
+                    src="/assets/images/flags/ru.png"
+                    alt="user-image"
+                    class="me-1"
+                    height="12"
+                  />
+                  <span class="align-middle">Russian</span>
+                </a>
+
+                <a
+                  href="?clang=fi"
+                  class="dropdown-item notify-item language"
+                  data-lang="fi"
+                >
+                  <img
+                    src="/assets/images/flags/fi.png"
+                    alt="user-image"
+                    class="me-1"
+                    height="12"
+                  />
+                  <span class="align-middle">Finnish</span>
+                </a>
+
+                <a
+                  href="?clang=sv"
+                  class="dropdown-item notify-item language"
+                  data-lang="sv"
+                >
+                  <img
+                    src="/assets/images/flags/se.png"
+                    alt="user-image"
+                    class="me-1"
+                    height="12"
+                  />
+                  <span class="align-middle">Swedish</span>
+                </a>
+
+                <a
+                  href="?clang=no"
+                  class="dropdown-item notify-item language"
+                  data-lang="no"
+                >
+                  <img
+                    src="/assets/images/flags/no.png"
+                    alt="user-image"
+                    class="me-1"
+                    height="12"
+                  />
+                  <span class="align-middle">Norwegian</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="dropdown d-inline-block">
+              <button
+                type="button"
+                class="btn header-item waves-effect"
+                id="page-header-user-dropdown"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <span
+                  class="d-xl-inline-block ms-1"
+                  key="t-henry"
+                  id="user_name"
+                  ><i class="fa-solid fa-circle-notch fa-spin"></i
+                ></span>
+
+                <script>
+                  $(document).ready(function () {
+                    var partner_contact_data = [
+                      {
+                        id: 33231,
+                        email: "thongchaiborvonrungreung@gmail.com",
+                        email_verified: 1,
+                        main_name: "Thongchai",
+                        main_lastname: "Borvonrungreung",
+                        company: "GTB Transfer & Travel",
+                        vat: "OO99999999999",
+                        phone: "+66970975824",
+                        account_type: "Standard",
+                        status: 1,
+                        language: "EN",
+                        country: "TH",
+                        address: "89/140 Moo. 8",
+                        city: "Lamlukka",
+                        province_state: "Array",
+                        zip: "12150",
+                        SDI: "",
+                        datetime_format_24: true,
+                        terms: "1",
+                      },
+                    ];
+                    var main_name = partner_contact_data[0].main_name;
+                    var id = partner_contact_data[0].id;
+
+                    $("#user_name").html(main_name + " (" + id + ")");
+                  });
+                </script>
+                <i class="mdi mdi-chevron-down d-xl-inline-block"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end">
+                <!-- item-->
+                <a class="dropdown-item" href="/profile"
+                  ><i class="fa-regular fa-user-gear"></i>
+                  <span key="t-profile">Profile</span></a
+                >
+                <a class="dropdown-item d-block" href="/tools"
+                  ><i class="fa-regular fa-screwdriver-wrench"></i>
+                  <span key="t-settings">Partner Tools</span></a
+                >
+
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-danger" href="/logout"
+                  ><i
+                    class="bx bx-power-off font-size-16 align-middle me-1 text-danger"
+                  ></i>
+                  <span key="t-logout">Logout</span></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <script>
+        $(document).ready(function () {
+          $.ajax({
+            url: "https://api.transfeero.com/v3/partner_ride_count",
+            type: "POST",
+            dataType: "json",
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader(
+                "Authorizations",
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBhc3N3b3JkIjoiUkFaNWdxcDFocmdfZ2RxNmR4dWtqczl3amhmZzgzNG4iLCJpZCI6IjEiLCJyb2xlIjoiYXBwIn0sImlkIjoiMSIsInJvbGUiOiJhcHAiLCJleHAiOjE3NzcxMzIyMjZ9.OnVcSVNBaw_d7-bh-jGJLrN3LHtLt2AWPhOyZIlLqvU",
+              );
+            },
+            contentType: "application/json",
+            data: JSON.stringify({
+              login_hash:
+                "33231177574982749e7fe9c985c082e9e5718bfd004e10d0fd0c194c3b07c20c494f485bf9d8400",
+              booking_id: id,
+            }),
+            success: function (data) {
+              var total_upcoming = data.data.total_upcoming;
+              var total_bookings = data.data.total_bookings;
+
+              if (total_upcoming == 0) {
+                $("#rides_count").hide();
+              } else {
+                $("#rides_count").html(total_upcoming);
+              }
+
+              if (total_bookings == 0) {
+                $(".new_rides_count").hide();
+              } else {
+                $(".new_rides_count").html(total_bookings);
+              }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+              if (jqXHR.status == 429) {
+                var TooManyModal = new bootstrap.Modal(
+                  document.getElementById("toomany429"),
+                  {
+                    keyboard: false,
+                  },
+                );
+                TooManyModal.show();
+              }
+            },
+          });
+        });
+      </script>
+
+      <!-- ========== Left Sidebar Start ========== -->
+      <div class="vertical-menu">
+        <div data-simplebar class="h-100">
+          <!--- Sidemenu -->
+          <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+              <li class="menu-title" key="t-menu">Menu</li>
+
+              <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                  <i class="fa-regular fa-home" style="margin-right: 15px"></i>
+                  <span key="t-dashboards">Dashboards</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                  <li><a href="/index" key="t-default">Dashboards</a></li>
+                </ul>
+              </li>
+
+              <li class="menu-title" key="t-menu">Rides</li>
+
+              <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                  <i
+                    class="fa-regular fa-bookmark"
+                    style="margin-right: 15px"
+                  ></i>
+                  <span key="t-dashboards">Rides</span>
+                  <span class="badge bg-danger new_rides_count"></span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                  <li>
+                    <a href="/new_rides" key="t-default"
+                      >Available rides
+                      <span class="badge bg-danger new_rides_count"></span
+                    ></a>
+                  </li>
+                  <li>
+                    <a href="/upcoming_rides" key="t-default">Upcoming rides</a>
+                  </li>
+                  <li><a href="/past_rides" key="t-default">Past rides</a></li>
+                </ul>
+              </li>
+
+              <li class="menu-title" key="t-apps">Drivers &amp; Fleet</li>
+
+              <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                  <i class="fa-regular fa-user" style="margin-right: 15px"></i>
+                  <span key="t-dashboards">Drivers</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                  <li><a href="/drivers" key="t-tui-calendar">Drivers</a></li>
+                  <li>
+                    <a href="/add_driver" key="t-full-calendar">Add a driver</a>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                  <i class="fa-regular fa-car" style="margin-right: 15px"></i>
+                  <span key="t-dashboards">Fleet</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                  <li><a href="/fleet" key="t-tui-calendar">Fleet</a></li>
+                  <li>
+                    <a href="/add_vehicle" key="t-full-calendar"
+                      >Add a vehicle</a
+                    >
+                  </li>
+                </ul>
+              </li>
+
+              <li class="menu-title" key="t-apps">Billing</li>
+
+              <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                  <i
+                    class="fa-regular fa-money-bills-simple"
+                    style="margin-right: 15px"
+                  ></i>
+                  <span key="t-dashboards">Billing</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                  <li>
+                    <a href="/payment_report" key="t-tui-calendar"
+                      >Payment report</a
+                    >
+                  </li>
+                  <li>
+                    <a href="/add_payment_data" key="t-full-calendar"
+                      >Payment data</a
+                    >
+                  </li>
+                </ul>
+              </li>
+
+              <li class="menu-title" key="t-apps">Tools</li>
+
+              <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                  <i class="fa-regular fa-map" style="margin-right: 15px"></i>
+                  <span key="t-dashboards">Work area</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                  <li>
+                    <a href="/work_area" key="t-tui-calendar">Work area</a>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                  <i
+                    class="fa-regular fa-user-gear"
+                    style="margin-right: 15px"
+                  ></i>
+                  <span key="t-dashboards">Options</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                  <li><a href="/profile" key="t-tui-calendar">Profile</a></li>
+                  <li>
+                    <a href="/tools" key="t-tui-calendar">Partner Tools</a>
+                  </li>
+                  <li>
+                    <a href="/profile" key="t-tui-calendar"
+                      >API (cooming soon)</a
+                    >
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                  <i
+                    class="fa-regular fa-comments"
+                    style="margin-right: 15px"
+                  ></i>
+                  <span key="t-dashboards">Assistance</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                  <li>
+                    <a
+                      href="https://partner-help.transfeero.com/en"
+                      target="_blank"
+                      key="t-tui-calendar"
+                      >Partner Help Center</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" onclick="Intercom('show')" key="t-tui-calendar"
+                      >Assistance</a
+                    >
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <!-- Sidebar -->
+        </div>
+      </div>
+      <!-- Left Sidebar End -->
+
+      <div class="main-content">
+        <div class="page-content">
+          <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+              <div class="col-12">
+                <div
+                  class="page-title-box d-sm-flex align-items-center justify-content-between"
+                >
+                  <h4 class="mb-sm-0">New Ride</h4>
+
+                  <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                      <li class="breadcrumb-item">
+                        <a href="javascript: void(0);">Ride</a>
+                      </li>
+                      <li class="breadcrumb-item active">New Ride</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end page title -->
+
+            <script>
+              // Updated compatibility function now accepts 4 parameters:
+              // bookedVehicleType, vehicleType, vehicleMaxPax, and booked pax.
+              function checkVehicleCompatibility(
+                bookedVehicleType,
+                vehicleType,
+                vehicleMaxPax,
+                pax,
+              ) {
+                // Ensure that the number of booked passengers does not exceed the vehicle's capacity.
+                if (pax > vehicleMaxPax) {
+                  return false;
+                }
+
+                var bookingDate = new Date($("#booking_date").val());
+
+                // Check if booking date is more than one hour ago
+                var oneHourAgo = new Date();
+                oneHourAgo.setHours(oneHourAgo.getHours() - 1);
+                var isBookingDateExpired = bookingDate < oneHourAgo;
+
+                if (bookedVehicleType === "Economy") {
+                  return (
+                    vehicleType === "Economy" ||
+                    vehicleType === "StandardSedan" ||
+                    vehicleType === "FirstClass" ||
+                    vehicleType === "FirstClassVan" ||
+                    vehicleType === "StandardVan" ||
+                    vehicleType === "Minibus12" ||
+                    vehicleType === "Minibus16"
+                  );
+                } else if (bookedVehicleType === "StandardSedan") {
+                  return (
+                    vehicleType === "StandardSedan" ||
+                    vehicleType === "FirstClass" ||
+                    vehicleType === "FirstClassVan" ||
+                    (isBookingDateExpired && vehicleType === "StandardVan")
+                  );
+                } else if (bookedVehicleType === "FirstClass") {
+                  return vehicleType === "FirstClass";
+                } else if (bookedVehicleType === "FirstClassVan") {
+                  return vehicleType === "FirstClassVan";
+                } else if (bookedVehicleType === "StandardVan") {
+                  return (
+                    vehicleType === "FirstClassVan" ||
+                    vehicleType === "StandardVan" ||
+                    vehicleType === "Minibus12" ||
+                    vehicleType === "Minibus16"
+                  );
+                } else if (bookedVehicleType === "Minibus12") {
+                  return (
+                    vehicleType === "Minibus12" || vehicleType === "Minibus16"
+                  );
+                } else if (bookedVehicleType === "Minibus16") {
+                  return vehicleType === "Minibus16";
+                }
+                return false;
+              }
+
+              function load_vehicles(bookedVehicleType, pax) {
+                var bookingDate = new Date($("#booking_date").val());
+                var oneHourAgo = new Date();
+                oneHourAgo.setHours(oneHourAgo.getHours() - 1);
+
+                if (bookingDate < oneHourAgo) {
+                  // If booking date is older than one hour, you can handle this case as needed.
+                } else {
+                  // Booking date is within the last hour; start the countdown.
+                  var countdownInterval = setInterval(updateCountdown, 1000);
+                }
+
+                var bearerToken =
+                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBhc3N3b3JkIjoiUkFaNWdxcDFocmdfZ2RxNmR4dWtqczl3amhmZzgzNG4iLCJpZCI6IjEiLCJyb2xlIjoiYXBwIn0sImlkIjoiMSIsInJvbGUiOiJhcHAiLCJleHAiOjE3NzcxMzIyMjZ9.OnVcSVNBaw_d7-bh-jGJLrN3LHtLt2AWPhOyZIlLqvU";
+
+                return $.ajax({
+                  type: "POST",
+                  url: "https://api.transfeero.com/v3/partner_vehicle_list",
+                  beforeSend: function (xhr) {
+                    xhr.setRequestHeader(
+                      "Authorizations",
+                      "Bearer " + bearerToken,
+                    );
+                  },
+                  data: {
+                    login_hash:
+                      "33231177574982749e7fe9c985c082e9e5718bfd004e10d0fd0c194c3b07c20c494f485bf9d8400",
+                  },
+                  dataType: "json",
+                  success: function (data) {
+                    var sampleArray = data.data;
+
+                    $(".js-example-basic-vehicle").select2({
+                      width: "100%", // override the changed default
+                    });
+                    var options = $(".js-example-basic-vehicle");
+
+                    $.each(sampleArray, function () {
+                      if (this.active == 0) {
+                        // Skip inactive vehicles.
+                        return;
+                      } else {
+                        // IMPORTANT: Now pass the booked pax (pax) as the 4th parameter.
+                        if (
+                          checkVehicleCompatibility(
+                            bookedVehicleType,
+                            this.type,
+                            this.passenger_max,
+                            pax,
+                          ) === false
+                        ) {
+                          options.append(
+                            $("<option />")
+                              .val(this.id)
+                              .text(
+                                this.name +
+                                  " (" +
+                                  this.plate +
+                                  ")" +
+                                  " [Not compliant] " +
+                                  this.type,
+                              )
+                              .attr("disabled", "disabled"),
+                          );
+                        } else {
+                          var type;
+                          if (this.type == "Economy") {
+                            type = "Economy";
+                          } else if (this.type == "StandardSedan") {
+                            type = "Standard Sedan";
+                          } else if (this.type == "FirstClass") {
+                            type = "First Class";
+                          } else if (this.type == "StandardVan") {
+                            type = "Standard Van";
+                          } else if (this.type == "FirstClassVan") {
+                            type = "First Class Van / SUV";
+                          } else if (this.type == "Minibus12") {
+                            type = "Minibus 12";
+                          } else if (this.type == "Minibus16") {
+                            type = "Minibus 16";
+                          } else {
+                            type = this.type;
+                          }
+
+                          options.append(
+                            $("<option />")
+                              .val(this.id)
+                              .text(
+                                this.name +
+                                  " (" +
+                                  this.plate +
+                                  ")" +
+                                  " " +
+                                  type,
+                              ),
+                          );
+                        }
+                      }
+                    });
+                    $("#vehicle").show();
+                    $("#loader_spin_vec").hide();
+                  },
+                  error: function (jqXHR, textStatus, errorThrown) {
+                    if (jqXHR.status == 429) {
+                      var TooManyModal = new bootstrap.Modal(
+                        document.getElementById("toomany429"),
+                        {
+                          keyboard: false,
+                        },
+                      );
+                      TooManyModal.show();
+                    }
+                    if (jqXHR.status == 401) {
+                      window.location.href = "/logout";
+                    }
+                    return false;
+                  },
+                });
+              }
+
+              function updateCountdown(bookingDate, now) {
+                var countdownElement = document.querySelector("#class_timer");
+                var bookingDate = new Date($("#booking_date").val());
+                var now = new Date();
+                now.setHours(now.getHours() - 1);
+                var timeRemaining = bookingDate - now;
+                var seconds = Math.floor((timeRemaining / 1000) % 60);
+                var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
+                var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
+                var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+
+                if (timeRemaining <= 0) {
+                  countdownElement.innerHTML =
+                    "(Refresh page and accept booking with a Standard Van)";
+                  window.location.reload();
+                } else {
+                  countdownElement.innerHTML =
+                    minutes + " minutes, " + seconds + " seconds";
+                }
+              }
+
+              function escapeHtml(value) {
+                if (value === null || value === undefined) {
+                  return "";
+                }
+                return String(value)
+                  .replace(/&/g, "&amp;")
+                  .replace(/</g, "&lt;")
+                  .replace(/>/g, "&gt;")
+                  .replace(/"/g, "&quot;")
+                  .replace(/'/g, "&#039;");
+              }
+
+              function formatRouteStop(routeValue) {
+                if (routeValue == null) {
+                  return "<em>To be defined</em>";
+                }
+                var normalized = String(routeValue).trim();
+                if (!normalized) {
+                  return "<em>To be defined</em>";
+                }
+                var separatorIndex = normalized.indexOf(",");
+                if (separatorIndex < 0) {
+                  return "<strong>" + escapeHtml(normalized) + "</strong>";
+                }
+                var main = normalized.substring(0, separatorIndex).trim();
+                var details = normalized.substring(separatorIndex + 1).trim();
+                if (!details) {
+                  return "<strong>" + escapeHtml(main) + "</strong>";
+                }
+                return (
+                  "<strong>" +
+                  escapeHtml(main) +
+                  "</strong><br /> " +
+                  escapeHtml(details)
+                );
+              }
+
+              function normalizeFlightIata(rawValue) {
+                if (!rawValue || !String(rawValue).trim()) {
+                  return null;
+                }
+                var normalizedInput = String(rawValue).trim().toUpperCase();
+                var firstSegment = normalizedInput
+                  .split(/[\/,;]/)[0]
+                  .replace(/[^A-Z0-9]/g, "");
+                if (!/^(?=.*[A-Z])(?=.*\d)[A-Z0-9]{3,}$/.test(firstSegment)) {
+                  return null;
+                }
+                return firstSegment;
+              }
+
+              function normalizeTimestampMs(rawValue) {
+                var numeric = Number(rawValue);
+                if (!isFinite(numeric) || numeric <= 0) {
+                  return null;
+                }
+                return numeric > 1000000000000 ? numeric : numeric * 1000;
+              }
+
+              var flightDelayTrackingStartBeforePickupMs = 3 * 60 * 60 * 1000;
+
+              function parseStoredDateTime(rawValue, timezone) {
+                var normalized = String(rawValue || "").trim();
+                var match = normalized.match(
+                  /^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})(?::(\d{2}))?$/,
+                );
+                if (!match) {
+                  return null;
+                }
+
+                var dateTime = luxon.DateTime.fromObject(
+                  {
+                    year: Number(match[1]),
+                    month: Number(match[2]),
+                    day: Number(match[3]),
+                    hour: Number(match[4]),
+                    minute: Number(match[5]),
+                    second: Number(match[6] || 0),
+                  },
+                  { zone: timezone || "UTC" },
+                );
+
+                return dateTime.isValid ? dateTime : null;
+              }
+
+              function parsePickupDateTime(pickupDateTime, timezone) {
+                return parseStoredDateTime(pickupDateTime, timezone);
+              }
+
+              function formatStoredPickupLabel(
+                rawValue,
+                timezone,
+                lang,
+                datetimeFormat24,
+              ) {
+                var pickupDateTime = parseStoredDateTime(rawValue, timezone);
+                if (!pickupDateTime) {
+                  return "";
+                }
+                return formatPickupLabel(
+                  pickupDateTime,
+                  lang,
+                  datetimeFormat24,
+                );
+              }
+
+              function uses24HourClock(rawValue) {
+                if (rawValue === true || rawValue === 1) {
+                  return true;
+                }
+                var normalized = String(rawValue || "")
+                  .trim()
+                  .toLowerCase();
+                return normalized === "1" || normalized === "true";
+              }
+
+              function formatPickupLabel(
+                pickupDateTime,
+                lang,
+                datetimeFormat24,
+              ) {
+                if (!pickupDateTime || !pickupDateTime.isValid) {
+                  return "";
+                }
+                var localized = pickupDateTime.setLocale(lang || "en");
+                if (uses24HourClock(datetimeFormat24)) {
+                  return localized.toFormat("dd LLL yyyy HH:mm");
+                }
+                return localized.toFormat("LLL, dd yyyy h:mm a");
+              }
+
+              function extractFlightPayload(data) {
+                if (!data || data.error) {
+                  return null;
+                }
+                if (data.response && typeof data.response === "object") {
+                  if (Array.isArray(data.response)) {
+                    return data.response.length > 0 ? data.response[0] : null;
+                  }
+                  return data.response;
+                }
+                return data;
+              }
+
+              function resolveDelayedPickupDateTime(
+                payload,
+                pickupDateTime,
+                timezone,
+              ) {
+                if (!payload || !pickupDateTime || !pickupDateTime.isValid) {
+                  return null;
+                }
+
+                var arrivalMs =
+                  normalizeTimestampMs(
+                    payload.arr_actual_ts || payload.arrival_actual_ts,
+                  ) ||
+                  normalizeTimestampMs(
+                    payload.arr_estimated_ts || payload.arrival_estimated_ts,
+                  );
+
+                if (arrivalMs) {
+                  var arrivalDateTime = luxon.DateTime.fromMillis(arrivalMs, {
+                    zone: timezone || "UTC",
+                  });
+                  if (
+                    arrivalDateTime.isValid &&
+                    arrivalDateTime.toMillis() > pickupDateTime.toMillis()
+                  ) {
+                    return arrivalDateTime;
+                  }
+                }
+
+                var delayedMinutes = parseInt(
+                  payload.arr_delayed ||
+                    payload.arrival_delayed ||
+                    payload.delayed,
+                  10,
+                );
+                if (!isNaN(delayedMinutes) && delayedMinutes > 0) {
+                  var delayedPickup = pickupDateTime.plus({
+                    minutes: delayedMinutes,
+                  });
+                  if (delayedPickup.toMillis() > pickupDateTime.toMillis()) {
+                    return delayedPickup;
+                  }
+                }
+
+                return null;
+              }
+
+              function renderPickupWithDelay(
+                targetSelector,
+                pickupDateTime,
+                delayedPickupDateTime,
+                lang,
+                datetimeFormat24,
+              ) {
+                if (!pickupDateTime || !pickupDateTime.isValid) {
+                  return;
+                }
+
+                var originalLabel = formatPickupLabel(
+                  pickupDateTime,
+                  lang,
+                  datetimeFormat24,
+                );
+                if (!originalLabel) {
+                  return;
+                }
+
+                if (
+                  delayedPickupDateTime &&
+                  delayedPickupDateTime.isValid &&
+                  delayedPickupDateTime.toMillis() > pickupDateTime.toMillis()
+                ) {
+                  var delayedLabel = formatPickupLabel(
+                    delayedPickupDateTime,
+                    lang,
+                    datetimeFormat24,
+                  );
+                  if (delayedLabel && delayedLabel !== originalLabel) {
+                    $(targetSelector).html(
+                      '<span class="pickup-time-updated">' +
+                        escapeHtml(delayedLabel) +
+                        "</span>" +
+                        '<span class="pickup-time-original">' +
+                        escapeHtml(originalLabel) +
+                        "</span>",
+                    );
+                    return;
+                  }
+                }
+
+                $(targetSelector).text(originalLabel);
+              }
+
+              function shouldTrackFlightForBookingStatus(bookingStatus) {
+                var normalized = Number(bookingStatus);
+                return normalized === 1 || normalized === 2;
+              }
+
+              function isWithinFlightDelayTrackingWindow(
+                pickupDateTime,
+                timezone,
+              ) {
+                if (!pickupDateTime || !pickupDateTime.isValid) {
+                  return false;
+                }
+
+                var now = luxon.DateTime.local().setZone(timezone || "UTC");
+                return (
+                  now.toMillis() >=
+                  pickupDateTime.toMillis() -
+                    flightDelayTrackingStartBeforePickupMs
+                );
+              }
+
+              function updatePickupFromFlightDelay(options) {
+                if (
+                  !options ||
+                  !shouldTrackFlightForBookingStatus(options.bookingStatus)
+                ) {
+                  return;
+                }
+
+                var flightIata = normalizeFlightIata(options.flightRawValue);
+                if (!flightIata) {
+                  return;
+                }
+
+                var pickupDateTime = parsePickupDateTime(
+                  options.pickupDateTime,
+                  options.timezone,
+                );
+                if (!pickupDateTime) {
+                  return;
+                }
+                if (
+                  !isWithinFlightDelayTrackingWindow(
+                    pickupDateTime,
+                    options.timezone,
+                  )
+                ) {
+                  return;
+                }
+
+                $.ajax({
+                  type: "GET",
+                  url: "https://apiv2.transfeero.com/airlabs/flight",
+                  data: { flight_iata: flightIata },
+                  dataType: "json",
+                }).done(function (response) {
+                  var payload = extractFlightPayload(response);
+                  if (!payload) {
+                    return;
+                  }
+                  var delayedPickup = resolveDelayedPickupDateTime(
+                    payload,
+                    pickupDateTime,
+                    options.timezone,
+                  );
+                  renderPickupWithDelay(
+                    options.targetSelector,
+                    pickupDateTime,
+                    delayedPickup,
+                    options.lang,
+                    options.datetimeFormat24,
+                  );
+                });
+              }
+
+              load_booking();
+              function load_booking() {
+                $.ajax({
+                  url: "https://api.transfeero.com/v3/partner_ava_booking_single",
+                  type: "POST",
+                  dataType: "json",
+                  beforeSend: function (xhr) {
+                    xhr.setRequestHeader(
+                      "Authorizations",
+                      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBhc3N3b3JkIjoiUkFaNWdxcDFocmdfZ2RxNmR4dWtqczl3amhmZzgzNG4iLCJpZCI6IjEiLCJyb2xlIjoiYXBwIn0sImlkIjoiMSIsInJvbGUiOiJhcHAiLCJleHAiOjE3NzcxMzIyMjZ9.OnVcSVNBaw_d7-bh-jGJLrN3LHtLt2AWPhOyZIlLqvU",
+                    );
+                  },
+                  contentType: "application/json",
+                  data: JSON.stringify({
+                    booking_hash: "69d4189c99c5e353cde3cadc",
+                    login_hash:
+                      "33231177574982749e7fe9c985c082e9e5718bfd004e10d0fd0c194c3b07c20c494f485bf9d8400",
+                  }),
+                  success: function (data) {
+                    var id = data.data.bookings[0].id;
+                    var data_time_ride = data.data.bookings[0].data_time_ride;
+                    var timestamp_ride = data.data.bookings[0].timestamp_ride;
+                    var start = data.data.bookings[0].start;
+                    var end = data.data.bookings[0].end;
+                    var km = data.data.bookings[0].km;
+                    var miles = data.data.bookings[0].miles;
+                    var pax = data.data.bookings[0].pax;
+                    var flight_train_number =
+                      data.data.bookings[0].flight_train_number;
+                    if (
+                      flight_train_number == null ||
+                      flight_train_number == ""
+                    ) {
+                      flight_train_number = "TBA";
+                    }
+                    var vehicle_class = data.data.bookings[0].vehicle_class;
+                    var child_seat = data.data.bookings[0].child_seat;
+                    var booster_seat = data.data.bookings[0].booster_sear;
+                    var currency = data.data.bookings[0].currency;
+                    var partner_payout = data.data.bookings[0].partner_payout;
+                    var note = data.data.bookings[0].note;
+                    var timezone = data.data.bookings[0].timezone;
+                    var hourly_duration = data.data.bookings[0].hourly_duration;
+                    var booking_status = data.data.bookings[0].status;
+                    var booking_datetime =
+                      data.data.bookings[0].booking_datetime;
+
+                    var bookingDate = new Date(booking_datetime);
+                    var now = new Date();
+                    var oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000); // Subtract one hour from the current time
+
+                    $("#booking_date").val(booking_datetime);
+
+                    var commission = data.data.bookings[0].commission;
+                    var is_lastminute = data.data.bookings[0].is_lastminute;
+
+                    if (is_lastminute == "0") {
+                      $("#lastminute").hide();
+                    } else {
+                      $("#lastminute").show();
+                    }
+
+                    if (commission < 13) {
+                      var commission =
+                        '<span class="badge bg-danger" style="margin-left:5px; font-size: 12px; margin-top: -2px">LAST PRICE</span>';
+                    } else {
+                      var commission = "";
+                    }
+
+                    if (note != null && note != "") {
+                      $("#the_notes").html(note);
+                      $("#note_box").show();
+                    } else {
+                      $("#note_box").hide();
+                    }
+
+                    const { DateTime } = luxon;
+
+                    const currentTime = DateTime.local().setZone(timezone);
+                    const timestamp = currentTime.toMillis();
+
+                    var partner_contact_data = [
+                      {
+                        id: 33231,
+                        email: "thongchaiborvonrungreung@gmail.com",
+                        email_verified: 1,
+                        main_name: "Thongchai",
+                        main_lastname: "Borvonrungreung",
+                        company: "GTB Transfer & Travel",
+                        vat: "OO99999999999",
+                        phone: "+66970975824",
+                        account_type: "Standard",
+                        status: 1,
+                        language: "EN",
+                        country: "TH",
+                        address: "89/140 Moo. 8",
+                        city: "Lamlukka",
+                        province_state: "Array",
+                        zip: "12150",
+                        SDI: "",
+                        datetime_format_24: true,
+                        terms: "1",
+                      },
+                    ];
+                    var datetime_format_24 =
+                      partner_contact_data[0].datetime_format_24;
+
+                    if (timestamp_ride <= timestamp) {
+                      var booking_in_the_future = false;
+                    } else {
+                      var booking_in_the_future = true;
+                    }
+
+                    if (hourly_duration > 0) {
+                      $("#hourly_box").show();
+                      $("#hourly_status").show();
+                      $("#hourly_status").html(
+                        '<i class="fa-solid fa-clock-rotate-left"></i> Hourly booking',
+                      );
+                      $("#hourly_duration").html(hourly_duration + " hours");
+                      $("#hourly_km").html(hourly_duration * 20);
+                      $("#hourly_miles").html(hourly_duration * 12.5);
+                    } else {
+                      $("#hourly_box").hide();
+                      $("#hourly_status").hide();
+                    }
+
+                    var vehicle_class_desc = "";
+
+                    if (vehicle_class == "Economy") {
+                      var vechicle_class_name = "Economy";
+                      var vehicle_class_desc =
+                        '<i class="fad fa-users"></i> MAX. 3 PASSENGERS - <i class="fad fa-suitcase-rolling"></i>MAX 3 MEDIUM SUITCASES';
+                    } else if (vehicle_class == "StandardSedan") {
+                      if (bookingDate < oneHourAgo) {
+                        // Booking date is older than one hour from now
+                        $("#StandardSedanAlternative").hide();
+                      } else {
+                        // Booking date is within the last hour
+                        $("#StandardSedanAlternative").show();
+                      }
+                      var vechicle_class_name = "Standard Sedan";
+                      var vehicle_class_desc =
+                        '<i class="fad fa-users"></i> MAX. 3 PASSENGERS - <i class="fad fa-suitcase-rolling"></i>MAX 3 MEDIUM SUITCASES';
+                    } else if (vehicle_class == "FirstClass") {
+                      $("#first_class_services").css("display", "inline-block");
+                      var vechicle_class_name =
+                        '<i class="fa-solid fa-gem"></i> First Class';
+                      var vehicle_class_desc =
+                        '<i class="fad fa-users"></i> MAX. 3 PASSENGERS - <i class="fad fa-suitcase-rolling"></i>MAX 3 MEDIUM SUITCASES';
+                    } else if (vehicle_class == "StandardVan") {
+                      var vechicle_class_name = "Standard Van";
+                      var vehicle_class_desc =
+                        '<i class="fad fa-users"></i> MAX. 7 PASSENGERS - <i class="fad fa-suitcase-rolling"></i> MAX 7 MEDIUM SUITCASES';
+                    } else if (vehicle_class == "FirstClassVan") {
+                      $("#first_class_services").css("display", "inline-block");
+                      var vechicle_class_name =
+                        '<i class="fa-solid fa-gem"></i> First Class Van / SUV';
+                      var vehicle_class_desc =
+                        '<i class="fad fa-users"></i> MAX. 6 PASSENGERS - <i class="fad fa-suitcase-rolling"></i> MAX 6 MEDIUM SUITCASES';
+                    } else if (vehicle_class == "Minibus12") {
+                      var vechicle_class_name = "Minibus 12";
+                      var vehicle_class_desc =
+                        '<i class="fad fa-users"></i> MAX. 12 PASSENGERS - <i class="fad fa-suitcase-rolling"></i> MAX 12 MEDIUM SUITCASES';
+                    } else if (vehicle_class == "Minibus16") {
+                      var vechicle_class_name = "Minibus 16";
+                      var vehicle_class_desc =
+                        '<i class="fad fa-users"></i> MAX. 16 PASSENGERS - <i class="fad fa-suitcase-rolling"></i> MAX 16 MEDIUM SUITCASES';
+                    } else {
+                      var vechicle_class_name = vehicle_class;
+                    }
+
+                    $("#vehicle_class_desc").html(vehicle_class_desc);
+
+                    var value = formatStoredPickupLabel(
+                      data_time_ride,
+                      timezone,
+                      "en",
+                      datetime_format_24,
+                    );
+                    $("#data_time_ride").html(value || data_time_ride);
+
+                    $("#start").html(formatRouteStop(start));
+
+                    if (hourly_duration > 0) {
+                      $("#end").html("<em>To be defined</em>");
+                    } else {
+                      $("#end").html(formatRouteStop(end));
+                    }
+                    $("#km").html(km);
+                    $("#miles").html(miles);
+                    $("#pax").html(pax);
+                    $("#vehicle_class").html(vechicle_class_name);
+
+                    var hasChildSeat = !(
+                      child_seat == null ||
+                      child_seat == "" ||
+                      Number(child_seat) === 0
+                    );
+                    var hasBoosterSeat = !(
+                      booster_seat == null ||
+                      booster_seat == "" ||
+                      Number(booster_seat) === 0
+                    );
+
+                    if (hasChildSeat) {
+                      $("#child_seat").addClass("booking-extra-count");
+                    } else {
+                      $("#child_seat").removeClass("booking-extra-count");
+                    }
+
+                    if (hasBoosterSeat) {
+                      $("#booster_seat").addClass("booking-extra-count");
+                    } else {
+                      $("#booster_seat").removeClass("booking-extra-count");
+                    }
+
+                    $("#have_extra .booking-extra-warning").remove();
+                    if (hasChildSeat || hasBoosterSeat) {
+                      $("#have_extra").append(
+                        ' <span class="booking-extra-warning" style="color:#f9b442"><i class="fa-solid fa-triangle-exclamation"></i></span>',
+                      );
+                      $("#extras_box").show();
+                    } else {
+                      $("#extras_box").hide();
+                    }
+
+                    $("#child_seat").html(hasChildSeat ? child_seat : "0");
+                    $("#booster_seat").html(
+                      hasBoosterSeat ? booster_seat : "0",
+                    );
+                    $("#currency").html(currency);
+                    $("#partner_payout").html(partner_payout);
+                    $("#partner_payout").append(commission);
+                    $("#flight_train_number").html(flight_train_number);
+                    updatePickupFromFlightDelay({
+                      targetSelector: "#data_time_ride",
+                      bookingStatus: booking_status,
+                      flightRawValue: flight_train_number,
+                      pickupDateTime: data_time_ride,
+                      timezone: timezone,
+                      datetimeFormat24: datetime_format_24,
+                      lang: "en",
+                    });
+
+                    $("#booking_status").html("New Ride " + id);
+
+
+                    load_vehicles(vehicle_class, pax);
+                  },
+                  error: function (jqXHR, textStatus, errorThrown) {
+                    if (jqXHR.status == 429) {
+                      var TooManyModal = new bootstrap.Modal(
+                        document.getElementById("toomany429"),
+                        {
+                          keyboard: false,
+                        },
+                      );
+                      TooManyModal.show();
+                    }
+                    if (jqXHR.status == 401) {
+                      window.location.href = "/logout";
+                    }
+                    var NoRes = new bootstrap.Modal(
+                      document.getElementById("NoRes"),
+                      {
+                        keyboard: false,
+                      },
+                    );
+
+                    NoRes.show();
+
+
+                    // redirect to rides
+                    if (jqXHR.responseJSON.booking_id) {
+                      window.location.replace(
+                        "../../booking/" + jqXHR.responseJSON.booking_id,
+                      );
+                    } else {
+
+                      var myModalEl = document.getElementById("NoRes");
+                      myModalEl.addEventListener(
+                        "hidden.bs.modal",
+                        function (event) {
+                          window.location.replace("../../");
+                        },
+                      );
+                    }
+                  },
+                });
+              }
+            </script>
+
+            <div class="booking-detail-page">
+              <div class="booking-header-strip">
+                <span
+                  class="badge badge-soft-primary font-size-18"
+                  id="booking_status"
+                  style="text-transform: uppercase"
+                  >New Ride</span
+                >
+                <span
+                  class="badge badge-soft-primary font-size-18"
+                  id="hourly_status"
+                  style="display: none; text-transform: uppercase"
+                  ><i class="fa-solid fa-circle-notch fa-spin"></i
+                ></span>
+                <span
+                  class="badge badge-soft-danger font-size-18"
+                  id="lastminute"
+                  style="display: none; text-transform: uppercase"
+                  >LASTMINUTE</span
+                >
+              </div>
+
+              <div class="row the_booking">
+                <div class="col-lg-8">
+                  <div class="card booking-main-card">
+                    <div class="card-body">
+                      <div
+                        class="row booking-info-grid"
+                        style="line-height: 22px"
+                      >
+                        <div
+                          class="col-lg-4"
+                          style="margin-top: 10px; margin-bottom: 15px"
+                        >
+                          <input
+                            type="hidden"
+                            id="vehicle_class_hide"
+                            value=""
+                          />
+                          <input type="hidden" id="booking_date" value="" />
+
+                          <span
+                            class="booking_single_box_title"
+                            style="
+                              margin-top: 6px;
+                              margin-bottom: 10px;
+                              font-weight: 300;
+                            "
+                            ><i class="fa-solid fa-calendar-days"></i> DATE/TIME
+                            OF SERVICE
+                          </span>
+                          <span
+                            id="data_time_ride"
+                            style="
+                              font-size: 18px;
+                              font-weight: 600;
+                              margin-top: 5px;
+                            "
+                            ><i
+                              class="fa-solid fa-circle-notch fa-spin"
+                            ></i></span
+                          ><br />
+
+                          <div
+                            id="hourly_box"
+                            class="booking-soft-panel"
+                            style="display: none"
+                          >
+                            <span
+                              class="booking_single_box_title"
+                              style="
+                                margin-top: 6px;
+                                margin-bottom: 10px;
+                                font-weight: 300;
+                              "
+                              ><i class="fa-solid fa-clock-rotate-left"></i>
+                              Hourly booking</span
+                            >
+                            <strong>Duration:</strong>
+                            <span id="hourly_duration"
+                              ><i
+                                class="fa-solid fa-circle-notch fa-spin"
+                              ></i></span
+                            ><br />
+                            <strong>Incl. Km/Miles:</strong>
+                            <span id="hourly_km"
+                              ><i
+                                class="fa-solid fa-circle-notch fa-spin"
+                              ></i></span
+                            >km /
+                            <span id="hourly_miles"
+                              ><i
+                                class="fa-solid fa-circle-notch fa-spin"
+                              ></i></span
+                            >mi<br />
+                          </div>
+
+                          <div id="note_box" class="booking-soft-panel">
+                            <span
+                              class="booking_single_box_title"
+                              style="
+                                margin-top: 6px;
+                                margin-bottom: 10px;
+                                font-weight: 300;
+                              "
+                              ><i class="fa-solid fa-note"></i> CUSTOMER
+                              NOTES</span
+                            >
+                            <span id="the_notes"></span>
+                          </div>
+
+                          <div
+                            id="amendment_action"
+                            class="booking-soft-panel"
+                            style="display: none"
+                          >
+                            <span
+                              class="booking_single_box_title"
+                              style="
+                                margin-top: 6px;
+                                margin-bottom: 10px;
+                                font-weight: 300;
+                              "
+                              ><i class="fa-light fa-calendar-days"></i>
+                              AMENDMENT PENDING</span
+                            >
+                            <strong>New date / time of service:</strong>
+                            <br /><span
+                              id="amendment_new_datetime"
+                              style="font-size: 20px; font-weight: 600"
+                              ><i class="fa-solid fa-circle-notch fa-spin"></i
+                            ></span>
+                            <br />
+                            <br />
+                            <input type="hidden" id="amendment_id" value="" />
+                            <button
+                              type="button"
+                              class="btn btn-success waves-effect waves-light ame_action"
+                              data-action="accept"
+                            >
+                              Accept
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-danger waves-effect waves-light ame_action"
+                              data-action="refuse"
+                            >
+                              Decline
+                            </button>
+                          </div>
+                        </div>
+                        <!-- end col -->
+                        <div
+                          class="col-lg-8"
+                          style="margin-top: 10px; margin-bottom: 15px"
+                        >
+                          <span
+                            class="booking_single_box_title"
+                            style="
+                              margin-top: 6px;
+                              margin-bottom: 10px;
+                              font-weight: 300;
+                            "
+                            ><i class="fa-solid fa-route"></i> ROUTE</span
+                          >
+                          <div class="booking-route-stack">
+                            <div class="booking-route-stop start">
+                              <span class="booking-route-icon"
+                                ><i class="fa-solid fa-location-dot"></i
+                              ></span>
+                              <div id="start" class="booking-route-address">
+                                <i class="fa-solid fa-circle-notch fa-spin"></i>
+                              </div>
+                            </div>
+                            <div class="booking-route-stop end">
+                              <span class="booking-route-icon"
+                                ><i class="fa-solid fa-flag-checkered"></i
+                              ></span>
+                              <div id="end" class="booking-route-address">
+                                <i class="fa-solid fa-circle-notch fa-spin"></i>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="booking-facts">
+                            <span class="booking-fact-pill"
+                              ><i class="fa-solid fa-plane"></i> Flight / Train:
+                              <span id="flight_train_number"
+                                ><i
+                                  class="fa-solid fa-circle-notch fa-spin"
+                                ></i></span
+                            ></span>
+                            <span class="booking-fact-pill"
+                              ><i class="fa-solid fa-route"></i> km:
+                              <span id="km"
+                                ><i
+                                  class="fa-solid fa-circle-notch fa-spin"
+                                ></i></span
+                            ></span>
+                            <span class="booking-fact-pill"
+                              ><i class="fa-solid fa-road"></i> Miles:
+                              <span id="miles"
+                                ><i
+                                  class="fa-solid fa-circle-notch fa-spin"
+                                ></i></span
+                            ></span>
+                            <span class="booking-fact-pill"
+                              ><i class="fa-solid fa-users"></i> passengers:
+                              <span id="pax"
+                                ><i
+                                  class="fa-solid fa-circle-notch fa-spin"
+                                ></i></span
+                            ></span>
+                          </div>
+
+                          <div
+                            id="vehicle_box"
+                            style="margin-top: 20px; margin-bottom: 15px"
+                          >
+                            <span
+                              class="booking_single_box_title"
+                              style="
+                                margin-top: 6px;
+                                margin-bottom: 10px;
+                                font-weight: 300;
+                              "
+                              ><i class="fa-solid fa-car"></i> VEHICLE
+                              CLASS</span
+                            >
+                            <span id="vehicle_class" style="font-size: 18px"
+                              ><i class="fa-solid fa-circle-notch fa-spin"></i
+                            ></span>
+                            <span
+                              id="vehicle_class_desc"
+                              style="
+                                font-size: 12px;
+                                display: block;
+                                margin-top: 5px;
+                              "
+                            ></span>
+
+                            <div
+                              id="first_class_services"
+                              style="display: none"
+                            >
+                              <br />
+                              <div
+                                style="
+                                  padding: 15px;
+                                  border-radius: 5px;
+                                  border: 1px solid #23282d;
+                                  margin-top: 10px;
+                                "
+                              >
+                                <strong>FIRST CLASS SERVICE</strong><br />
+                                Included in the price:
+                                <ul>
+                                  <li>Bottled water (one per person)</li>
+                                  <li>free WIFI</li>
+                                  <li>
+                                    The driver must wear a black suit, white
+                                    shirt and tie
+                                  </li>
+                                  <li>
+                                    <strong
+                                      >The driver must be able to speak
+                                      English</strong
+                                    >
+                                  </li>
+                                  <li>
+                                    <strong
+                                      ><i
+                                        class="fa-solid fa-location-exclamation"
+                                      ></i>
+                                      In the event of a delayed flight, the
+                                      pick-up must be rescheduled to the new
+                                      arrival/departure time</strong
+                                    >
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- end col -->
+                      </div>
+                      <!-- end row -->
+
+                      <hr />
+
+                      <div
+                        class="row booking-info-grid"
+                        style="line-height: 20px"
+                      >
+                        <div
+                          class="col-lg-4"
+                          id="extras_box"
+                          style="margin-top: 10px; margin-bottom: 15px"
+                        >
+                          <span
+                            class="booking_single_box_title"
+                            id="have_extra"
+                            style="
+                              margin-top: 6px;
+                              margin-bottom: 10px;
+                              font-weight: 300;
+                            "
+                            ><i class="fa-solid fa-seat-airline"></i>
+                            EXTRA</span
+                          >
+
+                          <div class="booking-extra-list">
+                            <span class="booking-extra-item"
+                              >Child seats:
+                              <span id="child_seat"
+                                ><i
+                                  class="fa-solid fa-circle-notch fa-spin"
+                                ></i></span
+                            ></span>
+                            <span class="booking-extra-item"
+                              >Booster seats:
+                              <span id="booster_seat"
+                                ><i
+                                  class="fa-solid fa-circle-notch fa-spin"
+                                ></i></span
+                            ></span>
+                          </div>
+                        </div>
+                        <!-- end col -->
+                        <div
+                          class="col-lg-8"
+                          style="margin-top: 10px; margin-bottom: 15px"
+                        >
+                          <span
+                            class="booking_single_box_title"
+                            style="
+                              margin-top: 6px;
+                              margin-bottom: 10px;
+                              font-weight: 300;
+                            "
+                            ><i class="fa-regular fa-money-bill-1"></i>
+                            PAYOUT</span
+                          >
+
+                          <span class="payout booking-payout-value">
+                            <span id="currency"></span
+                            ><span id="partner_payout"
+                              ><i class="fa-solid fa-circle-notch fa-spin"></i
+                            ></span>
+                          </span>
+                          <small class="booking-payout-note"
+                            ><strong>This is your net payout.</strong> <br />
+                            Our commission has already been subtracted from the
+                            total paid from the customer. Please take note that
+                            the payment for this journey has already been
+                            collected by Transfeero and will be credited to you
+                            following the completion of the service in
+                            accordance with our payment terms.</small
+                          >
+                        </div>
+                        <!-- end col -->
+                      </div>
+                      <!-- end row -->
+                    </div>
+                  </div>
+                </div>
+                <!-- end col -->
+
+                <div class="col-lg-4">
+                  <div class="card booking-side-card">
+                    <div class="card-body">
+                      <span class="booking_single_box_title"
+                        >ACCEPT OR REFUSE</span
+                      >
+
+                      <div id="ass_vehicle_div" class="booking-action-block">
+                        <span
+                          class="booking_single_box_title"
+                          style="font-weight: 300"
+                          >SELECT VEHICLE</span
+                        >
+
+                        <div
+                          class="alert alert-info"
+                          id="StandardSedanAlternative"
+                          style="display: none"
+                        >
+                          This ride requires the use of a Standard Sedan,
+                          however, if by <span id="class_timer"></span> it has
+                          not yet been accepted, it will also be possible to
+                          accept the ride with a Standard Van class vehicle
+                        </div>
+
+                        <hr />
+
+                        <div id="loader_spin_vec">
+                          <i class="fa-solid fa-circle-notch fa-spin"></i>
+                        </div>
+
+                        <select
+                          id="vehicle"
+                          style="display: none"
+                          class="js-example-basic-vehicle"
+                          name="vehicle"
+                          class="form-control form-control-lg"
+                        >
+                          <option disabled value="" selected hidden>
+                            SELECT VEHICLE
+                          </option>
+                        </select>
+                        <br />
+                        <small id="accept_info"
+                          ><i class="fa-regular fa-circle-exclamation"></i> You
+                          must select a vehicle before you can accept the
+                          ride</small
+                        >
+                        <br /><br />
+                        <div
+                          class="cf-turnstile"
+                          data-sitekey="0x4AAAAAAAc8Qg36iz5OftRl"
+                        ></div>
+
+                        <button
+                          id="accept_ride"
+                          class="btn btn-success waves-effect waves-light btn-block btn-lg accept_button booking-action-btn"
+                          data-action="accept"
+                          style="margin-top: 20px"
+                          disabled
+                        >
+                          Accept ride
+                        </button>
+
+                        <button
+                          id="refuse_ride"
+                          class="btn btn-outline-danger waves-effect waves-light btn-block accept_button booking-action-btn"
+                          data-action="refuse"
+                          style="margin-top: 10px"
+                        >
+                          Refuse ride
+                        </button>
+                      </div>
+
+                      <script type="text/javascript">
+                        $(document).ready(function () {
+                          function checkCaptcha() {
+                            return new Promise((resolve, reject) => {
+                              var response = turnstile.getResponse(); // Assicurati che 'turnstile' sia definito e accessibile
+                              if (response.length == 0) {
+                                reject("Solve Captcha first!");
+                              } else {
+                                $.ajax({
+                                  type: "POST",
+                                  url: "/api/checkturnstile",
+                                  data: { cf: response },
+                                  success: function (data) {
+                                    if (data.success == false) {
+                                      reject("Captcha failed!");
+                                    } else {
+                                      resolve(data); // Risolve la promessa con i dati ricevuti
+                                    }
+                                  },
+                                  error: function (error) {
+                                    reject("AJAX error: " + error.statusText);
+                                  },
+                                });
+                              }
+                            });
+                          }
+
+                          var bearerToken =
+                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBhc3N3b3JkIjoiUkFaNWdxcDFocmdfZ2RxNmR4dWtqczl3amhmZzgzNG4iLCJpZCI6IjEiLCJyb2xlIjoiYXBwIn0sImlkIjoiMSIsInJvbGUiOiJhcHAiLCJleHAiOjE3NzcxMzIyMjZ9.OnVcSVNBaw_d7-bh-jGJLrN3LHtLt2AWPhOyZIlLqvU";
+
+                          $(".accept_button").click(function () {
+                            $(this).prop("disabled", true);
+                            $(this).html(
+                              '<i class="fa-solid fa-circle-notch fa-spin"></i>',
+                            );
+                            // check chapta
+                            var response = turnstile.getResponse();
+
+                            if (response && response.length == 0) {
+                              errorToast("Please solve the captcha first");
+                              return false;
+                            } else {
+                              // send cf post to /api/checkturnstile to check chapta
+
+                              checkCaptcha()
+                                .then((data) => {
+                                  if ($("#vehicle").val() == "") {
+                                    alert("Please select a vehicle");
+                                    return false;
+                                  }
+
+                                  var vehicle = $("#vehicle").val();
+                                  var booking_id = "69d4189c99c5e353cde3cadc";
+                                  var action = $(this).attr("data-action");
+                                  if (action == "accept") {
+                                    var action = "";
+                                  } else {
+                                    var action = 1;
+                                  }
+                                  var booking_hash = "69d4189c99c5e353cde3cadc";
+
+                                  $.ajax({
+                                    type: "POST",
+                                    url: "https://api.transfeero.com/v3/partner_accept_booking",
+                                    beforeSend: function (xhr) {
+                                      xhr.setRequestHeader(
+                                        "Authorizations",
+                                        "Bearer " + bearerToken,
+                                      );
+                                    },
+                                    data: {
+                                      login_hash:
+                                        "33231177574982749e7fe9c985c082e9e5718bfd004e10d0fd0c194c3b07c20c494f485bf9d8400",
+                                      booking_hash: booking_hash,
+                                      vehicle_id: vehicle,
+                                      refuse: action,
+                                    },
+                                    dataType: "json",
+                                    success: function (data) {
+                                      if (data.message == "Refused") {
+                                        errorToast("Booking has been refused");
+                                        setTimeout(function () {
+                                          window.location.replace(
+                                            "../new_rides",
+                                          );
+                                        }, 1000);
+                                      } else {
+                                        var booking_id = data.data.booking_id;
+
+                                        successToast(
+                                          "Booking has been accepted",
+                                        );
+                                        setTimeout(function () {
+                                          window.location.replace(
+                                            "../booking/" + booking_id,
+                                          );
+                                        }, 1000);
+                                      }
+                                    },
+                                    error: function (
+                                      jqXHR,
+                                      textStatus,
+                                      errorThrown,
+                                    ) {
+                                      if (jqXHR.status == 429) {
+                                        var TooManyModal = new bootstrap.Modal(
+                                          document.getElementById("toomany429"),
+                                          {
+                                            keyboard: false,
+                                          },
+                                        );
+                                        TooManyModal.show();
+                                      }
+
+                                      if (jqXHR.status == 401) {
+                                        window.location.href = "/logout";
+                                      }
+                                      errorToast(
+                                        "Something went wrong, booking was already accepted from another partner.",
+                                      );
+                                      setTimeout(function () {
+                                        location.reload();
+                                      }, 1500);
+                                    },
+                                  });
+                                })
+                                .catch((error) => {
+                                  console.error("Error:", error);
+                                  errorToast(
+                                    "Captcha failed, please try again",
+                                  );
+                                  console.log($(this).attr("data-action"));
+                                  // enable button
+                                  $(".accept_button").prop("disabled", false);
+                                  $(".accept_button").html(function () {
+                                    if (
+                                      $(this).attr("data-action") == "accept"
+                                    ) {
+                                      return "Accept ride";
+                                    } else {
+                                      return "Refuse ride";
+                                    }
+                                  });
+                                  return false;
+                                });
+                            }
+                          });
+
+                          $("#vehicle").on("change", function () {
+                            $("#accept_ride").prop("disabled", false);
+                            $("#accept_info").hide();
+                          });
+                        });
+                      </script>
+                    </div>
+                  </div>
+                </div>
+                <!-- end col -->
+              </div>
+              <!-- end row -->
+            </div>
+
+            <!-- Modal Message-->
+            <div
+              class="modal fade"
+              id="NoRes"
+              tabindex="-1"
+              aria-labelledby="NoResLaber"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="NoResLabel">Error</h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    This ride has already been accepted by another partner or
+                    does not exist
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- container-fluid -->
+        </div>
+        <script src="/assets/js/custom.js"></script>
+
+        <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"
+          integrity="sha512-RtZU3AyMVArmHLiW0suEZ9McadTdegwbgtiQl5Qqo9kunkVg1ofwueXD8/8wv3Af8jkME3DDe3yLfR8HSJfT2g=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"
+        ></script>
+
+        <script>
+          function successToast(message) {
+            Toastify({
+              text: message,
+              duration: 3000,
+              close: true,
+              gravity: "top", // `top` or `bottom`
+              position: "right", // `left`, `center` or `right`
+              backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+              stopOnFocus: true, // Prevents dismissing of toast on hover
+              onClick: function () {}, // Callback after click
+            }).showToast();
+          }
+
+          function errorToast(message) {
+            Toastify({
+              text: message,
+              duration: 3000,
+              close: true,
+              gravity: "top", // `top` or `bottom`
+              position: "right", // `left`, `center` or `right`
+              backgroundColor: "linear-gradient(to right, #ce2b37, #ffc736)",
+              stopOnFocus: true, // Prevents dismissing of toast on hover
+              onClick: function () {}, // Callback after click
+            }).showToast();
+          }
+        </script>
+
+        <script
+          type="text/javascript"
+          src="https://cdn.jsdelivr.net/npm/toastify-js"
+        ></script>
+
+        <script>
+          var partner_contact_data = [
+            {
+              id: 33231,
+              email: "thongchaiborvonrungreung@gmail.com",
+              email_verified: 1,
+              main_name: "Thongchai",
+              main_lastname: "Borvonrungreung",
+              company: "GTB Transfer & Travel",
+              vat: "OO99999999999",
+              phone: "+66970975824",
+              account_type: "Standard",
+              status: 1,
+              language: "EN",
+              country: "TH",
+              address: "89/140 Moo. 8",
+              city: "Lamlukka",
+              province_state: "Array",
+              zip: "12150",
+              SDI: "",
+              datetime_format_24: true,
+              terms: "1",
+            },
+          ];
+          var datetime_format_24 = partner_contact_data[0].datetime_format_24;
+          var email = partner_contact_data[0].email;
+          var main_name = partner_contact_data[0].main_name;
+          var main_lastname = partner_contact_data[0].main_lastname;
+          var company_name = partner_contact_data[0].company;
+          var phone = partner_contact_data[0].phone;
+          var status = partner_contact_data[0].status;
+          var language = partner_contact_data[0].language;
+          var id = partner_contact_data[0].id;
+
+          var nome = main_name + " (" + id + ")";
+          var intercom_app_id = "q2t0raq9";
+          var intercom_user_id = "partner:33231";
+          var intercom_user_jwt =
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoicGFydG5lcjozMzIzMSIsImVtYWlsIjoidGhvbmdjaGFpYm9ydm9ucnVuZ3JldW5nQGdtYWlsLmNvbSIsImlhdCI6MTc3NjAyMzM3NCwiZXhwIjoxNzc2MTA5Nzc0fQ.dvViWV4OVjgLLq4x6kJURw1YXp8eb_1pUTvACM_tWfI";
+          window.intercomSettings = {
+            api_base: "https://api-iam.intercom.io",
+            app_id: intercom_app_id,
+          };
+
+          if (intercom_user_id && intercom_user_jwt) {
+            window.intercomSettings.intercom_user_jwt = intercom_user_jwt;
+            window.intercomSettings.user_id = intercom_user_id;
+            window.intercomSettings.name = nome; // Full name
+            window.intercomSettings.email = email;
+            window.intercomSettings.phone = phone;
+            window.intercomSettings.PartnerID = id;
+            window.intercomSettings.PartnerActive = status;
+            window.intercomSettings.PartnerLang = language;
+            window.intercomSettings.session_duration = 86400000; // 1 day
+          }
+
+          (function () {
+            var w = window;
+            var ic = w.Intercom;
+            if (typeof ic === "function") {
+              ic("shutdown");
+              ic("boot", w.intercomSettings);
+            } else {
+              var d = document;
+              var i = function () {
+                i.c(arguments);
+              };
+              i.q = [];
+              i.c = function (args) {
+                i.q.push(args);
+              };
+              w.Intercom = i;
+              var l = function () {
+                var s = d.createElement("script");
+                s.type = "text/javascript";
+                s.async = true;
+                s.src = "https://widget.intercom.io/widget/" + intercom_app_id;
+                var x = d.getElementsByTagName("script")[0];
+                x.parentNode.insertBefore(s, x);
+              };
+              if (w.attachEvent) {
+                w.attachEvent("onload", l);
+              } else {
+                w.addEventListener("load", l, false);
+              }
+            }
+          })();
+        </script>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="toomany429"
+          tabindex="-1"
+          aria-labelledby="toomany429Label"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="toomany429Label">
+                  429 Too Many Requests
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                Ouch! ...you are making too many requests! for security reasons
+                you must wait 60 seconds before making a new request
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-6">
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                © Transfeero.
+              </div>
+              <div class="col-sm-6">
+                <div class="text-sm-end d-none d-sm-block"></div>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+      <!-- end main content-->
+    </div>
+
+    <!-- Responsive Table js -->
+    <script src="/assets/libs/admin-resources/rwd-table/rwd-table.min.js"></script>
+
+    <!-- Init js -->
+    <script src="/assets/js/pages/table-responsive.init.js"></script>
+
+    <!-- App js -->
+    <script src="/assets/js/app.js"></script>
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516"
+      integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg=="
+      data-cf-beacon='{"version":"2024.11.0","token":"5b9c40e7969a4ee6a5efacd1e059ae7d","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

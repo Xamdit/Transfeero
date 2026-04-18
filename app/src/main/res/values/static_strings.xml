@@ -4,11 +4,10 @@
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <resources>
     <!-- Name of the application -->
-    <string name="app_name" translatable="false">Transfeero</string>
+    <string name="app_name" translatable="false">PKGO</string>
     <string name="firefox" translatable="false">Firefox</string>
 
     <!-- Preference for developers -->
-    <string name="preference_leakcanary" translatable="false">LeakCanary</string>
 
     <!--suppress CheckTagEmptyBody This is a default value for places where we don't want a string set-->
     <string name="empty_string" translatable="false"></string>

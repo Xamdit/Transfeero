@@ -140,6 +140,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
 
         android.util.Log.d("FenixLog", "StartupStep: 0. Application.onCreate start")
         // DO NOT ADD ANYTHING ABOVE HERE.
+        android.util.Log.d("FenixLog", "StartupStep: 0.1 setupInMainProcessOnly starting...")
         setupInMainProcessOnly()
         android.util.Log.d("FenixLog", "StartupStep: 10. Application.onCreate end")
         // DO NOT ADD ANYTHING UNDER HERE.
@@ -192,6 +193,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
 
     @CallSuper
     open fun setupInAllProcesses() {
+        android.util.Log.d("FenixLog", "StartupStep: -1. setupInAllProcesses start")
         setupCrashReporting()
 
         // We want the log messages of all builds to go to Android logcat
@@ -256,7 +258,6 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
             }
         }
 
-        setupLeakCanary()
         startMetricsIfEnabled()
         setupPush()
 
@@ -421,14 +422,6 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
         }
     }
 
-    protected open fun setupLeakCanary() {
-        // no-op, LeakCanary is disabled by default
-    }
-
-    open fun updateLeakCanaryState(isEnabled: Boolean) {
-        // no-op, LeakCanary is disabled by default
-    }
-
     private fun setupPush() {
         // Sets the PushFeature as the singleton instance for push messages to go to.
         // We need the push feature setup here to deliver messages in the case where the service
@@ -450,6 +443,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
     }
 
     private fun setupCrashReporting() {
+        android.util.Log.d("FenixLog", "StartupStep: -0.5. setupCrashReporting")
         components
             .analytics
             .crashReporter

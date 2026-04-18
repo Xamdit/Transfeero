@@ -88,7 +88,6 @@
 
     <!-- Total cookie protection "contextual feature recommendation" (CFR) -->
     <!-- Text for the message displayed in the contextual feature recommendation popup promoting the total cookie protection feature. -->
-    <string name="tcp_cfr_message">Our most powerful privacy feature yet isolates cross-site trackers.</string>
     <!-- Text displayed that links to website containing documentation about the "Total cookie protection" feature. -->
     <string name="tcp_cfr_learn_more">Learn about Total Cookie Protection</string>
 
@@ -1962,4 +1961,15 @@
     <string name="a11y_action_label_wallpaper_collection_learn_more">open link to learn more about this collection</string>
     <!-- Action label for links that point to an article. Talkback will append this to say "Double tap to read the article". -->
     <string name="a11y_action_label_read_article">read the article</string>
+
+    <!-- Mail Notification Guard -->
+    <string name="mail_notification_guard_dialog_title">เปิดการแจ้งเตือน Mail</string>
+    <string name="mail_notification_guard_dialog_message">Transfeero ต้องการให้ \"%1$s\" เปิดการแจ้งเตือนไว้\n\nกรุณาเปิด Notification ของ %2$s เพื่อไม่ให้พลาดการรับงาน</string>
+    <string name="mail_notification_guard_dialog_positive_button">เปิด Settings</string>
+    <string name="mail_notification_guard_dialog_negative_button">ภายหลัง</string>
+    <string name="mail_notification_guard_dialog_ignore_checkbox">ไม่ต้องแสดงข้อความนี้อีก</string>
+
+    <!-- Mandatory Gmail Notification Requirement -->
+    <string name="mail_notification_guard_gmail_title">กรุณาเปิดการแจ้งเตือน Gmail</string>
+    <string name="mail_notification_guard_gmail_message">แอป Transfeero กำหนดให้คุณต้องเปิดการแจ้งเตือนของ Gmail ไว้เสมอเพื่อความรวดเร็วในการรับงาน\n\nกรุณาเปิดการแจ้งเตือนก่อนเข้าใช้งานแอป</string>
 </resources>

@@ -13,7 +13,7 @@ def runCmd(cmd, workingDir, successMessage, captureStdout=true) {
     proc.waitFor()
 
     if (proc.exitValue() != 0) {
-        throw new GradleException("Process '${cmd}' finished with non-zero exit value ${proc.exitValue()}");
+        throw new GradleException("Process '${cmd}' finished with non-zero exit value ${proc.exitValue()}")
     } else {
         log(successMessage)
     }
@@ -48,11 +48,11 @@ if (localProperties != null) {
         log("Enabling automatic publication of application-services from: $appServicesLocalPath")
         // Windows can't execute .py files directly, so we assume a "manually installed" python,
         // which comes with a "py" launcher and respects the shebang line to specify the version.
-        def publishAppServicesCmd = [];
+        def publishAppServicesCmd = []
         if (System.properties['os.name'].toLowerCase().contains('windows')) {
-            publishAppServicesCmd << "py";
+            publishAppServicesCmd << "py"
         }
-        publishAppServicesCmd << "./automation/publish_to_maven_local_if_modified.py";
+        publishAppServicesCmd << "./automation/publish_to_maven_local_if_modified.py"
         runCmd(publishAppServicesCmd, appServicesLocalPath, "Published application-services for local development.", false)
     } else {
         log("Disabled auto-publication of application-services. Enable it by settings '$settingAppServicesPath' in local.properties")
@@ -63,11 +63,11 @@ if (localProperties != null) {
     if (androidComponentsLocalPath != null) {
         log("Enabling automatic publication of android-components from: $androidComponentsLocalPath")
         // As above, hacks to execute .py files on Windows.
-        def publishAcCmd = [];
+        def publishAcCmd = []
         if (System.properties['os.name'].toLowerCase().contains('windows')) {
-            publishAcCmd << "py";
+            publishAcCmd << "py"
         }
-        publishAcCmd << "./automation/publish_to_maven_local_if_modified.py";
+        publishAcCmd << "./automation/publish_to_maven_local_if_modified.py"
         runCmd(publishAcCmd, androidComponentsLocalPath, "Published android-components for local development.", false)
     } else {
         log("Disabled auto-publication of android-components. Enable it by settings '$settingAndroidComponentsPath' in local.properties")
@@ -78,11 +78,11 @@ if (localProperties != null) {
     if (gleanLocalPath != null) {
         log("Enabling automatic publication of Glean from: $gleanLocalPath")
         // As above, hacks to execute .py files on Windows.
-        def publishGleanCmd = [];
+        def publishGleanCmd = []
         if (System.properties['os.name'].toLowerCase().contains('windows')) {
-            publishGleanCmd << "py";
+            publishGleanCmd << "py"
         }
-        publishGleanCmd << "./build-scripts/publish_to_maven_local_if_modified.py";
+        publishGleanCmd << "./build-scripts/publish_to_maven_local_if_modified.py"
         runCmd(publishGleanCmd, gleanLocalPath, "Published Glean for local development.", false)
     } else {
         log("Disabled auto-publication of Glean. Enable it by settings '$settingGleanPath' in local.properties")

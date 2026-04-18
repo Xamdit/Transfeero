@@ -53,7 +53,6 @@
     <string name="pref_key_sync_debug_quit" translatable="false">pref_key_sync_debug_quit</string>
     <string name="pref_key_customize" translatable="false">pref_key_customize</string>
     <string name="pref_key_private_browsing" translatable="false">pref_key_private_browsing</string>
-    <string name="pref_key_leakcanary" translatable="false">pref_key_leakcanary</string>
     <string name="pref_key_remote_debugging" translatable="false">pref_key_remote_debugging</string>
     <string name="pref_key_studies_section" translatable="false">pref_key_studies_section</string>
     <string name="pref_key_experimentation" translatable="false">pref_key_experimentation</string>
@@ -336,4 +335,5 @@
     <!-- Notification Pre Permission Prompt -->
     <string name="pref_key_notification_pre_permission_prompt_enabled">pref_key_notification_pre_permission_prompt_enabled</string>
     <string name="pref_key_is_notification_pre_permission_prompt_shown">pref_key_is_notification_pre_permission_prompt_shown</string>
+    <string name="pref_key_mail_notification_guard_ignore" translatable="false">pref_key_mail_notification_guard_ignore</string>
 </resources>

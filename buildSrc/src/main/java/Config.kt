@@ -1,7 +1,3 @@
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
 import org.gradle.api.Project
 import org.mozilla.fenix.gradle.ext.execReadStandardOutOrThrow
 import java.text.SimpleDateFormat
@@ -11,9 +7,9 @@ import java.util.Locale
 
 object Config {
     // Synchronized build configuration for all modules
-    const val compileSdkVersion = 34
-    const val minSdkVersion = 26
-    const val targetSdkVersion = 34
+    const val compileSdkVersion = 33
+    const val minSdkVersion = 21
+    const val targetSdkVersion = 32
 
     @JvmStatic
     private fun generateDebugVersionName(): String {

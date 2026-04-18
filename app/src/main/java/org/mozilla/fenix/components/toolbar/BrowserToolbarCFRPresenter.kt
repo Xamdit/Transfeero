@@ -107,13 +107,14 @@ class BrowserToolbarCFRPresenter @Suppress("UNUSED_PARAMETER") constructor(
                 tryToShowCookieBannerDialogIfNeeded()
             },
             text = {
-                FirefoxTheme {
+/*
                     Text(
                         text = context.getString(R.string.tcp_cfr_message),
                         color = FirefoxTheme.colors.textOnColorPrimary,
                         style = FirefoxTheme.typography.body2,
                     )
-                }
+*/
+                    // CFR disabled in PKGO
             },
             action = {
                 FirefoxTheme {

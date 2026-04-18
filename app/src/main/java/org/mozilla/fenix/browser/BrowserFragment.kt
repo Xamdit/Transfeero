@@ -50,6 +50,7 @@ import kotlinx.coroutines.flow.map
 import mozilla.components.browser.state.selector.selectedTab
 import mozilla.components.lib.state.ext.consumeFlow
 import mozilla.components.support.ktx.kotlinx.coroutines.flow.ifAnyChanged
+import org.mozilla.fenix.BuildConfig
 import org.mozilla.fenix.ext.settings
 import org.mozilla.fenix.nimbus.FxNimbus
 import org.mozilla.fenix.settings.quicksettings.protections.cookiebanners.dialog.CookieBannerReEngagementDialogUtils
@@ -471,6 +472,10 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
         context: Context,
         view: View,
     ): List<ContextMenuCandidate> {
+        if (!BuildConfig.SHOW_CONTEXT_MENU) {
+            return emptyList()
+        }
+
         val contextMenuCandidateAppLinksUseCases = AppLinksUseCases(
             requireContext(),
             { true },

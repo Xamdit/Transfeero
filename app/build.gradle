@@ -16,12 +16,15 @@ apply plugin: 'androidx.benchmark'
 
 import com.android.build.OutputFile
 import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
 import org.gradle.internal.logging.text.StyledTextOutput.Style
 import org.gradle.internal.logging.text.StyledTextOutputFactory
 
 import static org.gradle.api.tasks.testing.TestResult.ResultType
 
 apply from: 'benchmark.gradle'
+
+def appConfig = new JsonSlurper().parse(file("${rootDir}/app-config.json"))
 
 android {
     compileSdkVersion Config.compileSdkVersion
@@ -45,6 +48,9 @@ android {
         resValue "bool", "IS_DEBUG", "false"
         buildConfigField "boolean", "USE_RELEASE_VERSIONING", "false"
         buildConfigField "String", "GIT_HASH", "\"\"" // see override in release builds for why it's blank.
+        buildConfigField "String", "HOME_URL", "\"${appConfig.home}\""
+        buildConfigField "boolean", "SHOW_TOOLBAR", "${appConfig.toolbar}"
+        buildConfigField "boolean", "SHOW_CONTEXT_MENU", "${appConfig.context_menu}"
         // This should be the "public" base URL of AMO.
         buildConfigField "String", "AMO_BASE_URL", "\"https://addons.mozilla.org\""
         buildConfigField "String", "AMO_COLLECTION_NAME", "\"Extensions-for-Android\""
@@ -241,7 +247,7 @@ android.applicationVariants.all { variant ->
 
     println("----------------------------------------------")
     println("Variant name:      " + variant.name)
-    println("Application ID:    " + [variant.mergedFlavor.applicationId, variant.buildType.applicationIdSuffix].findAll().join())
+    println("Application ID:    " + variant.applicationId)
     println("Build type:        " + variant.buildType.name)
     println("Flavor:            " + variant.flavorName)
     println("Telemetry enabled: " + !isDebug)
@@ -424,8 +430,9 @@ android.applicationVariants.all { variant ->
 
 // Generate Kotlin code for the Fenix Glean metrics.
 apply plugin: "org.mozilla.telemetry.glean-gradle-plugin"
-apply plugin: "org.mozilla.components.nimbus-gradle-plugin"
+// apply plugin: "org.mozilla.components.nimbus-gradle-plugin" // Disabled in PKGO to fix ZipException
 
+/*
 nimbus {
     // The path to the Nimbus feature manifest file
     manifestFile = "nimbus.fml.yaml"
@@ -446,6 +453,8 @@ nimbus {
     // and used to inform experiment configuration.
     experimenterManifest = ".experimenter.yaml"
 }
+*/
+// Nimbus configuration disabled in PKGO
 configurations {
     // There's an interaction between Gradle's resolution of dependencies with different types
     // (@jar, @aar) for `implementation` and `testImplementation` and with Android Studio's built-in
@@ -575,7 +584,7 @@ dependencies {
     implementation FenixDependencies.mozilla_lib_push_firebase
     implementation FenixDependencies.mozilla_lib_state
     implementation FenixDependencies.mozilla_lib_dataprotect
-    debugImplementation FenixDependencies.leakcanary
+
 
     implementation FenixDependencies.androidx_annotation
     implementation FenixDependencies.androidx_compose_ui

@@ -426,9 +426,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun setupPreferences() {
-        val leakKey = getPreferenceKey(R.string.pref_key_leakcanary)
         val debuggingKey = getPreferenceKey(R.string.pref_key_remote_debugging)
-        val preferenceLeakCanary = findPreference<Preference>(leakKey)
         val preferenceRemoteDebugging = findPreference<Preference>(debuggingKey)
         val preferenceMakeDefaultBrowser =
             requirePreference<DefaultBrowserPreference>(R.string.pref_key_make_default_browser)
@@ -436,13 +434,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val preferenceOpenLinksInExternalApp =
             findPreference<Preference>(getPreferenceKey(R.string.pref_key_open_links_in_external_app))
 
-        if (!Config.channel.isReleased) {
-            preferenceLeakCanary?.setOnPreferenceChangeListener { _, newValue ->
-                val isEnabled = newValue == true
-                context?.application?.updateLeakCanaryState(isEnabled)
-                true
-            }
-        }
 
         preferenceRemoteDebugging?.isVisible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
         preferenceRemoteDebugging?.setOnPreferenceChangeListener<Boolean> { preference, newValue ->

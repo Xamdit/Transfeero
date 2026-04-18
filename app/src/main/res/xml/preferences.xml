@@ -166,12 +166,6 @@
             app:iconSpaceReserved="false"
             android:title="@string/preferences_external_download_manager" />
 
-        <androidx.preference.SwitchPreference
-            android:defaultValue="true"
-            android:key="@string/pref_key_leakcanary"
-            android:title="@string/preference_leakcanary"
-            app:iconSpaceReserved="false"
-            app:isPreferenceVisible="@bool/IS_DEBUG" />
 
         <androidx.preference.SwitchPreference
             android:key="@string/pref_key_remote_debugging"

@@ -92,7 +92,9 @@ object GeckoProvider {
             )
         }
 
+        android.util.Log.d("FenixLog", "Engine: Creating GeckoRuntime...")
         val geckoRuntime = GeckoRuntime.create(context, runtimeSettings)
+        android.util.Log.d("FenixLog", "Engine: GeckoRuntime created ✓")
 
         geckoRuntime.autocompleteStorageDelegate = GeckoAutocompleteStorageDelegate(
             GeckoCreditCardsAddressesStorageDelegate(

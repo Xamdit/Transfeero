@@ -26,12 +26,30 @@
         return false;
     }
 
-    // ลองคลิกทันที และหลังจาก 1 / 2 วินาที
-    tryAccept();
-    setTimeout(tryAccept, 1000);
-    setTimeout(tryAccept, 2000);
+    // ฟังก์ชันสำหรับเช็ค URL และจัดการ Refresh
+    function checkURLAndRefresh() {
+        if (!window.location.href.includes('/new_rides')) return;
 
-    // คอยดู DOM สำหรับ Dialog/Popup ที่ขึ้นมาทีหลัง
+        // ลองหาปุ่มทันที
+        const found = tryAccept();
+        
+        if (!found) {
+            console.log("Fenix accept-ride: No ride found on /new_rides. Refreshing in 10s...");
+            setTimeout(() => {
+                // เช็คอีกครั้งเผื่อปุ่มเพิ่งขึ้นมาใน 10 วินาทีนี้
+                if (!tryAccept()) {
+                    location.reload();
+                }
+            }, 10000);
+        } else {
+            console.log("Fenix accept-ride: Ride found and clicked!");
+        }
+    }
+
+    // เริ่มการทำงาน
+    checkURLAndRefresh();
+
+    // คอยดู DOM สำหรับ Dialog/Popup ที่ขึ้นมาทีหลัง (ใช้ MutationObserver อย่างเดิม)
     const observer = new MutationObserver(() => tryAccept());
     observer.observe(document.documentElement, { childList: true, subtree: true });
 })();

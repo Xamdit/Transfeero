@@ -10,6 +10,12 @@ echo "Fenix: Updating extensions from $EXT_SRC to $EXT_DEST..."
 
 mkdir -p "$EXT_DEST"
 
+# NEW: Copy app-config.json directly from root to assets for native access
+if [ -f "./app-config.json" ]; then
+    echo "Processing app-config.json from root..."
+    cp "./app-config.json" "app/src/main/assets/app-config.json"
+fi
+
 # Remove only our custom extension directories (identified by .js source)
 for js_file in "$EXT_SRC"/*.js; do
     if [ -f "$js_file" ]; then

@@ -88,7 +88,6 @@
 
     <!-- Total cookie protection "contextual feature recommendation" (CFR) -->
     <!-- Text for the message displayed in the contextual feature recommendation popup promoting the total cookie protection feature. -->
-    <string name="tcp_cfr_message">අපගේ ප්‍රබලම රහස්‍යතා විශේෂාංගය හරස්-අඩවි ලුහුබැඳීම් හුදකලා කරයි.</string>
     <!-- Text displayed that links to website containing documentation about the "Total cookie protection" feature. -->
     <string name="tcp_cfr_learn_more">පූර්ණ දත්තකඩ රැකවරණය ගැන දැනගන්න</string>
 

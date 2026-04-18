@@ -304,6 +304,11 @@ class Settings(private val appContext: Context) : PreferencesHolder {
         default = !Config.channel.isMozillaOnline,
     )
 
+    var ignoreMailNotificationGuard by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_mail_notification_guard_ignore),
+        default = false,
+    )
+
     var isExperimentationEnabled by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_experimentation),
         default = true,
@@ -324,9 +329,10 @@ class Settings(private val appContext: Context) : PreferencesHolder {
         default = true,
     )
 
-    var shouldUseLightTheme: Boolean
-        get() = true
-        set(_) {}
+    var shouldUseLightTheme by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_light_theme),
+        default = false,
+    )
 
     var shouldUseAutoSize by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_accessibility_auto_size),
@@ -400,7 +406,7 @@ class Settings(private val appContext: Context) : PreferencesHolder {
 
     var isFirstNimbusRun: Boolean by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_is_first_run),
-        default = false,
+        default = true,
     )
 
     var nimbusLastFetchTime: Long by longPreference(
@@ -517,13 +523,15 @@ class Settings(private val appContext: Context) : PreferencesHolder {
         }
     }
 
-    var shouldUseDarkTheme: Boolean
-        get() = false
-        set(_) {}
+    var shouldUseDarkTheme by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_dark_theme),
+        default = false,
+    )
 
-    var shouldFollowDeviceTheme: Boolean
-        get() = false
-        set(_) {}
+    var shouldFollowDeviceTheme by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_follow_device_theme),
+        default = false,
+    )
 
     var shouldUseHttpsOnly by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_https_only),
@@ -542,13 +550,14 @@ class Settings(private val appContext: Context) : PreferencesHolder {
 
     var shouldUseTrackingProtection by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_tracking_protection),
-        default = false,
+        default = true,
     )
 
-    var shouldUseCookieBanner: Boolean
-        get() = true
-        @Suppress("UNUSED_PARAMETER")
-        set(value) {}
+    var shouldUseCookieBanner by lazyFeatureFlagPreference(
+        appContext.getPreferenceKey(R.string.pref_key_cookie_banner_v1),
+        featureFlag = true,
+        default = { cookieBannersSection[CookieBannersSection.FEATURE_SETTING_VALUE] == 1 },
+    )
 
     var userOptOutOfReEngageCookieBannerDialog by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_cookie_banner_re_engage_dialog_dismissed),
@@ -568,7 +577,7 @@ class Settings(private val appContext: Context) : PreferencesHolder {
     )
 
     val shouldShowCookieBannerUI: Boolean
-        get() = true
+        get() = cookieBannersSection[CookieBannersSection.FEATURE_UI] == 1
 
     /**
      * Indicates after how many hours a cookie banner dialog should be shown again
@@ -659,14 +668,20 @@ class Settings(private val appContext: Context) : PreferencesHolder {
         default = false,
     )
 
-    val useStandardTrackingProtection: Boolean
-        get() = true
+    val useStandardTrackingProtection by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_tracking_protection_standard_option),
+        true,
+    )
 
-    val useStrictTrackingProtection: Boolean
-        get() = false
+    val useStrictTrackingProtection by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_tracking_protection_strict_default),
+        false,
+    )
 
-    val useCustomTrackingProtection: Boolean
-        get() = false
+    val useCustomTrackingProtection by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_tracking_protection_custom_option),
+        false,
+    )
 
     @VisibleForTesting(otherwise = PRIVATE)
     fun setStrictETP() {
@@ -688,14 +703,14 @@ class Settings(private val appContext: Context) : PreferencesHolder {
 
     val blockCookiesInCustomTrackingProtection by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_tracking_protection_custom_cookies),
-        false,
+        true,
     )
 
     val enabledTotalCookieProtection: Boolean
-        get() = false
+        get() = Config.channel.isNightlyOrDebug || mr2022Sections[Mr2022Section.TCP_FEATURE] == true
 
     private val enabledTotalCookieProtectionCFR: Boolean
-        get() = false
+        get() = Config.channel.isNightlyOrDebug || mr2022Sections[Mr2022Section.TCP_CFR] == true
 
     /**
      * Indicates if the total cookie protection CRF should be shown.
@@ -703,7 +718,7 @@ class Settings(private val appContext: Context) : PreferencesHolder {
     var shouldShowTotalCookieProtectionCFR by lazyFeatureFlagPreference(
         appContext.getPreferenceKey(R.string.pref_key_should_show_total_cookie_protection_popup),
         featureFlag = true,
-        default = { false },
+        default = { enabledTotalCookieProtectionCFR },
     )
 
     val blockCookiesSelectionInCustomTrackingProtection by stringPreference(
@@ -816,7 +831,7 @@ class Settings(private val appContext: Context) : PreferencesHolder {
     var shouldUseBottomToolbar by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_toolbar_bottom),
         // Default accessibility users to top toolbar
-        default = false,
+        default = !touchExplorationIsEnabled && !switchServiceIsEnabled,
     )
 
     val toolbarPosition: ToolbarPosition
@@ -1362,7 +1377,7 @@ class Settings(private val appContext: Context) : PreferencesHolder {
     var showHomeOnboardingDialog by lazyFeatureFlagPreference(
         appContext.getPreferenceKey(R.string.pref_key_should_show_home_onboarding_dialog),
         featureFlag = true,
-        default = { false },
+        default = { mr2022Sections[Mr2022Section.HOME_ONBOARDING_DIALOG_EXISTING_USERS] == true },
     )
 
     /**
@@ -1545,7 +1560,14 @@ class Settings(private val appContext: Context) : PreferencesHolder {
      * Get the current mode for cookie banner handling
      */
     fun getCookieBannerHandling(): CookieBannerHandlingMode {
-        return CookieBannerHandlingMode.REJECT_OR_ACCEPT_ALL
+        return when (shouldUseCookieBanner) {
+            true -> CookieBannerHandlingMode.REJECT_ALL
+            false -> if (shouldEnabledCookieBannerDetectOnlyMode()) {
+                CookieBannerHandlingMode.REJECT_ALL
+            } else {
+                CookieBannerHandlingMode.DISABLED
+            }
+        }
     }
 
     /**

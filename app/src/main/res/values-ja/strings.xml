@@ -92,7 +92,6 @@
 
     <!-- Total cookie protection "contextual feature recommendation" (CFR) -->
     <!-- Text for the message displayed in the contextual feature recommendation popup promoting the total cookie protection feature. -->
-    <string name="tcp_cfr_message">私たちの最も強力なプライバシー保護機能は、クロスサイトトラッカーをさらに分離します。</string>
     <!-- Text displayed that links to website containing documentation about the "Total cookie protection" feature. -->
     <string name="tcp_cfr_learn_more">包括的 Cookie 保護について学ぶ</string>
 

@@ -87,7 +87,6 @@
 
     <!-- Total cookie protection "contextual feature recommendation" (CFR) -->
     <!-- Text for the message displayed in the contextual feature recommendation popup promoting the total cookie protection feature. -->
-    <string name="tcp_cfr_message">ᱟᱞᱮᱭᱟᱜ ᱡᱷᱚᱛᱚ ᱠᱷᱚᱱ ᱫᱟᱲᱮ ᱱᱤᱥᱚᱱ ᱯᱷᱤᱪᱚᱨ ᱫᱚ ᱯᱟᱧᱡᱟ ᱵᱟᱨ ᱯᱟᱦᱴᱟ ᱫᱟᱱᱟᱲ ᱠᱚ ᱵᱟᱫ ᱠᱚᱣᱟᱭ ᱾</string>
     <!-- Text displayed that links to website containing documentation about the "Total cookie protection" feature. -->
     <string name="tcp_cfr_learn_more">ᱢᱩᱴ ᱯᱟᱧᱡᱟ ᱨᱩᱠᱷᱤᱭᱟᱹ ᱵᱟᱵᱚᱛ ᱰᱷᱮᱨ ᱵᱟᱲᱟᱭ ᱢᱮ</string>
 

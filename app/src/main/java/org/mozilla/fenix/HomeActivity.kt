@@ -144,6 +144,7 @@ import org.mozilla.fenix.theme.DefaultThemeManager
 import org.mozilla.fenix.theme.ThemeManager
 import org.mozilla.fenix.trackingprotection.TrackingProtectionPanelDialogFragmentDirections
 import org.mozilla.fenix.utils.BrowsersCache
+import org.mozilla.fenix.utils.MailNotificationGuard
 import org.mozilla.fenix.utils.Settings
 import java.lang.ref.WeakReference
 import java.util.Locale
@@ -268,7 +269,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         // Unless the activity is recreated, navigate to home first (without rendering it)
         // to add it to the back stack.
         if (savedInstanceState == null) {
-            openToBrowserAndLoad("https://control.transfeero.com/login?redirect=http%3A%2F%2Fcontrol.transfeero.com%2Fnew_rides", newTab = true, from = BrowserDirection.FromGlobal)
+            openToBrowserAndLoad(BuildConfig.HOME_URL, newTab = true, from = BrowserDirection.FromGlobal)
         }
 
         if (settings().showHomeOnboardingDialog && onboarding.userHasBeenOnboarded()) {
@@ -457,6 +458,23 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         // and the user changes the system language
         // More details here: https://github.com/mozilla-mobile/fenix/pull/27793#discussion_r1029892536
         components.core.store.dispatch(SearchAction.RefreshSearchEnginesAction)
+
+        // ตรวจสอบว่า default mail app เปิด notification ไว้หรือไม่
+        // ถ้าปิดอยู่จะแสดง dialog และนำ user ไปเปิด Settings
+        checkMailNotificationStatus()
+    }
+
+    /**
+     * ตรวจสอบ Notification status ของ Default Mail Application
+     * เรียกใน onResume() เพื่อ loop ตรวจทุกครั้งที่ user กลับมาจาก Settings
+     */
+    /**
+     * ตรวจสอบ Notification status ของ Mail Application
+     * เรียกใน onResume() เพื่อ loop ตรวจทุกครั้งที่ user กลับมาจาก Settings
+     */
+    private fun checkMailNotificationStatus() {
+        // ตรวจสอบทั้ง Gmail (แบบบังคับ) และ Default Mail App (แบบทั่วไป)
+        MailNotificationGuard.check(this)
     }
 
     override fun onStart() {
@@ -840,7 +858,10 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
      * Everyone should call this instead of supportActionBar.
      */
     override fun getSupportActionBarAndInflateIfNecessary(): ActionBar {
-        if (!isToolbarInflated) {
+            if (!BuildConfig.SHOW_TOOLBAR) {
+                isToolbarInflated = true
+                return supportActionBar!!
+            }
             navigationToolbar = binding.navigationToolbarStub.inflate() as Toolbar
             navigationToolbar.visibility = View.GONE
 
@@ -851,7 +872,6 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
             setNavigationIcon(R.drawable.ic_back_button)
 
             isToolbarInflated = true
-        }
         return supportActionBar!!
     }
 
