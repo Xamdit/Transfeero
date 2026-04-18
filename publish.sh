@@ -29,21 +29,26 @@ echo "==========================================="
 
 # Clean previous builds
 echo "Cleaning up..."
+# Remove any leftover temporary scripts
+rm -f *.py
 ./gradlew clean
 
 # Build the project
 echo "Building $VARIANT..."
+export GRADLE_OPTS="-Xss16m"
+GRADLE_ARGS="-x lint -x test"
+
 if [[ "$VARIANT" == "debug" ]]; then
-    ./gradlew app:assembleDebug -x lint -x test
+    ./gradlew app:assembleDebug $GRADLE_ARGS
 elif [[ "$VARIANT" == "nightly" ]]; then
-    ./gradlew app:assembleNightly -x lint -x test
+    ./gradlew app:assembleNightly $GRADLE_ARGS
 elif [[ "$VARIANT" == "beta" ]]; then
-    ./gradlew app:assembleBeta -x lint -x test
+    ./gradlew app:assembleBeta $GRADLE_ARGS
 elif [[ "$VARIANT" == "release" ]]; then
-    ./gradlew app:assembleRelease -x lint -x test
+    ./gradlew app:assembleRelease $GRADLE_ARGS
 else
     echo "Unknown variant: $VARIANT. Attempting to run assemble$VARIANT..."
-    ./gradlew "app:assemble$VARIANT" -x lint -x test
+    ./gradlew "app:assemble$VARIANT" $GRADLE_ARGS
 fi
 
 # Create output directory

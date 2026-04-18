@@ -127,6 +127,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
         val start = SystemClock.elapsedRealtimeNanos()
 
         super.onCreate()
+        org.mozilla.fenix.utils.AppConfig.load(this)
 
         setupInAllProcesses()
 
@@ -216,6 +217,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
 
         run {
             // Make sure the engine is initialized and ready to use.
+            // android.util.Log.d("FenixLog", "StartupStep: 2.1 engine.warmUp")
             components.strictMode.resetAfter(StrictMode.allowThreadDiskReads()) {
                 components.core.engine.warmUp()
             }

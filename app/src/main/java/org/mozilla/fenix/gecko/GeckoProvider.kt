@@ -60,6 +60,21 @@ object GeckoProvider {
             .aboutConfigEnabled(Config.channel.isBeta || Config.channel.isNightlyOrDebug)
             .build()
 
+        if (!org.mozilla.fenix.utils.AppConfig.remoteSettingsEnabled) {
+             runtimeSettings.arguments.addAll(listOf(
+                "--setpref", "services.settings.server=",
+                "--setpref", "security.content_signatures.remote_settings.enabled=false",
+                "--setpref", "browser.safebrowsing.downloads.remote.enabled=false",
+                "--setpref", "browser.safebrowsing.phishing.enabled=false",
+                "--setpref", "browser.safebrowsing.malware.enabled=false",
+                "--setpref", "datareporting.healthreport.uploadEnabled=false",
+                "--setpref", "toolkit.telemetry.enabled=false",
+                "--setpref", "toolkit.telemetry.server="
+            ))
+        }
+ 
+        val geckoRuntime = GeckoRuntime.create(context, runtimeSettings)
+
         val settings = context.components.settings
         if (!settings.shouldUseAutoSize) {
             runtimeSettings.automaticFontSizeAdjustment = false
@@ -92,8 +107,6 @@ object GeckoProvider {
             )
         }
 
-        android.util.Log.d("FenixLog", "Engine: Creating GeckoRuntime...")
-        val geckoRuntime = GeckoRuntime.create(context, runtimeSettings)
         android.util.Log.d("FenixLog", "Engine: GeckoRuntime created ✓")
 
         geckoRuntime.autocompleteStorageDelegate = GeckoAutocompleteStorageDelegate(

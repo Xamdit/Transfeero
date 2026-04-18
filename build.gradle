@@ -8,21 +8,13 @@ buildscript {
         maven {
             name "Mozilla Nightly"
             url "https://nightly.maven.mozilla.org/maven2"
-            content {
-                // Improve performance: only check moz maven for mozilla deps.
-                includeGroupByRegex RepoMatching.mozilla
-            }
         }
-
+ 
         maven {
             name "Mozilla"
             url "https://maven.mozilla.org/maven2"
-            content {
-                // Improve performance: only check moz maven for mozilla deps.
-                includeGroupByRegex RepoMatching.mozilla
-            }
         }
-
+ 
         if (project.hasProperty("googleRepo")) {
             maven {
                 name "Google"
@@ -30,16 +22,9 @@ buildscript {
                 url project.property("googleRepo")
             }
         } else {
-            google() {
-                content {
-                    // Improve performance: only check google maven for google deps.
-                    includeGroupByRegex RepoMatching.androidx
-                    includeGroupByRegex RepoMatching.comAndroid
-                    includeGroupByRegex RepoMatching.comGoogle
-                }
-            }
+            google()
         }
-
+ 
         if (project.hasProperty("centralRepo")) {
             maven {
                 name "MavenCentral"
@@ -47,15 +32,7 @@ buildscript {
                 allowInsecureProtocol true // Local Nexus in CI uses HTTP
             }
         } else {
-            mavenCentral() {
-                content {
-                    // Improve security: don't search deps with known repos.
-                    excludeGroupByRegex RepoMatching.mozilla
-                    excludeGroupByRegex RepoMatching.androidx
-                    excludeGroupByRegex RepoMatching.comAndroid
-                    excludeGroupByRegex RepoMatching.comGoogle
-                }
-            }
+            mavenCentral()
         }
     }
 
@@ -66,7 +43,7 @@ buildscript {
         classpath FenixDependencies.androidx_safeargs
         classpath FenixDependencies.osslicenses_plugin
 
-        classpath "org.mozilla.components:tooling-glean-gradle:${FenixVersions.mozilla_android_components}"
+//        classpath "org.mozilla.components:tooling-glean-gradle:${FenixVersions.mozilla_android_components}"
 //      classpath "org.mozilla.components:tooling-nimbus-gradle:${FenixVersions.mozilla_android_components}" // Disabled in PKGO
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -84,21 +61,13 @@ allprojects {
         maven {
             name "Mozilla Nightly"
             url "https://nightly.maven.mozilla.org/maven2"
-            content {
-                // Improve performance: only check moz maven for mozilla deps.
-                includeGroupByRegex RepoMatching.mozilla
-            }
         }
-
+ 
         maven {
             name "Mozilla"
             url "https://maven.mozilla.org/maven2"
-            content {
-                // Improve performance: only check moz maven for mozilla deps.
-                includeGroupByRegex RepoMatching.mozilla
-            }
         }
-
+ 
         if (project.hasProperty("googleRepo")) {
             maven {
                 name "Google"
@@ -106,16 +75,9 @@ allprojects {
                 allowInsecureProtocol true // Local Nexus in CI uses HTTP
             }
         } else {
-            google() {
-                content {
-                    // Improve performance: only check google maven for google deps.
-                    includeGroupByRegex RepoMatching.androidx
-                    includeGroupByRegex RepoMatching.comAndroid
-                    includeGroupByRegex RepoMatching.comGoogle
-                }
-            }
+            google()
         }
-
+ 
         if (project.hasProperty("centralRepo")) {
             maven {
                 name "MavenCentral"
@@ -123,15 +85,7 @@ allprojects {
                 allowInsecureProtocol true // Local Nexus in CI uses HTTP
             }
         } else {
-            mavenCentral() {
-                content {
-                    // Improve security: don't search deps with known repos.
-                    excludeGroupByRegex RepoMatching.mozilla
-                    excludeGroupByRegex RepoMatching.androidx
-                    excludeGroupByRegex RepoMatching.comAndroid
-                    excludeGroupByRegex RepoMatching.comGoogle
-                }
-            }
+            mavenCentral()
         }
     }
 
@@ -227,6 +181,7 @@ tasks.register("listRepositories") {
     }
 }
 
+/*
 tasks.register("githubTestDetails", GithubDetailsTask) {
     text = "### [Unit Test Results]({reportsUrl}/test/testDebugUnitTest/index.html)"
 }
@@ -238,3 +193,4 @@ tasks.register("githubLintDetektDetails", GithubDetailsTask) {
 tasks.register("githubLintAndroidDetails", GithubDetailsTask) {
     text = "### [Android Lint Results]({reportsUrl}/lint-results-debug.html)"
 }
+*/

@@ -272,9 +272,11 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
             openToBrowserAndLoad(BuildConfig.HOME_URL, newTab = true, from = BrowserDirection.FromGlobal)
         }
 
+        /*
         if (settings().showHomeOnboardingDialog && onboarding.userHasBeenOnboarded()) {
             navHost.navController.navigate(NavGraphDirections.actionGlobalHomeOnboardingDialog())
         }
+        */
 
         Performance.processIntentIfPerformanceTest(intent, this)
 

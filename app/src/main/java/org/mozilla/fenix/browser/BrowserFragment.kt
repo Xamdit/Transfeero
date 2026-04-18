@@ -333,6 +333,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
         val settings = context.settings()
 
         if (!settings.userKnowsAboutPwas) {
+            /*
             pwaOnboardingObserver = PwaOnboardingObserver(
                 store = context.components.core.store,
                 lifecycleOwner = this,
@@ -342,6 +343,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
             ).also {
                 it.start()
             }
+            */
         }
 
         subscribeToTabCollections()
