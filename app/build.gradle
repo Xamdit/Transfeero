@@ -468,7 +468,7 @@ configurations.all {
         select("org.mozilla.geckoview:geckoview-nightly-omni:0")
     }
 }
- 
+
 dependencies {
     testImplementation FenixDependencies.jna
 

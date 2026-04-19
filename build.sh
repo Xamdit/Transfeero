@@ -24,7 +24,7 @@ echo "Using JAVA_HOME: $JAVA_HOME"
 # Step 3: Run Build
 echo "Starting build (Debug variant)..."
 # แนะนำให้ใช้ 4mb (4m) สำหรับโปรเจกต์ใหญ่ และเพิ่ม Heap เป็น 8g ถ้าเครื่องไหว
-export GRADLE_OPTS="-Xmx8g -Xss4m"
+export GRADLE_OPTS="-Xmx8g -Xss32m"
 # ./gradlew assembleDebug -PversionName="1.0.0" -PversionCode=1 --no-daemon
 ./gradlew assembleDebug -PversionName="1.0.0" -PversionCode=1 --stacktrace --info
 

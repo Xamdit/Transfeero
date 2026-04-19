@@ -1,26 +1,29 @@
 package org.mozilla.fenix
-import java.util.UUID
 
 class MetricStub {
-    fun record(extras: Any? = null) {}
-    fun record() {}
-    fun add(amount: Int = 1) {}
-    fun add(amount: Long) {}
-    fun add() {}
+    fun record(vararg args: Any?) {}
     fun set(value: Any? = null) {}
-    fun set() {}
+    fun add(value: Any? = null) {}
+    fun accumulateSamples(value: Any? = null) {}
+    fun accumulate(value: Any? = null) {}
+    fun generateAndSet(): Any = "stub-uuid"
+    fun stop(value: Any? = null) {}
+    fun cancel(value: Any? = null) {}
+    fun <T> start(value: Any? = null): T? = null
+    fun stopAndAccumulate(value: Any? = null) {}
     fun submit(value: Any? = null) {}
-    fun submit() {}
-    fun accumulate(samples: Long) {}
-    fun accumulateSamples(samples: List<Long>? = null) {}
-    fun testGetValue(): Any? = null
-    fun generateAndSet(): UUID = UUID.randomUUID()
-    fun cancel(samples: Any? = null) {}
-    fun start(): Long = 0L
-    fun stopAndAccumulate(samples: Any? = null) {}
-    operator fun get(key: Any?): MetricStub = this
+
+    inline fun <T> measure(block: () -> T): T {
+        return block()
+    }
+
+    operator fun get(key: String): MetricStub = this
 }
 
 class MapStub {
-    operator fun get(key: Any?): MetricStub = MetricStub()
+    fun set(key: String, value: String) {}
+    fun record(vararg args: Any?) {}
+    fun all(context: Any?): Any = this
+    operator fun get(key: String): MetricStub = MetricStub()
+    val isDefaultBrowser: Boolean = false
 }

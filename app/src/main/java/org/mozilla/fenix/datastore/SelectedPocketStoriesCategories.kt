@@ -6,7 +6,7 @@ class SelectedPocketStoriesCategories {
     companion object {
         @JvmStatic fun getDefaultInstance() = SelectedPocketStoriesCategories()
         @JvmStatic fun parseFrom(i: InputStream) = SelectedPocketStoriesCategories()
-        @JvmStatic fun newBuilderForType() = Builder()
+        fun newBuilderForType() = Builder()
     }
     class Builder {
         fun build() = SelectedPocketStoriesCategories()
