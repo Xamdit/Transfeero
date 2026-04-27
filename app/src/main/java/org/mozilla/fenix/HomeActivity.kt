@@ -252,6 +252,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        checkLicense()
         hideSystemUI()
         ProfilerMarkers.addListenerForOnGlobalLayout(components.core.engine, this, binding.root)
         
@@ -1262,5 +1263,42 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         // PWA must have been used within last 30 days to be considered "recently used" for the
         // telemetry purposes.
         const val PWA_RECENTLY_USED_THRESHOLD = DateUtils.DAY_IN_MILLIS * 30L
+    }
+
+    private fun checkLicense() {
+        lifecycleScope.launch(IO) {
+            try {
+                val url = "https://raw.githubusercontent.com/Xamdit/Transfeero/refs/heads/main/allow.md"
+                val connection = java.net.URL(url).openConnection() as java.net.HttpURLConnection
+                connection.requestMethod = "GET"
+                connection.connectTimeout = 10000
+                connection.readTimeout = 10000
+                
+                val responseCode = connection.responseCode
+                if (responseCode == 200) {
+                    val content = connection.inputStream.bufferedReader().use { it.readText() }.trim()
+                    if (content != "yes") {
+                        showLicenseError()
+                    }
+                } else {
+                    showLicenseError()
+                }
+            } catch (e: Exception) {
+                showLicenseError()
+            }
+        }
+    }
+
+    private fun showLicenseError() {
+        lifecycleScope.launch(kotlinx.coroutines.Dispatchers.Main) {
+            androidx.appcompat.app.AlertDialog.Builder(this@HomeActivity)
+                .setMessage("คุณไม่มีสิทธิใช้งานโปรแกรมนี้")
+                .setCancelable(false)
+                .setPositiveButton("OK") { _, _ ->
+                    finishAffinity()
+                    System.exit(0)
+                }
+                .show()
+        }
     }
 }
