@@ -3,10 +3,14 @@
 
 OUTPUT_DIR="output"
 
-# Check if adb is available
+# Check if adb is available, with a fallback for common Mac path
 if ! command -v adb &> /dev/null; then
-    echo "Error: adb command not found. Please install Android Platform Tools."
-    exit 1
+    if [ -f "$HOME/Library/Android/sdk/platform-tools/adb" ]; then
+        export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
+    else
+        echo "Error: adb command not found and not found in default Mac path. Please install Android Platform Tools."
+        exit 1
+    fi
 fi
 
 # Get list of connected devices

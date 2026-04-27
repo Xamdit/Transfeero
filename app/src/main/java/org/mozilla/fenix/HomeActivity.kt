@@ -30,6 +30,8 @@ import androidx.annotation.VisibleForTesting.Companion.PROTECTED
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDirections
@@ -146,6 +148,7 @@ import org.mozilla.fenix.trackingprotection.TrackingProtectionPanelDialogFragmen
 import org.mozilla.fenix.utils.BrowsersCache
 import org.mozilla.fenix.utils.MailNotificationGuard
 import org.mozilla.fenix.utils.Settings
+import org.mozilla.fenix.utils.AppConfig
 import java.lang.ref.WeakReference
 import java.util.Locale
 
@@ -251,6 +254,14 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         setContentView(binding.root)
         hideSystemUI()
         ProfilerMarkers.addListenerForOnGlobalLayout(components.core.engine, this, binding.root)
+        
+        binding.autopilotFab.setOnClickListener {
+            openToBrowserAndLoad(
+                "resource://android/assets/extensions/autopilot/src/pages/panel/index.html",
+                newTab = true,
+                from = BrowserDirection.FromGlobal
+            )
+        }
 
         // Must be after we set the content view
         if (isVisuallyComplete) {
@@ -354,23 +365,68 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
             "HomeActivity.onCreate",
         )
         StartupTimeline.onActivityCreateEndHome(this) // DO NOT MOVE ANYTHING BELOW HERE.
+
+        if (AppConfig.immersiveMode) {
+            hideSystemUI()
+            
+            // Handle WindowInsets for the FAB to prevent it from being blocked
+            binding.autopilotFab.let { fab ->
+                ViewCompat.setOnApplyWindowInsetsListener(fab) { view, insets ->
+                    val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                    val lp = view.layoutParams as android.widget.FrameLayout.LayoutParams
+                    // If bars are visible, systemBars.bottom > 0.
+                    // We want to add this to our base margin of 16dp (approx 48px).
+                    val baseMargin = (16 * resources.displayMetrics.density).toInt()
+                    lp.bottomMargin = baseMargin + systemBars.bottom
+                    view.layoutParams = lp
+                    insets
+                }
+            }
+        }
     }
+
+
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) {
+        if (hasFocus && AppConfig.immersiveMode) {
             hideSystemUI()
         }
     }
 
     private fun hideSystemUI() {
-        @Suppress("DEPRECATION")
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-            or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-            or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-            or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-            or View.SYSTEM_UI_FLAG_FULLSCREEN)
+        android.util.Log.d("FenixAppConfig", "hideSystemUI() called, immersiveMode=${AppConfig.immersiveMode}")
+        if (!AppConfig.immersiveMode) return
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false)
+            window.insetsController?.let { controller ->
+                controller.hide(android.view.WindowInsets.Type.statusBars() or android.view.WindowInsets.Type.navigationBars())
+                controller.systemBarsBehavior = android.view.WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            }
+        } else {
+            @Suppress("DEPRECATION")
+            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_FULLSCREEN)
+        }
+        
+        // Ensure the system bars stay hidden on modern Android versions
+        ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { _, insets ->
+            if (AppConfig.immersiveMode) {
+                val isNavVisible = insets.isVisible(WindowInsetsCompat.Type.navigationBars())
+                val isStatusVisible = insets.isVisible(WindowInsetsCompat.Type.statusBars())
+                if (isNavVisible || isStatusVisible) {
+                    window.decorView.postDelayed({
+                        if (AppConfig.immersiveMode) hideSystemUI()
+                    }, 2500)
+                }
+            }
+            insets
+        }
     }
 
     /**
@@ -420,6 +476,10 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
     @Suppress("TooGenericExceptionCaught")
     override fun onResume() {
         super.onResume()
+
+        if (AppConfig.immersiveMode) {
+            hideSystemUI()
+        }
 
         // Diagnostic breadcrumb for "Display already aquired" crash:
         // https://github.com/mozilla-mobile/android-components/issues/7960

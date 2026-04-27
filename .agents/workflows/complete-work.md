@@ -1,15 +1,27 @@
 # Fenix Android Optimization - Work Status
 
+## 📋 Instructions
+เมื่อได้รับคำสั่ง `/complete-work` ให้ดำเนินการตามลำดับดังนี้:
+
+1. **Summarize Work**: สรุปงานที่ทำสำเร็จในหัวข้อ **Latest Progress**
+2. **Identify Issues**: ระบุปัญหาที่ยังค้างอยู่หรือต้องทำต่อในหัวข้อ **Pending Issues**
+3. **Save Memory**: บันทึกไฟล์นี้ลงใน `.agents/workflows/complete-work.md`
+4. **Final Sync**: รัน `git add .`, `git commit -m "workflow: complete work summary"`, และ `git push`
+5. **Goodbye**: แจ้งผู้ใช้ว่าสรุปงานเรียบร้อยแล้วและปิด session
+
+---
+
+
 ## Latest Progress
-- **Fixed Build Errors**: Resolved compilation issues in `publish.sh` by using fully qualified `android.util.Log` calls in `FenixApplication.kt`.
-- **Verified Build**: Successfully generated APKs in the `output/` directory (arm64, v7a, x86).
-- **Ride Catching Logic**: Updated `accept-ride.js` to automatically refresh the `/new_rides` page every 10 seconds if no job is found.
-- **Shadow DOM Support**: Cookie acceptance extension now supports deep Shadow DOM traversal.
-- **Crash Management**: `StrictMode` is hard-disabled to improve startup stability on various devices.
+- **Synchronized Workflows**: Standardized `.agents/workflows/` with `/resume-work` and `/complete-work` commands and fixed repository paths.
+- **Agent Documentation**: Created `.agents/README.md` as a central index for workflow management.
+- **Code Analysis**: Verified startup logging sequence in `FenixApplication.kt` (StartupStep 0-10) and investigated signature settings in `GeckoProvider.kt`.
+- **Environment Sync**: Confirmed codebase is up-to-date via `git pull`.
+- **Build Completed**: `./update.sh` finished successfully. APKs are ready in the `/output` folder.
 
 ## Pending Issues
-- **Diagnostic Logging**: Watch Logcat for "FenixLog" tags to identify the crash module if the app still fails on restart (check for `StartupStep`).
-- **GeckoView Signature**: `InvalidSignatureError` warnings in logs still need investigation for long-term stability.
+- **Verify Startup Stability**: Monitor Logcat for "FenixLog" tags during app launch to ensure it reaches "StartupStep: 10".
+- **Signature Investigation**: Confirm if `InvalidSignatureError` warnings affect performance or stability, given `remote_settings` is disabled.
 
 ## Notes for Next Session
 - Run `/resume-work` to start from this state.

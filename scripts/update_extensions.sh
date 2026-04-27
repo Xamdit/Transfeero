@@ -79,9 +79,49 @@ EOF
     fi
 done
 
+# Process directories in ./extensions that have manifest.json
+for ext_dir in "$EXT_SRC"/*/; do
+    if [ -d "$ext_dir" ] && [ -f "${ext_dir}manifest.json" ]; then
+        ext_name=$(basename "$ext_dir")
+        target_dir="$EXT_DEST/$ext_name"
+        ext_id="${ext_name}@transfeero.com"
+
+        echo "Processing directory extension: $ext_name..."
+        rm -rf "$target_dir"
+        mkdir -p "$target_dir"
+
+        # Copy all files from the extension directory
+        cp -R "$ext_dir"* "$target_dir/"
+
+        # Update manifest.json with Gecko ID if missing
+        if ! grep -q "gecko" "${target_dir}/manifest.json"; then
+            # Use python to safely update JSON
+            python3 -c "
+import json, sys
+with open('${target_dir}/manifest.json', 'r') as f:
+    data = json.load(f)
+if 'applications' not in data:
+    data['applications'] = {}
+if 'gecko' not in data['applications']:
+    data['applications']['gecko'] = {'id': '${ext_id}'}
+# Ensure it's manifest version 2 for better compatibility if it was 3
+# data['manifest_version'] = 2 
+with open('${target_dir}/manifest.json', 'w') as f:
+    json.dump(data, f, indent=2)
+"
+        fi
+        echo "  -> id: ${ext_id} (Directory base)"
+    fi
+done
+
 echo ""
 echo "Fenix: Extensions updated successfully."
 echo "Custom extensions installed:"
 for js_file in "$EXT_SRC"/*.js; do
     [ -f "$js_file" ] && echo "  - $(basename "${js_file%.*}")"
+done
+for ext_dir in "$EXT_SRC"/*/; do
+    if [ -d "$ext_dir" ] && [ -f "${ext_dir}manifest.json" ]; then
+        echo "  - $(basename "$ext_dir") (Directory)"
+    fi
 done

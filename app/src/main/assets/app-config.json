@@ -1,8 +1,9 @@
 {
   "toolbar": false,
-  "home": "https://control.transfeero.com/login?redirect=http//2Fcontrol.transfeero.com/new_rides",
+  "home": "https://control.transfeero.com/login?redirect=https%3A%2F%2Fcontrol.transfeero.com%2Fnew_rides",
   "app_name": "transfeero",
   "context_menu": true,
   "telemetry": false,
-  "remote_settings": false
+  "remote_settings": false,
+  "immersive_mode": true
 }

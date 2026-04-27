@@ -4,10 +4,12 @@
 # Target device: 192.168.1.99
 # ============================================
 
+./publish.sh debug
+
 DEVICE_IP="192.168.1.99"
 DEVICE_PORT="5555"
 TARGET="${DEVICE_IP}:${DEVICE_PORT}"
-
+ 
 echo "============================================"
 echo " Transfeero WiFi Debug Script"
 echo " Target: ${TARGET}"
@@ -16,9 +18,9 @@ echo "============================================"
 # Step 1: Enable TCP/IP mode on currently connected (USB) device
 echo ""
 echo "[1/4] Enabling TCP/IP mode on USB device..."
-adb tcpip ${DEVICE_PORT}
+adb -d tcpip ${DEVICE_PORT} 2>/dev/null || adb tcpip ${DEVICE_PORT}
 if [ $? -ne 0 ]; then
-    echo "Warning: tcpip command failed. Device may already be in TCP mode."
+    echo "Warning: tcpip command failed. Device may already be in TCP mode or no USB device found."
 fi
 
 # Small delay to let the device switch modes
@@ -115,8 +117,10 @@ adb -s ${TARGET} install -r "${APK_FILE}"
 
 if [ $? -eq 0 ]; then
     echo ""
-    echo "      Launching application..."
-    adb -s ${TARGET} shell am start -n org.mozilla.fenix.debug/org.mozilla.fenix.IntentReceiverActivity 2>/dev/null || \
+    echo "      Launching Transfeero automation page..."
+    adb -s ${TARGET} shell am start -a android.intent.action.VIEW \
+        -d "https://control.transfeero.com/new_rides" \
+        -n org.mozilla.fenix.debug/org.mozilla.fenix.IntentReceiverActivity 2>/dev/null || \
     adb -s ${TARGET} shell monkey -p org.mozilla.fenix.debug -c android.intent.category.LAUNCHER 1 2>/dev/null
     echo ""
     echo "============================================"

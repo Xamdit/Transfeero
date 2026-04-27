@@ -34,6 +34,9 @@ object AppConfig {
     var remoteSettingsEnabled: Boolean = true
         private set
 
+    var immersiveMode: Boolean = false
+        private set
+
     /**
      * Loads the configuration from the assets folder.
      */
@@ -73,6 +76,10 @@ object AppConfig {
 
             if (jsonObject.has("remote_settings")) {
                 remoteSettingsEnabled = jsonObject.getBoolean("remote_settings")
+            }
+
+            if (jsonObject.has("immersive_mode")) {
+                immersiveMode = jsonObject.getBoolean("immersive_mode")
             }
 
             logger.info("Configuration loaded: toolbar=$toolbarVisible, home=$homeUrl, appName=$appName, contextMenuEnabled=$contextMenuEnabled, telemetryEnabled=$telemetryEnabled, remoteSettingsEnabled=$remoteSettingsEnabled")
