@@ -112,3 +112,4 @@ build_error.log
 !app/src/main/assets/extensions/**/*.apk
 
 
+logs/

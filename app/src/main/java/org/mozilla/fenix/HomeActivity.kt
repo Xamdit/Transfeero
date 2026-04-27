@@ -258,11 +258,44 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         ProfilerMarkers.addListenerForOnGlobalLayout(components.core.engine, this, binding.root)
         
         binding.autopilotFab.setOnClickListener {
-            openToBrowserAndLoad(
-                "resource://android/assets/extensions/autopilot/src/pages/panel/index.html",
-                newTab = true,
-                from = BrowserDirection.FromGlobal
-            )
+            val dialog = android.app.Dialog(this, android.R.style.Theme_Light_NoTitleBar_Fullscreen)
+            val webView = android.webkit.WebView(this).apply {
+                settings.javaScriptEnabled = true
+                settings.domStorageEnabled = true
+                settings.allowFileAccess = true
+                settings.allowFileAccessFromFileURLs = true
+                settings.allowUniversalAccessFromFileURLs = true
+                webChromeClient = android.webkit.WebChromeClient()
+                webViewClient = android.webkit.WebViewClient()
+                loadUrl("file:///android_asset/extensions/autopilot/src/pages/panel/index.html")
+            }
+            
+            val layout = android.widget.LinearLayout(this).apply {
+                orientation = android.widget.LinearLayout.VERTICAL
+                
+                val topBar = android.widget.RelativeLayout(this@HomeActivity).apply {
+                    setBackgroundColor(android.graphics.Color.parseColor("#EEEEEE"))
+                    setPadding(24, 24, 24, 24)
+                    val closeButton = android.widget.Button(this@HomeActivity).apply {
+                        text = "Close Autopilot"
+                        setOnClickListener { dialog.dismiss() }
+                    }
+                    val params = android.widget.RelativeLayout.LayoutParams(
+                        android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT
+                    ).apply { addRule(android.widget.RelativeLayout.ALIGN_PARENT_END) }
+                    addView(closeButton, params)
+                }
+                
+                addView(topBar)
+                addView(webView, android.widget.LinearLayout.LayoutParams(
+                    android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
+                    android.widget.LinearLayout.LayoutParams.MATCH_PARENT
+                ))
+            }
+            
+            dialog.setContentView(layout)
+            dialog.show()
         }
 
         // Must be after we set the content view
