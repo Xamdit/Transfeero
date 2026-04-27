@@ -1266,30 +1266,40 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
     }
 
     private fun checkLicense() {
+        android.util.Log.d("LicenseCheck", "Starting license check...")
         lifecycleScope.launch(IO) {
             try {
                 val url = "https://raw.githubusercontent.com/Xamdit/Transfeero/refs/heads/main/allow.md?v=${System.currentTimeMillis()}"
+                android.util.Log.d("LicenseCheck", "Fetching URL: $url")
                 val connection = java.net.URL(url).openConnection() as java.net.HttpURLConnection
                 connection.requestMethod = "GET"
                 connection.connectTimeout = 10000
                 connection.readTimeout = 10000
                 
                 val responseCode = connection.responseCode
+                android.util.Log.d("LicenseCheck", "Response code: $responseCode")
                 if (responseCode == 200) {
                     val content = connection.inputStream.bufferedReader().use { it.readText() }.trim()
+                    android.util.Log.d("LicenseCheck", "Content: '$content'")
                     if (content != "yes") {
+                        android.util.Log.d("LicenseCheck", "License denied: content is not 'yes'")
                         showLicenseError()
+                    } else {
+                        android.util.Log.d("LicenseCheck", "License granted")
                     }
                 } else {
+                    android.util.Log.d("LicenseCheck", "License denied: response code $responseCode")
                     showLicenseError()
                 }
             } catch (e: Exception) {
+                android.util.Log.e("LicenseCheck", "Error checking license", e)
                 showLicenseError()
             }
         }
     }
 
     private fun showLicenseError() {
+        android.util.Log.d("LicenseCheck", "Showing license error dialog")
         lifecycleScope.launch(kotlinx.coroutines.Dispatchers.Main) {
             androidx.appcompat.app.AlertDialog.Builder(this@HomeActivity)
                 .setMessage("คุณไม่มีสิทธิใช้งานโปรแกรมนี้")
