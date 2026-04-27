@@ -218,6 +218,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
 
     @Suppress("ComplexMethod")
     final override fun onCreate(savedInstanceState: Bundle?) {
+        android.util.Log.i("LicenseCheck", "HomeActivity.onCreate() started")
         // DO NOT MOVE ANYTHING ABOVE THIS getProfilerTime CALL.
         val startTimeProfiler = components.core.engine.profiler?.getProfilerTime()
 
@@ -1266,42 +1267,49 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
     }
 
     private fun checkLicense() {
-        android.util.Log.d("LicenseCheck", "Starting license check...")
+        System.out.println("=== LICENSE CHECK START ===")
+        android.widget.Toast.makeText(this, "Checking license...", android.widget.Toast.LENGTH_SHORT).show()
         lifecycleScope.launch(IO) {
             try {
                 val url = "https://raw.githubusercontent.com/Xamdit/Transfeero/refs/heads/main/allow.md?v=${System.currentTimeMillis()}"
-                android.util.Log.d("LicenseCheck", "Fetching URL: $url")
+                System.out.println("=== LICENSE: Fetching $url ===")
                 val connection = java.net.URL(url).openConnection() as java.net.HttpURLConnection
                 connection.requestMethod = "GET"
-                connection.connectTimeout = 10000
-                connection.readTimeout = 10000
+                connection.connectTimeout = 15000
+                connection.readTimeout = 15000
+                connection.setRequestProperty("Cache-Control", "no-cache")
+                connection.useCaches = false
                 
                 val responseCode = connection.responseCode
-                android.util.Log.d("LicenseCheck", "Response code: $responseCode")
+                System.out.println("=== LICENSE: Response code = $responseCode ===")
                 if (responseCode == 200) {
                     val content = connection.inputStream.bufferedReader().use { it.readText() }.trim()
-                    android.util.Log.d("LicenseCheck", "Content: '$content'")
+                    System.out.println("=== LICENSE: Content = '$content' ===")
                     if (content != "yes") {
-                        android.util.Log.d("LicenseCheck", "License denied: content is not 'yes'")
+                        System.out.println("=== LICENSE: DENIED (content is not 'yes') ===")
                         showLicenseError()
                     } else {
-                        android.util.Log.d("LicenseCheck", "License granted")
+                        System.out.println("=== LICENSE: GRANTED ===")
                     }
                 } else {
-                    android.util.Log.d("LicenseCheck", "License denied: response code $responseCode")
+                    System.out.println("=== LICENSE: DENIED (status $responseCode) ===")
                     showLicenseError()
                 }
+                connection.disconnect()
             } catch (e: Exception) {
-                android.util.Log.e("LicenseCheck", "Error checking license", e)
+                System.out.println("=== LICENSE: ERROR ${e.message} ===")
+                e.printStackTrace()
                 showLicenseError()
             }
         }
     }
 
     private fun showLicenseError() {
-        android.util.Log.d("LicenseCheck", "Showing license error dialog")
+        System.out.println("=== LICENSE: SHOWING ERROR DIALOG ===")
         lifecycleScope.launch(kotlinx.coroutines.Dispatchers.Main) {
+            android.widget.Toast.makeText(this@HomeActivity, "License denied!", android.widget.Toast.LENGTH_LONG).show()
             androidx.appcompat.app.AlertDialog.Builder(this@HomeActivity)
+                .setTitle("ข้อผิดพลาด")
                 .setMessage("คุณไม่มีสิทธิใช้งานโปรแกรมนี้")
                 .setCancelable(false)
                 .setPositiveButton("OK") { _, _ ->

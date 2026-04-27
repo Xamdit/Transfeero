@@ -1,0 +1,264 @@
+--------- beginning of system
+04-27 16:17:58.848  1494 15374 E WindowManager: App trying to use insecure INPUT_FEATURE_NO_INPUT_CHANNEL flag. Ignoring
+--------- beginning of main
+04-27 16:17:58.883   615   704 E         : IProducerListener: malformed binder reply
+04-27 16:17:58.897   615  2455 E         : IProducerListener: malformed binder reply
+04-27 16:17:58.900   615  2455 E         : IProducerListener: malformed binder reply
+04-27 16:17:58.919   588   724 E qti_sensors_hal: processReportInd: lux: 23.000000, photopic: 0.012192, ir: 0.000000
+04-27 16:17:59.080   588   724 E qti_sensors_hal: processReportInd: lux: 24.000000, photopic: 0.012299, ir: 0.000000
+04-27 16:17:59.241   588   724 E qti_sensors_hal: processReportInd: lux: 24.000000, photopic: 0.012299, ir: 0.000000
+04-27 16:17:59.403   588   724 E qti_sensors_hal: processReportInd: lux: 23.000000, photopic: 0.012238, ir: 0.000000
+04-27 16:17:59.564   588   724 E qti_sensors_hal: processReportInd: lux: 24.000000, photopic: 0.012177, ir: 0.000000
+04-27 16:17:59.725   588   724 E qti_sensors_hal: processReportInd: lux: 24.000000, photopic: 0.012131, ir: 0.000000
+04-27 16:17:59.886   588   724 E qti_sensors_hal: processReportInd: lux: 28.000000, photopic: 0.013763, ir: 0.000000
+04-27 16:18:00.044   588   724 E qti_sensors_hal: processReportInd: lux: 24.000000, photopic: 0.012344, ir: 0.000000
+04-27 16:18:00.093  3102  3148 E BitmapFactory: Unable to decode stream: java.io.FileNotFoundException: /data/bbkcore/theme/icons/dynamic_icon/com.android.BBKClock/res/drawable-sw360dp-xhdpi/clock_hour.png (No such file or directory)
+04-27 16:18:00.102  3102  3148 E BitmapFactory: Unable to decode stream: java.io.FileNotFoundException: /data/bbkcore/theme/icons/dynamic_icon/com.android.BBKClock/res/drawable-sw360dp-xhdpi/clock_minute.png (No such file or directory)
+04-27 16:18:00.103  3102  3148 E BitmapFactory: Unable to decode stream: java.io.FileNotFoundException: /data/bbkcore/theme/icons/dynamic_icon/com.android.BBKClock/res/drawable-sw360dp-xhdpi/clock_dial.png (No such file or directory)
+04-27 16:18:00.106  3102  3148 E BitmapFactory: Unable to decode stream: java.io.FileNotFoundException: /data/bbkcore/theme/icons/dynamic_icon/com.android.BBKClock/res/drawable-sw360dp-xhdpi/clock_dial_center.png (No such file or directory)
+04-27 16:18:00.205   588   724 E qti_sensors_hal: processReportInd: lux: 24.000000, photopic: 0.012466, ir: 0.000000
+04-27 16:18:00.339   896   896 E wificond: vivo add tx_good 25485 tx_bad 855 rx_good 13631289 tx_retry 41088
+04-27 16:18:00.366   588   724 E qti_sensors_hal: processReportInd: lux: 17.000000, photopic: 0.009796, ir: 0.000000
+04-27 16:18:00.492  1494 15374 E WindowManager: App trying to use insecure INPUT_FEATURE_NO_INPUT_CHANNEL flag. Ignoring
+04-27 16:18:00.517   615  2455 E         : IProducerListener: malformed binder reply
+04-27 16:18:00.527   588   724 E qti_sensors_hal: processReportInd: lux: 23.000000, photopic: 0.011475, ir: 0.000000
+04-27 16:18:00.543 24793 24920 E RenderScript: SETAFFINITY ret = -1
+04-27 16:18:00.544 24793 24922 E RenderScript: SETAFFINITY ret = -1
+04-27 16:18:00.544 24793 24923 E RenderScript: SETAFFINITY ret = -1
+04-27 16:18:00.544 24793 24921 E RenderScript: SETAFFINITY ret = -1
+04-27 16:18:00.544 24793 24924 E RenderScript: SETAFFINITY ret = -1
+04-27 16:18:00.544 24793 24925 E RenderScript: SETAFFINITY ret = -1
+04-27 16:18:00.545 24793 24926 E RenderScript: SETAFFINITY ret = -1
+04-27 16:18:00.687   588   724 E qti_sensors_hal: processReportInd: lux: 25.000000, photopic: 0.012695, ir: 0.000000
+04-27 16:18:00.848   588   724 E qti_sensors_hal: processReportInd: lux: 26.000000, photopic: 0.012894, ir: 0.000000
+04-27 16:18:01.009   588   724 E qti_sensors_hal: processReportInd: lux: 27.000000, photopic: 0.013702, ir: 0.000000
+04-27 16:18:01.055  1494 15374 E ActivityManager: Sending non-protected broadcast com.vivo.abe.third.lifecontrol from system uid 1000 pkg null
+04-27 16:18:01.058   601   658 E ANDR-PERF-UTIL: Failed to read /sys/devices/system/cpu/cpu0/sched_prefer_idle
+04-27 16:18:01.058   601   658 E ANDR-PERF-OPTSHANDLER: Failed to read /sys/devices/system/cpu/cpu0/sched_prefer_idle
+04-27 16:18:01.058   601   658 E ANDR-PERF-RESOURCEQS: Failed to apply optimization [3, 1]
+04-27 16:18:01.058   601   658 E ANDR-PERF-UTIL: Failed to read /proc/sys/kernel/sched_small_task
+04-27 16:18:01.058   601   658 E ANDR-PERF-OPTSHANDLER: Failed to read /proc/sys/kernel/sched_small_task
+04-27 16:18:01.058   601   658 E ANDR-PERF-RESOURCEQS: Failed to apply optimization [3, 3]
+04-27 16:18:01.058   601   658 E ANDR-PERF-UTIL: Failed to read /sys/devices/system/cpu/cpu0/sched_mostly_idle_nr_run
+04-27 16:18:01.058   601   658 E ANDR-PERF-OPTSHANDLER: Failed to read /sys/devices/system/cpu/cpu0/sched_mostly_idle_nr_run
+04-27 16:18:01.058   601   658 E ANDR-PERF-RESOURCEQS: Failed to apply optimization [3, 5]
+04-27 16:18:01.058   601   658 E ANDR-PERF-UTIL: Failed to read /sys/devices/system/cpu/cpu0/sched_mostly_idle_load
+04-27 16:18:01.058   601   658 E ANDR-PERF-OPTSHANDLER: Failed to read /sys/devices/system/cpu/cpu0/sched_mostly_idle_load
+04-27 16:18:01.058   601   658 E ANDR-PERF-RESOURCEQS: Failed to apply optimization [3, 4]
+04-27 16:18:01.058  1494 15374 E ANDR-PERF-JNI: Iop tryGetService failed
+04-27 16:18:01.063  1494 15374 E ActivityTrigger: activityStartTrigger: not whiteListedorg.mozilla.fenix.debug/org.mozilla.fenix.HomeActivity/1
+04-27 16:18:01.063  1494 15374 E ActivityTrigger: activityResumeTrigger: not whiteListedorg.mozilla.fenix.debug/org.mozilla.fenix.HomeActivity/1
+04-27 16:18:01.078  1494 15374 E         : IProducerListener: malformed binder reply
+04-27 16:18:01.092  1494  4101 E VibratorService: motorModeEnableVibration---motor mode disable
+04-27 16:18:01.122   601   658 E ANDR-PERF-UTIL: Failed to read /sys/devices/system/cpu/cpu0/sched_prefer_idle
+04-27 16:18:01.122   601   658 E ANDR-PERF-OPTSHANDLER: Failed to read /sys/devices/system/cpu/cpu0/sched_prefer_idle
+04-27 16:18:01.122   601   658 E ANDR-PERF-RESOURCEQS: Failed to apply optimization [3, 1]
+04-27 16:18:01.122  1494 27896 E ActivityTrigger: activityResumeTrigger: not whiteListedorg.mozilla.fenix.debug/org.mozilla.fenix.HomeActivity/1
+04-27 16:18:01.123   601   658 E ANDR-PERF-UTIL: Failed to read /sys/devices/system/cpu/cpu0/sched_prefer_idle
+04-27 16:18:01.123   601   658 E ANDR-PERF-OPTSHANDLER: Failed to read /sys/devices/system/cpu/cpu0/sched_prefer_idle
+04-27 16:18:01.123   601   658 E ANDR-PERF-RESOURCEQS: Failed to apply optimization [3, 1]
+04-27 16:18:01.129   615  2484 E         : IProducerListener: malformed binder reply
+04-27 16:18:01.134   615  1012 E         : IProducerListener: malformed binder reply
+04-27 16:18:01.136   615  1012 E         : IProducerListener: malformed binder reply
+04-27 16:18:01.159  1494  1880 E ActivityTrigger: activityResumeTrigger: not whiteListedcom.bbk.launcher2/com.bbk.launcher2.Launcher/50006005
+04-27 16:18:01.160   601   658 E ANDR-PERF-UTIL: Failed to read /sys/devices/system/cpu/cpu0/sched_prefer_idle
+04-27 16:18:01.160   601   658 E ANDR-PERF-OPTSHANDLER: Failed to read /sys/devices/system/cpu/cpu0/sched_prefer_idle
+04-27 16:18:01.160   601   658 E ANDR-PERF-RESOURCEQS: Failed to apply optimization [3, 1]
+04-27 16:18:01.169   588   724 E qti_sensors_hal: processReportInd: lux: 30.000000, photopic: 0.015686, ir: 0.000000
+04-27 16:18:01.179  1494  1962 E SensorService: Lux0 = 0 , Lux1 = 0 , Lux2 = 10 ,OrtAndActv = 1 , use = 0 , Mode = 0 , factor = 0 , pcy = 3 ,OnFstGm = 1
+04-27 16:18:01.179  2184  4221 E ProxCoverNoticeService: monitor view is null, no need to update fullscreen
+04-27 16:18:01.189   615   702 E         : IProducerListener: malformed binder reply
+04-27 16:18:01.196  3102  3102 E BufferItemConsumer: [unnamed-3102-66] Failed to release buffer: Unknown error -1 (1)
+04-27 16:18:01.204  1494  1918 E ActivityManager: Sending non-protected broadcast vivo.vtouch.application.resumed from system 12921:com.vivo.contentcatcher/1000 pkg com.vivo.contentcatcher
+04-27 16:18:01.205 12921 12940 E ActivityThread: Failed to find provider info for vivo.content.catcher.touch
+04-27 16:18:01.206 12921 12940 E _V_ContentCatcher-CatcherTouchUnitController: distributeTopActivityChangedEvent
+04-27 16:18:01.206 12921 12940 E _V_ContentCatcher-CatcherTouchUnitController: java.lang.IllegalArgumentException: Unknown URI content://vivo.content.catcher.touch
+04-27 16:18:01.206 12921 12940 E _V_ContentCatcher-CatcherTouchUnitController: 	at android.content.ContentResolver.call(ContentResolver.java:1854)
+04-27 16:18:01.206 12921 12940 E _V_ContentCatcher-CatcherTouchUnitController: 	at com.vivo.contentcatcher.server.core.c.b(CatcherTouchUnitController.java:87)
+04-27 16:18:01.206 12921 12940 E _V_ContentCatcher-CatcherTouchUnitController: 	at com.vivo.contentcatcher.server.core.TouchCatcherService$4.run(TouchCatcherService.java:144)
+04-27 16:18:01.206 12921 12940 E _V_ContentCatcher-CatcherTouchUnitController: 	at android.os.Handler.handleCallback(Handler.java:790)
+04-27 16:18:01.206 12921 12940 E _V_ContentCatcher-CatcherTouchUnitController: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+04-27 16:18:01.206 12921 12940 E _V_ContentCatcher-CatcherTouchUnitController: 	at android.os.Looper.loop(Looper.java:192)
+04-27 16:18:01.206 12921 12940 E _V_ContentCatcher-CatcherTouchUnitController: 	at android.os.HandlerThread.run(HandlerThread.java:65)
+04-27 16:18:01.225   615  2484 E         : IProducerListener: malformed binder reply
+04-27 16:18:01.233   615   704 E         : IProducerListener: malformed binder reply
+04-27 16:18:01.234   615   704 E         : IProducerListener: malformed binder reply
+04-27 16:18:01.330   588   724 E qti_sensors_hal: processReportInd: lux: 50.000000, photopic: 0.023621, ir: 0.000000
+04-27 16:18:01.490   588   724 E qti_sensors_hal: processReportInd: lux: 50.000000, photopic: 0.023544, ir: 0.000000
+04-27 16:18:01.519  2184  4700 E ProxCoverNoticeService: monitor view is null, no need to update fullscreen
+04-27 16:18:01.651   588   724 E qti_sensors_hal: processReportInd: lux: 47.000000, photopic: 0.022705, ir: 0.000000
+04-27 16:18:01.805 24939 24969 E GeckoLibLoad: Load sqlite start
+04-27 16:18:01.805 24939 24969 E GeckoLibLoad: Load sqlite done
+04-27 16:18:01.806 24939 24969 E GeckoLibLoad: Load nss start
+04-27 16:18:01.806 24939 24969 E GeckoLibLoad: Load nss done
+04-27 16:18:01.807 24939 24969 E GeckoLibLoad: Loaded libs in 0.612136ms total, 0ms(0ms) user, 0ms(0ms) system, 0(0) faults
+04-27 16:18:01.814   588   724 E qti_sensors_hal: processReportInd: lux: 45.000000, photopic: 0.022034, ir: 0.000000
+04-27 16:18:01.973   588   724 E qti_sensors_hal: processReportInd: lux: 47.000000, photopic: 0.022720, ir: 0.000000
+04-27 16:18:02.044 24939 24983 E GeckoSession: String does not represent valid session state.
+04-27 16:18:02.115 24939 24983 I chatty  : uid=10593(org.mozilla.fenix.debug) DefaultDispatch identical 18 lines
+04-27 16:18:02.124 24939 24983 E GeckoSession: String does not represent valid session state.
+04-27 16:18:02.133   588   724 E qti_sensors_hal: processReportInd: lux: 48.000000, photopic: 0.023071, ir: 0.000000
+04-27 16:18:02.137 24939 24983 E GeckoSession: String does not represent valid session state.
+04-27 16:18:02.270 24939 24969 E GeckoConsole: [JavaScript Error: "Error: File resource://default-theme/ does not contain a valid manifest" {file: "resource://gre/modules/addons/XPIInstall.jsm" line: 684}]
+04-27 16:18:02.270 24939 24969 E GeckoConsole: [JavaScript Error: "Error: File resource://default-theme/ does not contain a valid manifest" {file: "resource://gre/modules/addons/XPIInstall.jsm" line: 684}]
+04-27 16:18:02.294   588   724 E qti_sensors_hal: processReportInd: lux: 45.000000, photopic: 0.022110, ir: 0.000000
+04-27 16:18:02.455   588   724 E qti_sensors_hal: processReportInd: lux: 37.000000, photopic: 0.019379, ir: 0.000000
+04-27 16:18:02.616   588   724 E qti_sensors_hal: processReportInd: lux: 35.000000, photopic: 0.018463, ir: 0.000000
+04-27 16:18:02.638 25049 25077 E GeckoLibLoad: Load sqlite start
+04-27 16:18:02.641 25049 25077 E GeckoLibLoad: Load sqlite done
+04-27 16:18:02.642 25049 25077 E GeckoLibLoad: Load nss start
+04-27 16:18:02.642 25049 25077 E GeckoLibLoad: Load nss done
+04-27 16:18:02.670 25049 25077 E GeckoLibLoad: Loaded libs in 27.526510ms total, 10ms(30ms) user, 0ms(0ms) system, 0(0) faults
+04-27 16:18:02.780   588   724 E qti_sensors_hal: processReportInd: lux: 32.000000, photopic: 0.017212, ir: 0.000000
+04-27 16:18:02.940   588   724 E qti_sensors_hal: processReportInd: lux: 36.000000, photopic: 0.019028, ir: 0.000000
+04-27 16:18:03.048  1494 27896 E ActivityTrigger: activityResumeTrigger: not whiteListedorg.mozilla.fenix.debug/org.mozilla.fenix.HomeActivity/1
+04-27 16:18:03.051  1494 27896 E ActivityTrigger: activityResumeTrigger: not whiteListedorg.mozilla.fenix.debug/org.mozilla.fenix.HomeActivity/1
+04-27 16:18:03.065  3102  3102 E BufferItemConsumer: [unnamed-3102-67] Failed to release buffer: Unknown error -1 (1)
+04-27 16:18:03.074  1494 27896 E ActivityTrigger: activityResumeTrigger: not whiteListedorg.mozilla.fenix.debug/org.mozilla.fenix.HomeActivity/1
+04-27 16:18:03.074   601   658 E ANDR-PERF-UTIL: Failed to read /sys/devices/system/cpu/cpu0/sched_prefer_idle
+04-27 16:18:03.074   601   658 E ANDR-PERF-OPTSHANDLER: Failed to read /sys/devices/system/cpu/cpu0/sched_prefer_idle
+04-27 16:18:03.074   601   658 E ANDR-PERF-RESOURCEQS: Failed to apply optimization [3, 1]
+04-27 16:18:03.098   588   724 E qti_sensors_hal: processReportInd: lux: 38.000000, photopic: 0.019745, ir: 0.000000
+04-27 16:18:03.105   615  1012 E         : IProducerListener: malformed binder reply
+04-27 16:18:03.110   615  2455 E         : IProducerListener: malformed binder reply
+04-27 16:18:03.115  1494  1962 E SensorService: Lux0 = 0 , Lux1 = 0 , Lux2 = 10 ,OrtAndActv = 1 , use = 0 , Mode = 0 , factor = 0 , pcy = 3 ,OnFstGm = 1
+04-27 16:18:03.116  2184  4221 E ProxCoverNoticeService: monitor view is null, no need to update minimum
+04-27 16:18:03.118   615   704 E         : IProducerListener: malformed binder reply
+04-27 16:18:03.259   588   724 E qti_sensors_hal: processReportInd: lux: 44.000000, photopic: 0.021805, ir: 0.000000
+04-27 16:18:03.361   896   896 E wificond: vivo add tx_good 25548 tx_bad 855 rx_good 13631355 tx_retry 41089
+04-27 16:18:03.419   588   724 E qti_sensors_hal: processReportInd: lux: 43.000000, photopic: 0.021744, ir: 0.000000
+04-27 16:18:03.580   588   724 E qti_sensors_hal: processReportInd: lux: 36.000000, photopic: 0.019302, ir: 0.000000
+04-27 16:18:03.584 24939 24969 E GeckoConsole: [JavaScript Error: "TypeError: can't access property "eventDispatcher", this.window.moduleManager is undefined" {file: "resource://gre/modules/GeckoViewActorParent.sys.mjs" line: 28}]
+04-27 16:18:03.584 24939 24969 E GeckoConsole: get eventDispatcher@resource://gre/modules/GeckoViewActorParent.sys.mjs:28:5
+04-27 16:18:03.584 24939 24969 E GeckoConsole: receiveMessage@resource://gre/modules/GeckoViewActorParent.sys.mjs:41:9
+04-27 16:18:03.584 24939 24969 E GeckoConsole: receiveMessage@resource:///actors/GeckoViewClipboardPermissionParent.jsm:42:22
+04-27 16:18:03.587 24939 24969 I chatty  : uid=10593(org.mozilla.fenix.debug) Gecko identical 2 lines
+04-27 16:18:03.589 24939 24969 E GeckoConsole: [JavaScript Error: "TypeError: can't access property "eventDispatcher", this.window.moduleManager is undefined" {file: "resource://gre/modules/GeckoViewActorParent.sys.mjs" line: 28}]
+04-27 16:18:03.589 24939 24969 E GeckoConsole: get eventDispatcher@resource://gre/modules/GeckoViewActorParent.sys.mjs:28:5
+04-27 16:18:03.589 24939 24969 E GeckoConsole: receiveMessage@resource://gre/modules/GeckoViewActorParent.sys.mjs:41:9
+04-27 16:18:03.589 24939 24969 E GeckoConsole: receiveMessage@resource:///actors/GeckoViewClipboardPermissionParent.jsm:42:22
+04-27 16:18:03.741   588   724 E qti_sensors_hal: processReportInd: lux: 31.000000, photopic: 0.015991, ir: 0.000000
+04-27 16:18:03.902   588   724 E qti_sensors_hal: processReportInd: lux: 30.000000, photopic: 0.015167, ir: 0.000000
+04-27 16:18:04.063   588   724 E qti_sensors_hal: processReportInd: lux: 30.000000, photopic: 0.015335, ir: 0.000000
+04-27 16:18:04.086  1494  1976 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+04-27 16:18:04.223   588   724 E qti_sensors_hal: processReportInd: lux: 31.000000, photopic: 0.015747, ir: 0.000000
+04-27 16:18:04.391   588   724 E qti_sensors_hal: processReportInd: lux: 32.000000, photopic: 0.016190, ir: 0.000000
+04-27 16:18:04.431  1494 27571 E WindowManager: App trying to use insecure INPUT_FEATURE_NO_INPUT_CHANNEL flag. Ignoring
+04-27 16:18:04.445  1494 27896 E ActivityManager: Sending non-protected broadcast vivo.vtouch.application.resumed from system 12921:com.vivo.contentcatcher/1000 pkg com.vivo.contentcatcher
+04-27 16:18:04.448 12921 12940 E ActivityThread: Failed to find provider info for vivo.content.catcher.touch
+04-27 16:18:04.448 12921 12940 E _V_ContentCatcher-CatcherTouchUnitController: distributeTopActivityChangedEvent
+04-27 16:18:04.448 12921 12940 E _V_ContentCatcher-CatcherTouchUnitController: java.lang.IllegalArgumentException: Unknown URI content://vivo.content.catcher.touch
+04-27 16:18:04.448 12921 12940 E _V_ContentCatcher-CatcherTouchUnitController: 	at android.content.ContentResolver.call(ContentResolver.java:1854)
+04-27 16:18:04.448 12921 12940 E _V_ContentCatcher-CatcherTouchUnitController: 	at com.vivo.contentcatcher.server.core.c.b(CatcherTouchUnitController.java:87)
+04-27 16:18:04.448 12921 12940 E _V_ContentCatcher-CatcherTouchUnitController: 	at com.vivo.contentcatcher.server.core.TouchCatcherService$4.run(TouchCatcherService.java:144)
+04-27 16:18:04.448 12921 12940 E _V_ContentCatcher-CatcherTouchUnitController: 	at android.os.Handler.handleCallback(Handler.java:790)
+04-27 16:18:04.448 12921 12940 E _V_ContentCatcher-CatcherTouchUnitController: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+04-27 16:18:04.448 12921 12940 E _V_ContentCatcher-CatcherTouchUnitController: 	at android.os.Looper.loop(Looper.java:192)
+04-27 16:18:04.448 12921 12940 E _V_ContentCatcher-CatcherTouchUnitController: 	at android.os.HandlerThread.run(HandlerThread.java:65)
+04-27 16:18:04.545   588   724 E qti_sensors_hal: processReportInd: lux: 31.000000, photopic: 0.015732, ir: 0.000000
+04-27 16:18:04.705   588   724 E qti_sensors_hal: processReportInd: lux: 31.000000, photopic: 0.016083, ir: 0.000000
+04-27 16:18:04.838   615   704 E         : IProducerListener: malformed binder reply
+04-27 16:18:04.866   588   724 E qti_sensors_hal: processReportInd: lux: 30.000000, photopic: 0.015228, ir: 0.000000
+04-27 16:18:05.010 25005 25038 E GeckoLibLoad: Load sqlite start
+04-27 16:18:05.012 25005 25038 E GeckoLibLoad: Load sqlite done
+04-27 16:18:05.013 25005 25038 E GeckoLibLoad: Load nss start
+04-27 16:18:05.013 25005 25038 E GeckoLibLoad: Load nss done
+04-27 16:18:05.027   588   724 E qti_sensors_hal: processReportInd: lux: 30.000000, photopic: 0.015045, ir: 0.000000
+04-27 16:18:05.042 25005 25038 E GeckoLibLoad: Loaded libs in 28.696615ms total, 30ms(30ms) user, 0ms(0ms) system, 0(0) faults
+04-27 16:18:05.072   615  2484 E         : IProducerListener: malformed binder reply
+04-27 16:18:05.073   615  1012 E         : IProducerListener: malformed binder reply
+04-27 16:18:05.187   588   724 E qti_sensors_hal: processReportInd: lux: 30.000000, photopic: 0.014587, ir: 0.000000
+04-27 16:18:05.306   615  1012 E         : IProducerListener: malformed binder reply
+04-27 16:18:05.350   588   724 E qti_sensors_hal: processReportInd: lux: 28.000000, photopic: 0.013870, ir: 0.000000
+04-27 16:18:05.351   615  2455 E         : IProducerListener: malformed binder reply
+04-27 16:18:05.374   615  1012 E         : IProducerListener: malformed binder reply
+04-27 16:18:05.376   615   704 E         : IProducerListener: malformed binder reply
+04-27 16:18:05.509   588   724 E qti_sensors_hal: processReportInd: lux: 25.000000, photopic: 0.012466, ir: 0.000000
+04-27 16:18:05.523   615  1012 E         : IProducerListener: malformed binder reply
+04-27 16:18:05.578  1494  1652 E ANDR-PERF-JNI: Iop tryGetService failed
+04-27 16:18:05.587 24939 24969 E GeckoConsole: [JavaScript Error: "TypeError: can't access property "eventDispatcher", this.window.moduleManager is undefined" {file: "resource://gre/modules/GeckoViewActorParent.sys.mjs" line: 28}]
+04-27 16:18:05.587 24939 24969 E GeckoConsole: get eventDispatcher@resource://gre/modules/GeckoViewActorParent.sys.mjs:28:5
+04-27 16:18:05.587 24939 24969 E GeckoConsole: receiveMessage@resource://gre/modules/GeckoViewActorParent.sys.mjs:41:9
+04-27 16:18:05.587 24939 24969 E GeckoConsole: receiveMessage@resource:///actors/GeckoViewClipboardPermissionParent.jsm:42:22
+04-27 16:18:05.598 24939 24969 E GeckoConsole: [JavaScript Error: "SyntaxError: import declarations may only appear at top level of a module" {file: "moz-extension://12bf7477-547c-4d76-986c-0b2b53c304af/service-worker-loader.js" line: 1 column: 0 source: "import './assets/index.ts.js';"}]
+04-27 16:18:05.670   588   724 E qti_sensors_hal: processReportInd: lux: 21.000000, photopic: 0.011200, ir: 0.000000
+04-27 16:18:05.675  2184  2902 E ProxCoverNoticeService: monitor view is null, no need to update minimum
+04-27 16:18:05.831   588   724 E qti_sensors_hal: processReportInd: lux: 22.000000, photopic: 0.011566, ir: 0.000000
+04-27 16:18:05.993   588   724 E qti_sensors_hal: processReportInd: lux: 23.000000, photopic: 0.011826, ir: 0.000000
+04-27 16:18:06.154   588   724 E qti_sensors_hal: processReportInd: lux: 23.000000, photopic: 0.012009, ir: 0.000000
+04-27 16:18:06.313   588   724 E qti_sensors_hal: processReportInd: lux: 22.000000, photopic: 0.011398, ir: 0.000000
+04-27 16:18:06.375   896   896 E wificond: vivo add tx_good 25625 tx_bad 857 rx_good 13631400 tx_retry 41090
+04-27 16:18:06.422 25005 25038 E Web Content: [JavaScript Error: "Error: Could not establish connection. Receiving end does not exist." {file: "moz-extension://b52565e4-41fa-4587-91da-1a2c7bdb09e8/content_script.js" line: 15}]
+04-27 16:18:06.473   588   724 E qti_sensors_hal: processReportInd: lux: 21.000000, photopic: 0.011154, ir: 0.000000
+04-27 16:18:06.635   588   724 E qti_sensors_hal: processReportInd: lux: 21.000000, photopic: 0.011353, ir: 0.000000
+04-27 16:18:06.795   588   724 E qti_sensors_hal: processReportInd: lux: 16.000000, photopic: 0.009247, ir: 0.000000
+04-27 16:18:06.956   588   724 E qti_sensors_hal: processReportInd: lux: 19.000000, photopic: 0.010529, ir: 0.000000
+04-27 16:18:07.116   588   724 E qti_sensors_hal: processReportInd: lux: 18.000000, photopic: 0.009964, ir: 0.000000
+04-27 16:18:07.134  2224  3174 E LocationAccessPolicy: pkgName = android whiteListApp = com.baidu.map.location,com.amap.android.location,com.google.android.gms
+04-27 16:18:07.134  2224  3174 E LocationAccessPolicy: pkgName = android blackListApp = 
+04-27 16:18:07.134  2224  3174 E LocationAccessPolicy: isLocationModeEnabled = false. userId = 0
+04-27 16:18:07.134  2224  3174 E LocationAccessPolicy: isLocationModeEnabled = false. userId = 0
+04-27 16:18:07.134  2224  3174 E LocationAccessPolicy: canAccessCellLocation return false. uid = 1000, pkgName = android
+04-27 16:18:07.252   615   704 E         : IProducerListener: malformed binder reply
+04-27 16:18:07.277   588   724 E qti_sensors_hal: processReportInd: lux: 18.000000, photopic: 0.010086, ir: 0.000000
+04-27 16:18:07.308   615   704 E         : IProducerListener: malformed binder reply
+04-27 16:18:07.326   615  1012 E         : IProducerListener: malformed binder reply
+04-27 16:18:07.332   615   704 E         : IProducerListener: malformed binder reply
+04-27 16:18:07.438   588   724 E qti_sensors_hal: processReportInd: lux: 18.000000, photopic: 0.010025, ir: 0.000000
+04-27 16:18:07.599   588   724 E qti_sensors_hal: processReportInd: lux: 20.000000, photopic: 0.010864, ir: 0.000000
+04-27 16:18:07.730  1494  1636 E ActivityManager: Sending non-protected broadcast com.vivo.abe.third.lifecontrol from system uid 1000 pkg null
+04-27 16:18:07.759   588   724 E qti_sensors_hal: processReportInd: lux: 20.000000, photopic: 0.010864, ir: 0.000000
+04-27 16:18:07.920   588   724 E qti_sensors_hal: processReportInd: lux: 21.000000, photopic: 0.011185, ir: 0.000000
+04-27 16:18:07.931 25244 25244 E ANRManager: mPackageName = com.android.camera, Get anr service = android.app.anr.IANRManager$Stub$Proxy@f92a8c8
+04-27 16:18:07.931 25244 25262 E ActivityThread: Failed to find provider info for com.bbk.iqoo.logsystemes
+04-27 16:18:07.940 25244 25264 E ActivityThread: Failed to find provider info for com.bbk.iqoo.logsystemes
+04-27 16:18:08.081   588   724 E qti_sensors_hal: processReportInd: lux: 20.000000, photopic: 0.011002, ir: 0.000000
+04-27 16:18:08.105   885  1612 E CameraService: getNumberOfCameras: ++++ get number of camera 3 mNumberOfCameras 3 mNumberOfNormalCameras 3 +++++++
+04-27 16:18:08.109   885  1612 I chatty  : uid=1047(cameraserver) Binder:885_1 identical 5 lines
+04-27 16:18:08.109   885  1612 E CameraService: getNumberOfCameras: ++++ get number of camera 3 mNumberOfCameras 3 mNumberOfNormalCameras 3 +++++++
+04-27 16:18:08.242   588   724 E qti_sensors_hal: processReportInd: lux: 22.000000, photopic: 0.011475, ir: 0.000000
+04-27 16:18:08.404   588   724 E qti_sensors_hal: processReportInd: lux: 23.000000, photopic: 0.012100, ir: 0.000000
+04-27 16:18:08.406   615  1012 E         : IProducerListener: malformed binder reply
+04-27 16:18:08.563   588   724 E qti_sensors_hal: processReportInd: lux: 24.000000, photopic: 0.012177, ir: 0.000000
+04-27 16:18:08.619   615   702 E         : IProducerListener: malformed binder reply
+04-27 16:18:08.621   615   702 E         : IProducerListener: malformed binder reply
+04-27 16:18:08.626  3645 25271 E FA      : Discarding data. Failed to send event to service
+04-27 16:18:08.626  3645 25271 E FA      : Discarding data. Failed to send event to service
+04-27 16:18:08.709   615  2455 E         : IProducerListener: malformed binder reply
+04-27 16:18:08.724   588   724 E qti_sensors_hal: processReportInd: lux: 22.000000, photopic: 0.011749, ir: 0.000000
+04-27 16:18:08.726   615   704 E         : IProducerListener: malformed binder reply
+04-27 16:18:08.732   615   704 E         : IProducerListener: malformed binder reply
+04-27 16:18:08.760   615  1012 E         : IProducerListener: malformed binder reply
+04-27 16:18:08.794   615  1012 I chatty  : uid=1000(system) Binder:615_3 identical 2 lines
+04-27 16:18:08.817   615  1012 E         : IProducerListener: malformed binder reply
+04-27 16:18:08.819   615   704 E         : IProducerListener: malformed binder reply
+04-27 16:18:08.880   615   702 E         : IProducerListener: malformed binder reply
+04-27 16:18:08.882   615   702 E         : IProducerListener: malformed binder reply
+04-27 16:18:08.886   588   724 E qti_sensors_hal: processReportInd: lux: 22.000000, photopic: 0.011429, ir: 0.000000
+04-27 16:18:08.993 25005 25038 E Web Content: [JavaScript Error: "uncaught exception: undefined"]
+04-27 16:18:09.045   588   724 E qti_sensors_hal: processReportInd: lux: 21.000000, photopic: 0.011246, ir: 0.000000
+04-27 16:18:09.206   588   724 E qti_sensors_hal: processReportInd: lux: 21.000000, photopic: 0.011246, ir: 0.000000
+04-27 16:18:09.367   588   724 E qti_sensors_hal: processReportInd: lux: 21.000000, photopic: 0.011108, ir: 0.000000
+04-27 16:18:09.386   896   896 E wificond: vivo add tx_good 25838 tx_bad 858 rx_good 13631574 tx_retry 41095
+04-27 16:18:09.452  3645 25271 E FA      : Discarding data. Failed to send event to service
+04-27 16:18:09.529   588   724 E qti_sensors_hal: processReportInd: lux: 21.000000, photopic: 0.011124, ir: 0.000000
+04-27 16:18:09.690   588   724 E qti_sensors_hal: processReportInd: lux: 20.000000, photopic: 0.011047, ir: 0.000000
+04-27 16:18:09.818   615   702 E         : IProducerListener: malformed binder reply
+04-27 16:18:09.849   588   724 E qti_sensors_hal: processReportInd: lux: 20.000000, photopic: 0.011063, ir: 0.000000
+04-27 16:18:09.859   615   702 E         : IProducerListener: malformed binder reply
+04-27 16:18:09.884   615   704 E         : IProducerListener: malformed binder reply
+04-27 16:18:09.886   615   704 E         : IProducerListener: malformed binder reply
+04-27 16:18:10.010   588   724 E qti_sensors_hal: processReportInd: lux: 23.000000, photopic: 0.012100, ir: 0.000000
+04-27 16:18:10.170   588   724 E qti_sensors_hal: processReportInd: lux: 23.000000, photopic: 0.012009, ir: 0.000000
+04-27 16:18:10.331   588   724 E qti_sensors_hal: processReportInd: lux: 23.000000, photopic: 0.012131, ir: 0.000000
+04-27 16:18:10.432  1494  3387 E VibratorService: motorModeEnableVibration---motor mode disable
+04-27 16:18:10.437  1494  3387 E VibratorService: motorModeEnableVibration---motor mode disable
+04-27 16:18:10.492   588   724 E qti_sensors_hal: processReportInd: lux: 23.000000, photopic: 0.012039, ir: 0.000000
+04-27 16:18:10.653   588   724 E qti_sensors_hal: processReportInd: lux: 23.000000, photopic: 0.011810, ir: 0.000000
+04-27 16:18:10.713  1494  2296 E WindowManager: App trying to use insecure INPUT_FEATURE_NO_INPUT_CHANNEL flag. Ignoring
+04-27 16:18:10.755   615  2455 E         : IProducerListener: malformed binder reply
+04-27 16:18:10.813   588   724 E qti_sensors_hal: processReportInd: lux: 21.000000, photopic: 0.011368, ir: 0.000000
+04-27 16:18:10.838   615  2484 E         : IProducerListener: malformed binder reply
+04-27 16:18:10.840   615  2455 E         : IProducerListener: malformed binder reply
+04-27 16:18:10.974   588   724 E qti_sensors_hal: processReportInd: lux: 21.000000, photopic: 0.011246, ir: 0.000000
+04-27 16:18:11.135   588   724 E qti_sensors_hal: processReportInd: lux: 21.000000, photopic: 0.011292, ir: 0.000000

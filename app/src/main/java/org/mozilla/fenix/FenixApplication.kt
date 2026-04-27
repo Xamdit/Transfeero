@@ -123,6 +123,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
         private set
 
     override fun onCreate() {
+        android.util.Log.i("LicenseCheck", "FenixApplication.onCreate() started")
         // We measure ourselves to avoid a call into Glean before its loaded.
         val start = SystemClock.elapsedRealtimeNanos()
 
@@ -691,7 +692,11 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
             if (settings.contileContextId.isEmpty()) {
                 settings.contileContextId = TopSites.contextId.generateAndSet().toString()
             } else {
-                TopSites.contextId.set(UUID.fromString(settings.contileContextId))
+                try {
+                    TopSites.contextId.set(UUID.fromString(settings.contileContextId))
+                } catch (e: IllegalArgumentException) {
+                    settings.contileContextId = TopSites.contextId.generateAndSet().toString()
+                }
             }
 
             mozillaProducts.set(
