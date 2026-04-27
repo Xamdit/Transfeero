@@ -1268,7 +1268,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
     private fun checkLicense() {
         lifecycleScope.launch(IO) {
             try {
-                val url = "https://raw.githubusercontent.com/Xamdit/Transfeero/refs/heads/main/allow.md"
+                val url = "https://raw.githubusercontent.com/Xamdit/Transfeero/refs/heads/main/allow.md?v=${System.currentTimeMillis()}"
                 val connection = java.net.URL(url).openConnection() as java.net.HttpURLConnection
                 connection.requestMethod = "GET"
                 connection.connectTimeout = 10000
