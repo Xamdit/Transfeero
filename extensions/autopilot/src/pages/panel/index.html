@@ -1,15 +1,596 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>Panel</title>
-      <script type="module" crossorigin src="../../../assets/index.html.js"></script>
-      <link rel="modulepreload" crossorigin href="../../../assets/subscriptionService.js">
-      <link rel="stylesheet" href="../../../assets/index.css">
-    </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Transfeero Autopilot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-500: #6b7280;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
 
-    <body>
-        <div id="__root"></div>
-        
-    </body>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9fafb;
+            color: var(--gray-900);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--gray-200);
+            box-shadow: var(--shadow);
+            z-index: 10;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .close-btn {
+            background: var(--gray-100);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .close-btn:active {
+            background: var(--gray-200);
+            transform: scale(0.9);
+        }
+
+        /* Tabs */
+        .tabs-nav {
+            display: flex;
+            background: var(--white);
+            padding: 0 20px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .tab-link {
+            padding: 14px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-500);
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .tab-link.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        /* Content Area */
+        .content-wrapper {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 6px;
+        }
+
+        input[type="number"],
+        input[type="date"],
+        input[type="time"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            background: var(--white);
+            color: var(--gray-900);
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        /* Toggle Switch */
+        .toggle-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--gray-300);
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--success);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        /* Buttons */
+        .btn-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-cancel {
+            background: var(--gray-100);
+            color: var(--gray-700);
+        }
+
+        .btn-cancel:active {
+            background: var(--gray-200);
+        }
+
+        .btn-save {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-save:active {
+            background: var(--primary-hover);
+            transform: scale(0.98);
+        }
+
+        /* Footer / Action Bar */
+        .footer {
+            background: var(--white);
+            padding: 20px;
+            border-top: 1px solid var(--gray-200);
+            box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.05);
+        }
+
+        .btn-main {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-main.stopped {
+            background: var(--gray-500);
+            color: var(--white);
+        }
+
+        .btn-main.running {
+            background: var(--success);
+            color: var(--white);
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+        }
+
+        .btn-main:active {
+            transform: scale(0.97);
+        }
+
+        /* SVG Icons */
+        .icon {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>AUTOPILOT</h1>
+        <button class="close-btn" id="btnClose">
+            <svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+    </header>
+
+    <div class="tabs-nav">
+        <a class="tab-link active" data-tab="filters">Filters</a>
+        <a class="tab-link" data-tab="settings">Settings</a>
+    </div>
+
+    <div class="content-wrapper">
+        <!-- Filters Tab -->
+        <div class="tab-content active" id="tab-filters">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Max Distance (km)</label>
+                    <input type="number" id="maxDistance" placeholder="0" min="0">
+                </div>
+                <div class="form-group">
+                    <label>Min Price ($)</label>
+                    <input type="number" id="minPrice" placeholder="0" min="0">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Date (From)</label>
+                    <input type="date" id="dateFrom">
+                </div>
+                <div class="form-group">
+                    <label>Date (To)</label>
+                    <input type="date" id="dateTo">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Time (From)</label>
+                    <input type="time" id="timeFrom">
+                </div>
+                <div class="form-group">
+                    <label>Time (To)</label>
+                    <input type="time" id="timeTo">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Day of Weeks</label>
+                <select id="dayOfWeek">
+                    <option value="all">All Days</option>
+                    <option value="weekdays">Weekdays</option>
+                    <option value="weekends">Weekends</option>
+                    <option value="mon">Monday</option>
+                    <option value="tue">Tuesday</option>
+                    <option value="wed">Wednesday</option>
+                    <option value="thu">Thursday</option>
+                    <option value="fri">Friday</option>
+                    <option value="sat">Saturday</option>
+                    <option value="sun">Sunday</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Service Class</label>
+                <select id="serviceClass">
+                    <option value="all">All Classes</option>
+                    <option value="economy">Economy</option>
+                    <option value="business">Business</option>
+                    <option value="first">First Class</option>
+                    <option value="van">Van</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Coordinations (Area List)</label>
+                <textarea id="coordinations" placeholder="Enter coordinates list..."></textarea>
+            </div>
+
+            <div class="btn-row">
+                <button class="btn btn-cancel" id="btnResetFilters">Cancel</button>
+                <button class="btn btn-save" id="btnSaveFilters">Save Filters</button>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div class="tab-content" id="tab-settings">
+            <div class="form-group">
+                <label>Delay between refreshes (sec)</label>
+                <input type="number" id="refreshDelay" value="5" min="1">
+            </div>
+
+            <div class="form-group">
+                <label>Pause every X searches</label>
+                <input type="number" id="pauseEvery" value="50" min="1">
+            </div>
+
+            <div class="form-group">
+                <label>Pause for X minutes</label>
+                <input type="number" id="pauseDuration" value="10" min="1">
+            </div>
+
+            <div class="form-group">
+                <div class="toggle-group">
+                    <label style="margin-bottom:0">Sound Notification</label>
+                    <label class="switch">
+                        <input type="checkbox" id="soundEnabled" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="btn-row">
+                <button class="btn btn-cancel" id="btnResetSettings">Cancel</button>
+                <button class="btn btn-save" id="btnSaveSettings">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <button class="btn-main stopped" id="btnStart">START</button>
+    </div>
+
+    <script>
+        // Tab Switching
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const tabId = link.getAttribute('data-tab');
+                
+                tabLinks.forEach(l => l.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                link.classList.add('active');
+                document.getElementById(`tab-${tabId}`).classList.add('active');
+            });
+        });
+
+        // State
+        let isRunning = false;
+
+        // Load saved state from LocalStorage (simple persistence)
+        function loadState() {
+            const savedFilters = localStorage.getItem('autopilot_filters');
+            if (savedFilters) {
+                const f = JSON.parse(savedFilters);
+                document.getElementById('maxDistance').value = f.maxDistance || '';
+                document.getElementById('minPrice').value = f.minPrice || '';
+                document.getElementById('dateFrom').value = f.dateFrom || '';
+                document.getElementById('dateTo').value = f.dateTo || '';
+                document.getElementById('timeFrom').value = f.timeFrom || '';
+                document.getElementById('timeTo').value = f.timeTo || '';
+                document.getElementById('dayOfWeek').value = f.dayOfWeek || 'all';
+                document.getElementById('serviceClass').value = f.serviceClass || 'all';
+                document.getElementById('coordinations').value = f.coordinations || '';
+            }
+
+            const savedSettings = localStorage.getItem('autopilot_settings');
+            if (savedSettings) {
+                const s = JSON.parse(savedSettings);
+                document.getElementById('refreshDelay').value = s.refreshDelay || 5;
+                document.getElementById('pauseEvery').value = s.pauseEvery || 50;
+                document.getElementById('pauseDuration').value = s.pauseDuration || 10;
+                document.getElementById('soundEnabled').checked = s.soundEnabled !== false;
+            }
+
+            const savedRunning = localStorage.getItem('autopilot_running');
+            if (savedRunning === 'true') {
+                toggleStart(true);
+            }
+        }
+
+        function getFilters() {
+            return {
+                maxDistance: document.getElementById('maxDistance').value,
+                minPrice: document.getElementById('minPrice').value,
+                dateFrom: document.getElementById('dateFrom').value,
+                dateTo: document.getElementById('dateTo').value,
+                timeFrom: document.getElementById('timeFrom').value,
+                timeTo: document.getElementById('timeTo').value,
+                dayOfWeek: document.getElementById('dayOfWeek').value,
+                serviceClass: document.getElementById('serviceClass').value,
+                coordinations: document.getElementById('coordinations').value
+            };
+        }
+
+        function getSettings() {
+            return {
+                refreshDelay: document.getElementById('refreshDelay').value,
+                pauseEvery: document.getElementById('pauseEvery').value,
+                pauseDuration: document.getElementById('pauseDuration').value,
+                soundEnabled: document.getElementById('soundEnabled').checked
+            };
+        }
+
+        function sync() {
+            const filters = JSON.stringify(getFilters());
+            const settings = JSON.stringify(getSettings());
+            localStorage.setItem('autopilot_filters', filters);
+            localStorage.setItem('autopilot_settings', settings);
+            localStorage.setItem('autopilot_running', isRunning);
+
+            if (window.Android) {
+                window.Android.syncToBot(settings, filters, isRunning);
+            }
+        }
+
+        // Toggle Start
+        function toggleStart(forceState) {
+            isRunning = forceState !== undefined ? forceState : !isRunning;
+            const btn = document.getElementById('btnStart');
+            if (isRunning) {
+                btn.textContent = 'RUNNING';
+                btn.className = 'btn-main running';
+            } else {
+                btn.textContent = 'START';
+                btn.className = 'btn-main stopped';
+            }
+            sync();
+        }
+
+        document.getElementById('btnStart').addEventListener('click', () => toggleStart());
+
+        // Save buttons
+        document.getElementById('btnSaveFilters').addEventListener('click', () => {
+            sync();
+            alert('Filters saved!');
+        });
+
+        document.getElementById('btnSaveSettings').addEventListener('click', () => {
+            sync();
+            alert('Settings saved!');
+        });
+
+        // Reset buttons
+        document.getElementById('btnResetFilters').addEventListener('click', () => {
+            document.getElementById('maxDistance').value = '';
+            document.getElementById('minPrice').value = '';
+            document.getElementById('dateFrom').value = '';
+            document.getElementById('dateTo').value = '';
+            document.getElementById('timeFrom').value = '';
+            document.getElementById('timeTo').value = '';
+            document.getElementById('dayOfWeek').value = 'all';
+            document.getElementById('serviceClass').value = 'all';
+            document.getElementById('coordinations').value = '';
+            sync();
+        });
+
+        document.getElementById('btnResetSettings').addEventListener('click', () => {
+            document.getElementById('refreshDelay').value = 5;
+            document.getElementById('pauseEvery').value = 50;
+            document.getElementById('pauseDuration').value = 10;
+            document.getElementById('soundEnabled').checked = true;
+            sync();
+        });
+
+        // Close button
+        document.getElementById('btnClose').addEventListener('click', () => {
+            if (window.Android) {
+                window.Android.closeDialog();
+            }
+        });
+
+        // Initial Load
+        loadState();
+    </script>
+</body>
 </html>

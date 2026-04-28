@@ -299,7 +299,12 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
                 loadUrl("file:///android_asset/extensions/autopilot/src/pages/panel/index.html")
             }
             
+            dialog.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
             dialog.setContentView(webView)
+            dialog.window?.let { window ->
+                window.setLayout(android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.MATCH_PARENT)
+                window.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT))
+            }
             dialog.show()
         }
 
