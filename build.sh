@@ -18,7 +18,7 @@ else
 fi
 
 # Step 2: Set Java 11
-export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
 echo "Using JAVA_HOME: $JAVA_HOME"
 
 # Step 3: Run Build

@@ -79,6 +79,9 @@ rm -f logs/logcat.log
 adb -s ${TARGET} logcat "*:I" > logs/logcat.log &
 LOGCAT_PID=$!
 
+# Force stop the app before launching to ensure fresh configuration loading
+adb -s ${TARGET} shell am force-stop org.mozilla.fenix.debug
+
 # Launch the app
 adb -s ${TARGET} shell am start -a android.intent.action.VIEW \
     -d "https://control.transfeero.com/new_rides" \

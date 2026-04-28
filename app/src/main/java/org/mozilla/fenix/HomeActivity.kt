@@ -259,7 +259,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         ProfilerMarkers.addListenerForOnGlobalLayout(components.core.engine, this, binding.root)
         
         binding.autopilotFab.setOnClickListener {
-            val dialog = android.app.Dialog(this, android.R.style.Theme_Light_NoTitleBar_Fullscreen)
+            val dialog = android.app.Dialog(this)
             val webView = android.webkit.WebView(this).apply {
                 settings.javaScriptEnabled = true
                 settings.domStorageEnabled = true
