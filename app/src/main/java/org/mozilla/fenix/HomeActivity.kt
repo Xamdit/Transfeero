@@ -270,6 +270,24 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
                 webViewClient = android.webkit.WebViewClient()
                 addJavascriptInterface(object : Any() {
                     @android.webkit.JavascriptInterface
+                    fun getAuth(): String {
+                        val cookieManager = android.webkit.CookieManager.getInstance()
+                        val cookies = cookieManager.getCookie("https://control.transfeero.com")
+                        val map = mutableMapOf<String, String>()
+                        cookies?.split(";")?.forEach { 
+                            val parts = it.split("=")
+                            if (parts.size >= 2) {
+                                map[parts[0].trim()] = parts[1].trim()
+                            }
+                        }
+                        val result = org.json.JSONObject()
+                        result.put("hash", map["hash"] ?: "")
+                        result.put("token", map["token"] ?: "")
+                        result.put("email", map["email"] ?: "")
+                        return result.toString()
+                    }
+
+                    @android.webkit.JavascriptInterface
                     fun closeDialog() {
                         dialog.dismiss()
                     }
