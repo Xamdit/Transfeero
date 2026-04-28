@@ -267,34 +267,38 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
                 settings.allowUniversalAccessFromFileURLs = true
                 webChromeClient = android.webkit.WebChromeClient()
                 webViewClient = android.webkit.WebViewClient()
+                addJavascriptInterface(object : Any() {
+                    @android.webkit.JavascriptInterface
+                    fun closeDialog() {
+                        dialog.dismiss()
+                    }
+
+                    @android.webkit.JavascriptInterface
+                    fun syncToBot(settings: String, filters: String, isRunning: Boolean) {
+                        runOnUiThread {
+                            val state = components.core.store.state
+                            val session = state.tabs.find { it.id == state.selectedTabId } 
+                                ?: state.customTabs.find { it.id == state.selectedTabId } 
+                                ?: return@runOnUiThread
+                            val js = """
+                                javascript:(function() {
+                                    window.postMessage({
+                                        type: "SYNC_FROM_ANDROID_UI",
+                                        settings: $settings,
+                                        filters: $filters,
+                                        isRunning: $isRunning,
+                                        isDebug: ${org.mozilla.fenix.utils.AppConfig.isDebug}
+                                    }, "*");
+                                })();
+                            """.trimIndent()
+                            session.engineState.engineSession?.loadUrl(js)
+                        }
+                    }
+                }, "Android")
                 loadUrl("file:///android_asset/extensions/autopilot/src/pages/panel/index.html")
             }
             
-            val layout = android.widget.LinearLayout(this).apply {
-                orientation = android.widget.LinearLayout.VERTICAL
-                
-                val topBar = android.widget.RelativeLayout(this@HomeActivity).apply {
-                    setBackgroundColor(android.graphics.Color.parseColor("#EEEEEE"))
-                    setPadding(24, 24, 24, 24)
-                    val closeButton = android.widget.Button(this@HomeActivity).apply {
-                        text = "Close Autopilot"
-                        setOnClickListener { dialog.dismiss() }
-                    }
-                    val params = android.widget.RelativeLayout.LayoutParams(
-                        android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT,
-                        android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT
-                    ).apply { addRule(android.widget.RelativeLayout.ALIGN_PARENT_END) }
-                    addView(closeButton, params)
-                }
-                
-                addView(topBar)
-                addView(webView, android.widget.LinearLayout.LayoutParams(
-                    android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
-                    android.widget.LinearLayout.LayoutParams.MATCH_PARENT
-                ))
-            }
-            
-            dialog.setContentView(layout)
+            dialog.setContentView(webView)
             dialog.show()
         }
 

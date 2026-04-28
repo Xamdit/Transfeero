@@ -5,5 +5,6 @@
   "context_menu": true,
   "telemetry": false,
   "remote_settings": false,
-  "immersive_mode": true
+  "immersive_mode": true,
+  "debug": true
 }

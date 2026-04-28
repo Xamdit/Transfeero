@@ -37,6 +37,9 @@ object AppConfig {
     var immersiveMode: Boolean = false
         private set
 
+    var isDebug: Boolean = false
+        private set
+
     /**
      * Loads the configuration from the assets folder.
      */
@@ -82,7 +85,11 @@ object AppConfig {
                 immersiveMode = jsonObject.getBoolean("immersive_mode")
             }
 
-            logger.info("Configuration loaded: toolbar=$toolbarVisible, home=$homeUrl, appName=$appName, contextMenuEnabled=$contextMenuEnabled, telemetryEnabled=$telemetryEnabled, remoteSettingsEnabled=$remoteSettingsEnabled")
+            if (jsonObject.has("debug")) {
+                isDebug = jsonObject.getBoolean("debug")
+            }
+
+            logger.info("Configuration loaded: toolbar=$toolbarVisible, home=$homeUrl, appName=$appName, contextMenuEnabled=$contextMenuEnabled, telemetryEnabled=$telemetryEnabled, remoteSettingsEnabled=$remoteSettingsEnabled, debug=$isDebug")
         } catch (e: Exception) {
             logger.error("Failed to load app-config.json: ${e.message}")
             // Use defaults if file is missing or malformed
@@ -92,6 +99,7 @@ object AppConfig {
             contextMenuEnabled = true
             telemetryEnabled = true
             remoteSettingsEnabled = true
+            isDebug = false
         }
     }
 }

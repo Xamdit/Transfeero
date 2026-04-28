@@ -16,11 +16,12 @@
 - **Android Simulator Setup**: Created `test_device_api34` (Android 14) and added `asimulator` command to `~/.zshrc` to bypass physical device logcat restrictions.
 - **Log Management**: Updated `test.sh` to automatically output logs to `logs/logcat.log` and moved all temp files there. Added `logs/` to `.gitignore`.
 - **Autopilot FAB UI Fix**: Replaced the restricted `openToBrowserAndLoad` function in `HomeActivity.kt` with a native `Dialog` containing a `WebView`. The settings UI now correctly displays from `file:///android_asset/...` without showing a blank white page.
-- **Extension Analysis**: Analyzed `transfeer_extension` structure to prepare for its full integration into `extensions/autopilot`.
+- **Autopilot UI Sync**: Fully synced UI and source code (`src/` and `assets/`) from `transfeer_extension` into `extensions/autopilot`.
+- **Web/App Bridge Verification**: Verified that the Web-to-App bridge via `window.Android.syncToBot` and `window.Android.closeDialog` is fully implemented in `index.html`.
 
 ## Pending Issues
-- **Autopilot UI Integration**: Fully sync and implement the UI/source code from `transfeer_extension` into `extensions/autopilot` as requested by the user.
-- **Web/App Bridge**: Verify the JavaScript mock functions in `extensions/autopilot/src/pages/panel/index.html` and ensure the UI works smoothly within the native Android WebView Dialog.
+- **Testing the UI**: Test the newly synced Autopilot FAB UI in the Android simulator to ensure settings are saved and the Native bridge functions correctly without crashing.
+- **Background Worker E2E Test**: Verify if the `assets/index.ts.js` background worker correctly receives configuration updates from the Android UI and performs automated API requests as intended.
 
 ## Notes for Next Session
 - Run `/resume-work` to start from this state.
