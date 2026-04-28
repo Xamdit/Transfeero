@@ -50,7 +50,7 @@ private const val CFR_TO_ANCHOR_VERTICAL_PADDING = -6
  * @param toolbar will serve as anchor for the CFRs
  * @param sessionId optional custom tab id used to identify the custom tab in which to show a CFR.
  */
-class BrowserToolbarCFRPresenter(
+class BrowserToolbarCFRPresenter @Suppress("UNUSED_PARAMETER") constructor(
     private val context: Context,
     private val browserStore: BrowserStore,
     private val settings: Settings,
@@ -68,22 +68,7 @@ class BrowserToolbarCFRPresenter(
      */
     @Suppress("MagicNumber")
     fun start() {
-        if (settings.shouldShowTotalCookieProtectionCFR) {
-            tcpCfrScope = browserStore.flowScoped { flow ->
-                flow
-                    .mapNotNull { it.findCustomTabOrSelectedTab(sessionId)?.content?.progress }
-                    // The "transformWhile" below ensures that the 100% progress is only collected once.
-                    .transformWhile { progress ->
-                        emit(progress)
-                        progress != 100
-                    }
-                    .filter { it == 100 }
-                    .collect {
-                        tcpCfrScope?.cancel()
-                        showTcpCfr()
-                    }
-            }
-        }
+        // TCP CFR Tooltip is disabled.
     }
 
     /**
@@ -122,13 +107,14 @@ class BrowserToolbarCFRPresenter(
                 tryToShowCookieBannerDialogIfNeeded()
             },
             text = {
-                FirefoxTheme {
+/*
                     Text(
                         text = context.getString(R.string.tcp_cfr_message),
                         color = FirefoxTheme.colors.textOnColorPrimary,
                         style = FirefoxTheme.typography.body2,
                     )
-                }
+*/
+                    // CFR disabled in PKGO
             },
             action = {
                 FirefoxTheme {

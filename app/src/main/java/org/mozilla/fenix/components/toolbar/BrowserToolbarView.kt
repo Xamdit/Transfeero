@@ -128,6 +128,9 @@ class BrowserToolbarView(
                 )
 
                 display.hint = context.getString(R.string.search_hint)
+
+                visibility = View.GONE
+                isEnabled = false
             }
 
             val menuToolbar: ToolbarMenu
@@ -205,26 +208,10 @@ class BrowserToolbarView(
      *
      * @param shouldDisableScroll force disable of the dynamic behavior irrespective of the intrinsic checks.
      */
+    @Suppress("UNUSED_PARAMETER")
     fun setToolbarBehavior(shouldDisableScroll: Boolean = false) {
-        when (settings.toolbarPosition) {
-            ToolbarPosition.BOTTOM -> {
-                if (settings.isDynamicToolbarEnabled && !isPwaTabOrTwaTab && !settings.shouldUseFixedTopToolbar) {
-                    setDynamicToolbarBehavior(MozacToolbarPosition.BOTTOM)
-                } else {
-                    expandToolbarAndMakeItFixed()
-                }
-            }
-            ToolbarPosition.TOP -> {
-                if (settings.shouldUseFixedTopToolbar ||
-                    !settings.isDynamicToolbarEnabled ||
-                    shouldDisableScroll
-                ) {
-                    expandToolbarAndMakeItFixed()
-                } else {
-                    setDynamicToolbarBehavior(MozacToolbarPosition.TOP)
-                }
-            }
-        }
+        view.visibility = View.GONE
+        expandToolbarAndMakeItFixed()
     }
 
     @VisibleForTesting

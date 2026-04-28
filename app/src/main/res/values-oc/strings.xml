@@ -87,7 +87,6 @@
 
     <!-- Total cookie protection "contextual feature recommendation" (CFR) -->
     <!-- Text for the message displayed in the contextual feature recommendation popup promoting the total cookie protection feature. -->
-    <string name="tcp_cfr_message">Nòstra foncionalitat la mai potenta de confidencialitat isola ja los traçadors intersites.</string>
     <!-- Text displayed that links to website containing documentation about the "Total cookie protection" feature. -->
     <string name="tcp_cfr_learn_more">Ne saber tocant la proteccion totala contra los cookies</string>
 

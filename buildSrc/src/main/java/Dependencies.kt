@@ -15,7 +15,6 @@ object FenixVersions {
     const val android_lint_api = "30.3.0"
 
     const val sentry = "6.13.1"
-    const val leakcanary = "2.10"
     const val osslicenses_plugin = "0.10.4"
     const val detekt = "1.19.0"
     const val jna = "5.12.1"
@@ -179,7 +178,7 @@ object FenixDependencies {
     const val mozilla_support_locale = "org.mozilla.components:support-locale:${FenixVersions.mozilla_android_components}"
 
     const val sentry = "io.sentry:sentry-android:${FenixVersions.sentry}"
-    const val leakcanary = "com.squareup.leakcanary:leakcanary-android-core:${FenixVersions.leakcanary}"
+
 
     const val androidx_compose_ui = "androidx.compose.ui:ui:${FenixVersions.androidx_compose}"
     const val androidx_compose_ui_test = "androidx.compose.ui:ui-test-junit4:${FenixVersions.androidx_compose}"

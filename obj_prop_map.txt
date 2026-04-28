@@ -1,0 +1,2 @@
+GleanMetrics.EngineTab.ForegroundMetricsExtra
+GleanMetrics.Events.marketingNotificationAllowed

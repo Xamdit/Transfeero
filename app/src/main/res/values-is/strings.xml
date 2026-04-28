@@ -89,7 +89,6 @@
 
     <!-- Total cookie protection "contextual feature recommendation" (CFR) -->
     <!-- Text for the message displayed in the contextual feature recommendation popup promoting the total cookie protection feature. -->
-    <string name="tcp_cfr_message">Öflugasti persónuverndareiginleikinn okkar til þessa einangrar vefkökur sem tengja á milli vefsvæða.</string>
     <!-- Text displayed that links to website containing documentation about the "Total cookie protection" feature. -->
     <string name="tcp_cfr_learn_more">Lærððu meira um allsherjar-vefkökuvarnir</string>
 

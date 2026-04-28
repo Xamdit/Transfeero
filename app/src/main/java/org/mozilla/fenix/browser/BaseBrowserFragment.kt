@@ -1447,7 +1447,7 @@ abstract class BaseBrowserFragment :
                 activity.themeManager.applyStatusBarTheme(activity)
             }
             if (webAppToolbarShouldBeVisible) {
-                browserToolbarView.view.isVisible = true
+                browserToolbarView.view.visibility = View.GONE
                 val toolbarHeight = resources.getDimensionPixelSize(R.dimen.browser_toolbar_height)
                 initializeEngineView(toolbarHeight)
                 browserToolbarView.expand()

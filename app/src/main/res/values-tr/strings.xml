@@ -89,7 +89,6 @@
 
     <!-- Total cookie protection "contextual feature recommendation" (CFR) -->
     <!-- Text for the message displayed in the contextual feature recommendation popup promoting the total cookie protection feature. -->
-    <string name="tcp_cfr_message">Şimdiye kadarki en güçlü gizlilik özelliğimiz, siteler arası takip kodlarını izole ediyor.</string>
     <!-- Text displayed that links to website containing documentation about the "Total cookie protection" feature. -->
     <string name="tcp_cfr_learn_more">Komple çerez koruması hakkında bilgi al</string>
 

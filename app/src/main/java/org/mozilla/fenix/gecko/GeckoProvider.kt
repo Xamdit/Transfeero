@@ -51,14 +51,29 @@ object GeckoProvider {
         policy: TrackingProtectionPolicy,
     ): GeckoRuntime {
         val builder = GeckoRuntimeSettings.Builder()
-
-        val runtimeSettings = builder
             .crashHandler(CrashHandlerService::class.java)
             .telemetryDelegate(GeckoAdapter())
             .contentBlocking(policy.toContentBlockingSetting())
             .debugLogging(Config.channel.isDebug)
             .aboutConfigEnabled(Config.channel.isBeta || Config.channel.isNightlyOrDebug)
-            .build()
+
+        if (!org.mozilla.fenix.utils.AppConfig.remoteSettingsEnabled) {
+            builder.arguments(arrayOf(
+                "--setpref", "services.settings.server=",
+                "--setpref", "security.content_signatures.remote_settings.enabled=false",
+                "--setpref", "browser.safebrowsing.downloads.remote.enabled=false",
+                "--setpref", "browser.safebrowsing.phishing.enabled=false",
+                "--setpref", "browser.safebrowsing.malware.enabled=false",
+                "--setpref", "datareporting.healthreport.uploadEnabled=false",
+                "--setpref", "toolkit.telemetry.enabled=false",
+                "--setpref", "toolkit.telemetry.server=",
+                "--setpref", "xpinstall.signatures.required=false"
+            ))
+        }
+
+        val runtimeSettings = builder.build()
+ 
+        val geckoRuntime = GeckoRuntime.create(context, runtimeSettings)
 
         val settings = context.components.settings
         if (!settings.shouldUseAutoSize) {
@@ -92,7 +107,7 @@ object GeckoProvider {
             )
         }
 
-        val geckoRuntime = GeckoRuntime.create(context, runtimeSettings)
+        android.util.Log.d("FenixLog", "Engine: GeckoRuntime created ✓")
 
         geckoRuntime.autocompleteStorageDelegate = GeckoAutocompleteStorageDelegate(
             GeckoCreditCardsAddressesStorageDelegate(

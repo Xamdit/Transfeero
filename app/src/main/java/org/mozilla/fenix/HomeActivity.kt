@@ -30,6 +30,8 @@ import androidx.annotation.VisibleForTesting.Companion.PROTECTED
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDirections
@@ -145,7 +147,9 @@ import org.mozilla.fenix.theme.DefaultThemeManager
 import org.mozilla.fenix.theme.ThemeManager
 import org.mozilla.fenix.trackingprotection.TrackingProtectionPanelDialogFragmentDirections
 import org.mozilla.fenix.utils.BrowsersCache
+import org.mozilla.fenix.utils.MailNotificationGuard
 import org.mozilla.fenix.utils.Settings
+import org.mozilla.fenix.utils.AppConfig
 import java.lang.ref.WeakReference
 import java.util.Locale
 
@@ -215,6 +219,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
 
     @Suppress("ComplexMethod")
     final override fun onCreate(savedInstanceState: Bundle?) {
+        android.util.Log.i("LicenseCheck", "HomeActivity.onCreate() started")
         // DO NOT MOVE ANYTHING ABOVE THIS getProfilerTime CALL.
         val startTimeProfiler = components.core.engine.profiler?.getProfilerTime()
 
@@ -249,7 +254,54 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        checkLicense()
+        hideSystemUI()
         ProfilerMarkers.addListenerForOnGlobalLayout(components.core.engine, this, binding.root)
+        
+        binding.autopilotFab.setOnClickListener {
+            val dialog = android.app.Dialog(this, android.R.style.Theme_Light_NoTitleBar_Fullscreen)
+            val webView = android.webkit.WebView(this).apply {
+                settings.javaScriptEnabled = true
+                settings.domStorageEnabled = true
+                settings.allowFileAccess = true
+                settings.allowFileAccessFromFileURLs = true
+                settings.allowUniversalAccessFromFileURLs = true
+                webChromeClient = android.webkit.WebChromeClient()
+                webViewClient = android.webkit.WebViewClient()
+                addJavascriptInterface(object : Any() {
+                    @android.webkit.JavascriptInterface
+                    fun closeDialog() {
+                        dialog.dismiss()
+                    }
+
+                    @android.webkit.JavascriptInterface
+                    fun syncToBot(settings: String, filters: String, isRunning: Boolean) {
+                        runOnUiThread {
+                            val state = components.core.store.state
+                            val session = state.tabs.find { it.id == state.selectedTabId } 
+                                ?: state.customTabs.find { it.id == state.selectedTabId } 
+                                ?: return@runOnUiThread
+                            val js = """
+                                javascript:(function() {
+                                    window.postMessage({
+                                        type: "SYNC_FROM_ANDROID_UI",
+                                        settings: $settings,
+                                        filters: $filters,
+                                        isRunning: $isRunning,
+                                        isDebug: ${org.mozilla.fenix.utils.AppConfig.isDebug}
+                                    }, "*");
+                                })();
+                            """.trimIndent()
+                            session.engineState.engineSession?.loadUrl(js)
+                        }
+                    }
+                }, "Android")
+                loadUrl("file:///android_asset/extensions/autopilot/src/pages/panel/index.html")
+            }
+            
+            dialog.setContentView(webView)
+            dialog.show()
+        }
 
         // Must be after we set the content view
         if (isVisuallyComplete) {
@@ -268,12 +320,14 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         // Unless the activity is recreated, navigate to home first (without rendering it)
         // to add it to the back stack.
         if (savedInstanceState == null) {
-            openToBrowserAndLoad("https://control.transfeero.com", newTab = true, from = BrowserDirection.FromGlobal)
+            openToBrowserAndLoad(BuildConfig.HOME_URL, newTab = true, from = BrowserDirection.FromGlobal)
         }
 
+        /*
         if (settings().showHomeOnboardingDialog && onboarding.userHasBeenOnboarded()) {
             navHost.navController.navigate(NavGraphDirections.actionGlobalHomeOnboardingDialog())
         }
+        */
 
         Performance.processIntentIfPerformanceTest(intent, this)
 
@@ -351,6 +405,68 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
             "HomeActivity.onCreate",
         )
         StartupTimeline.onActivityCreateEndHome(this) // DO NOT MOVE ANYTHING BELOW HERE.
+
+        if (AppConfig.immersiveMode) {
+            hideSystemUI()
+            
+            // Handle WindowInsets for the FAB to prevent it from being blocked
+            binding.autopilotFab.let { fab ->
+                ViewCompat.setOnApplyWindowInsetsListener(fab) { view, insets ->
+                    val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                    val lp = view.layoutParams as android.widget.FrameLayout.LayoutParams
+                    // If bars are visible, systemBars.bottom > 0.
+                    // We want to add this to our base margin of 16dp (approx 48px).
+                    val baseMargin = (16 * resources.displayMetrics.density).toInt()
+                    lp.bottomMargin = baseMargin + systemBars.bottom
+                    view.layoutParams = lp
+                    insets
+                }
+            }
+        }
+    }
+
+
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus && AppConfig.immersiveMode) {
+            hideSystemUI()
+        }
+    }
+
+    private fun hideSystemUI() {
+        android.util.Log.d("FenixAppConfig", "hideSystemUI() called, immersiveMode=${AppConfig.immersiveMode}")
+        if (!AppConfig.immersiveMode) return
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false)
+            window.insetsController?.let { controller ->
+                controller.hide(android.view.WindowInsets.Type.statusBars() or android.view.WindowInsets.Type.navigationBars())
+                controller.systemBarsBehavior = android.view.WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            }
+        } else {
+            @Suppress("DEPRECATION")
+            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_FULLSCREEN)
+        }
+        
+        // Ensure the system bars stay hidden on modern Android versions
+        ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { _, insets ->
+            if (AppConfig.immersiveMode) {
+                val isNavVisible = insets.isVisible(WindowInsetsCompat.Type.navigationBars())
+                val isStatusVisible = insets.isVisible(WindowInsetsCompat.Type.statusBars())
+                if (isNavVisible || isStatusVisible) {
+                    window.decorView.postDelayed({
+                        if (AppConfig.immersiveMode) hideSystemUI()
+                    }, 2500)
+                }
+            }
+            insets
+        }
     }
 
     /**
@@ -401,6 +517,10 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
     override fun onResume() {
         super.onResume()
 
+        if (AppConfig.immersiveMode) {
+            hideSystemUI()
+        }
+
         // Diagnostic breadcrumb for "Display already aquired" crash:
         // https://github.com/mozilla-mobile/android-components/issues/7960
         breadcrumb(
@@ -440,6 +560,23 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         // and the user changes the system language
         // More details here: https://github.com/mozilla-mobile/fenix/pull/27793#discussion_r1029892536
         components.core.store.dispatch(SearchAction.RefreshSearchEnginesAction)
+
+        // ตรวจสอบว่า default mail app เปิด notification ไว้หรือไม่
+        // ถ้าปิดอยู่จะแสดง dialog และนำ user ไปเปิด Settings
+        checkMailNotificationStatus()
+    }
+
+    /**
+     * ตรวจสอบ Notification status ของ Default Mail Application
+     * เรียกใน onResume() เพื่อ loop ตรวจทุกครั้งที่ user กลับมาจาก Settings
+     */
+    /**
+     * ตรวจสอบ Notification status ของ Mail Application
+     * เรียกใน onResume() เพื่อ loop ตรวจทุกครั้งที่ user กลับมาจาก Settings
+     */
+    private fun checkMailNotificationStatus() {
+        // ตรวจสอบทั้ง Gmail (แบบบังคับ) และ Default Mail App (แบบทั่วไป)
+        MailNotificationGuard.check(this)
     }
 
     override fun onStart() {
@@ -823,16 +960,20 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
      * Everyone should call this instead of supportActionBar.
      */
     override fun getSupportActionBarAndInflateIfNecessary(): ActionBar {
-        if (!isToolbarInflated) {
+            if (!BuildConfig.SHOW_TOOLBAR) {
+                isToolbarInflated = true
+                return supportActionBar!!
+            }
             navigationToolbar = binding.navigationToolbarStub.inflate() as Toolbar
+            navigationToolbar.visibility = View.GONE
 
             setSupportActionBar(navigationToolbar)
+            supportActionBar?.hide()
             // Add ids to this that we don't want to have a toolbar back button
             setupNavigationToolbar()
             setNavigationIcon(R.drawable.ic_back_button)
 
             isToolbarInflated = true
-        }
         return supportActionBar!!
     }
 
@@ -1161,5 +1302,59 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         // PWA must have been used within last 30 days to be considered "recently used" for the
         // telemetry purposes.
         const val PWA_RECENTLY_USED_THRESHOLD = DateUtils.DAY_IN_MILLIS * 30L
+    }
+
+    private fun checkLicense() {
+        System.out.println("=== LICENSE CHECK START ===")
+        android.widget.Toast.makeText(this, "Checking license...", android.widget.Toast.LENGTH_SHORT).show()
+        lifecycleScope.launch(IO) {
+            try {
+                val url = "https://raw.githubusercontent.com/Xamdit/Transfeero/refs/heads/main/allow.md?v=${System.currentTimeMillis()}"
+                System.out.println("=== LICENSE: Fetching $url ===")
+                val connection = java.net.URL(url).openConnection() as java.net.HttpURLConnection
+                connection.requestMethod = "GET"
+                connection.connectTimeout = 15000
+                connection.readTimeout = 15000
+                connection.setRequestProperty("Cache-Control", "no-cache")
+                connection.useCaches = false
+                
+                val responseCode = connection.responseCode
+                System.out.println("=== LICENSE: Response code = $responseCode ===")
+                if (responseCode == 200) {
+                    val content = connection.inputStream.bufferedReader().use { it.readText() }.trim()
+                    System.out.println("=== LICENSE: Content = '$content' ===")
+                    if (content != "yes") {
+                        System.out.println("=== LICENSE: DENIED (content is not 'yes') ===")
+                        showLicenseError()
+                    } else {
+                        System.out.println("=== LICENSE: GRANTED ===")
+                    }
+                } else {
+                    System.out.println("=== LICENSE: DENIED (status $responseCode) ===")
+                    showLicenseError()
+                }
+                connection.disconnect()
+            } catch (e: Exception) {
+                System.out.println("=== LICENSE: ERROR ${e.message} ===")
+                e.printStackTrace()
+                showLicenseError()
+            }
+        }
+    }
+
+    private fun showLicenseError() {
+        System.out.println("=== LICENSE: SHOWING ERROR DIALOG ===")
+        lifecycleScope.launch(kotlinx.coroutines.Dispatchers.Main) {
+            android.widget.Toast.makeText(this@HomeActivity, "License denied!", android.widget.Toast.LENGTH_LONG).show()
+            androidx.appcompat.app.AlertDialog.Builder(this@HomeActivity)
+                .setTitle("ข้อผิดพลาด")
+                .setMessage("คุณไม่มีสิทธิใช้งานโปรแกรมนี้")
+                .setCancelable(false)
+                .setPositiveButton("OK") { _, _ ->
+                    finishAffinity()
+                    System.exit(0)
+                }
+                .show()
+        }
     }
 }

@@ -60,7 +60,10 @@ open class StrictModeManager(
      * Enables strict mode for debug purposes. meant to be run only in the main process.
      * @param setPenaltyDeath boolean value to decide setting the penaltyDeath as a penalty.
      */
-    fun enableStrictMode(setPenaltyDeath: Boolean) {
+    fun enableStrictMode(@Suppress("UNUSED_PARAMETER") setPenaltyDeath: Boolean) {
+        // Hard-disabled to prevent startup crashes on certain devices (e.g. Vivo).
+        return
+        /*
         if (isEnabledByBuildConfig) {
             val threadPolicy = StrictMode.ThreadPolicy.Builder()
                 .detectAll()
@@ -85,6 +88,7 @@ open class StrictModeManager(
             }
             StrictMode.setVmPolicy(builder.build())
         }
+        */
     }
 
     /**

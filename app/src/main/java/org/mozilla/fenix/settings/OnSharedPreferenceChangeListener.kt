@@ -21,8 +21,10 @@ class OnSharedPreferenceChangeListener(
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
     }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        listener(sharedPreferences, key)
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        if (sharedPreferences != null && key != null) {
+            listener(sharedPreferences, key)
+        }
     }
 }
 

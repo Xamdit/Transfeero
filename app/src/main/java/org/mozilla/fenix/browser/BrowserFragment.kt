@@ -32,11 +32,9 @@ import mozilla.components.feature.contextmenu.ContextMenuCandidate
 import mozilla.components.feature.readerview.ReaderViewFeature
 import mozilla.components.feature.tab.collections.TabCollection
 import mozilla.components.feature.tabs.WindowFeature
-import mozilla.components.lib.state.ext.consumeFlow
 import mozilla.components.service.glean.private.NoExtras
 import mozilla.components.support.base.feature.UserInteractionHandler
 import mozilla.components.support.base.feature.ViewBoundFeatureWrapper
-import mozilla.components.support.ktx.kotlinx.coroutines.flow.ifAnyChanged
 import org.mozilla.fenix.GleanMetrics.ReaderMode
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.FenixSnackbar
@@ -51,6 +49,7 @@ import kotlinx.coroutines.flow.map
 import mozilla.components.browser.state.selector.selectedTab
 import mozilla.components.lib.state.ext.consumeFlow
 import mozilla.components.support.ktx.kotlinx.coroutines.flow.ifAnyChanged
+import org.mozilla.fenix.BuildConfig
 import org.mozilla.fenix.ext.settings
 import org.mozilla.fenix.nimbus.FxNimbus
 import org.mozilla.fenix.settings.quicksettings.protections.cookiebanners.dialog.CookieBannerReEngagementDialogUtils
@@ -334,6 +333,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
         val settings = context.settings()
 
         if (!settings.userKnowsAboutPwas) {
+            /*
             pwaOnboardingObserver = PwaOnboardingObserver(
                 store = context.components.core.store,
                 lifecycleOwner = this,
@@ -343,6 +343,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
             ).also {
                 it.start()
             }
+            */
         }
 
         subscribeToTabCollections()
@@ -473,6 +474,10 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
         context: Context,
         view: View,
     ): List<ContextMenuCandidate> {
+        if (!BuildConfig.SHOW_CONTEXT_MENU) {
+            return emptyList()
+        }
+
         val contextMenuCandidateAppLinksUseCases = AppLinksUseCases(
             requireContext(),
             { true },

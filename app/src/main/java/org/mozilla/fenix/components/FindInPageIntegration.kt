@@ -54,7 +54,7 @@ class FindInPageIntegration(
 
     @VisibleForTesting
     internal fun restorePreviousLayout() {
-        toolbarInfo.toolbar.isVisible = true
+        toolbarInfo.toolbar.visibility = View.GONE
 
         val engineViewParent = getEngineViewParent()
         val engineViewParentParams = getEngineViewsParentLayoutParams()

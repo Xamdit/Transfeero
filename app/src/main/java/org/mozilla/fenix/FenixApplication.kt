@@ -123,10 +123,12 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
         private set
 
     override fun onCreate() {
+        android.util.Log.i("LicenseCheck", "FenixApplication.onCreate() started")
         // We measure ourselves to avoid a call into Glean before its loaded.
         val start = SystemClock.elapsedRealtimeNanos()
 
         super.onCreate()
+        org.mozilla.fenix.utils.AppConfig.load(this)
 
         setupInAllProcesses()
 
@@ -138,8 +140,11 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
             return
         }
 
+        android.util.Log.d("FenixLog", "StartupStep: 0. Application.onCreate start")
         // DO NOT ADD ANYTHING ABOVE HERE.
+        android.util.Log.d("FenixLog", "StartupStep: 0.1 setupInMainProcessOnly starting...")
         setupInMainProcessOnly()
+        android.util.Log.d("FenixLog", "StartupStep: 10. Application.onCreate end")
         // DO NOT ADD ANYTHING UNDER HERE.
 
         // DO NOT MOVE ANYTHING BELOW THIS elapsedRealtimeNanos CALL.
@@ -190,6 +195,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
 
     @CallSuper
     open fun setupInAllProcesses() {
+        android.util.Log.d("FenixLog", "StartupStep: -1. setupInAllProcesses start")
         setupCrashReporting()
 
         // We want the log messages of all builds to go to Android logcat
@@ -198,32 +204,39 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
 
     @CallSuper
     open fun setupInMainProcessOnly() {
+        android.util.Log.d("FenixLog", "StartupStep: 1. setupInMainProcessOnly start")
         // ⚠️ DO NOT ADD ANYTHING ABOVE THIS LINE.
         // Especially references to the engine/BrowserStore which can alter the app initialization.
         // See: https://github.com/mozilla-mobile/fenix/issues/26320
         //
         // We can initialize Nimbus before Glean because Glean will queue messages
         // before it's initialized.
+        android.util.Log.d("FenixLog", "StartupStep: 2. Initialize Nimbus")
         initializeNimbus()
 
         ProfilerMarkerFactProcessor.create { components.core.engine.profiler }.register()
 
         run {
             // Make sure the engine is initialized and ready to use.
+            // android.util.Log.d("FenixLog", "StartupStep: 2.1 engine.warmUp")
             components.strictMode.resetAfter(StrictMode.allowThreadDiskReads()) {
                 components.core.engine.warmUp()
             }
 
             // We need to always initialize Glean and do it early here.
+            android.util.Log.d("FenixLog", "StartupStep: 3. Initialize Glean")
             initializeGlean()
 
             // Attention: Do not invoke any code from a-s in this scope.
+            android.util.Log.d("FenixLog", "StartupStep: 4. finishSetupMegazord")
             val megazordSetup = finishSetupMegazord()
 
+            android.util.Log.d("FenixLog", "StartupStep: 5. setDayNightTheme")
             setDayNightTheme()
-            components.strictMode.enableStrictMode(true)
+            // components.strictMode.enableStrictMode(true) // Disabled to prevent crash on Vivo devices
             warmBrowsersCache()
 
+            android.util.Log.d("FenixLog", "StartupStep: 6. initializeWebExtensionSupport")
             initializeWebExtensionSupport()
             if (FeatureFlags.storageMaintenanceFeature) {
                 // Make sure to call this function before registering a storage worker
@@ -233,8 +246,11 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
                 // for the periodic task.
                 GlobalPlacesDependencyProvider.initialize(components.core.historyStorage)
             }
+            android.util.Log.d("FenixLog", "StartupStep: 7. restoreBrowserState")
             restoreBrowserState()
+            android.util.Log.d("FenixLog", "StartupStep: 8. restoreDownloads")
             restoreDownloads()
+            android.util.Log.d("FenixLog", "StartupStep: 9. restoreMessaging")
             restoreMessaging()
 
             // Just to make sure it is impossible for any application-services pieces
@@ -245,7 +261,6 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
             }
         }
 
-        setupLeakCanary()
         startMetricsIfEnabled()
         setupPush()
 
@@ -410,14 +425,6 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
         }
     }
 
-    protected open fun setupLeakCanary() {
-        // no-op, LeakCanary is disabled by default
-    }
-
-    open fun updateLeakCanaryState(isEnabled: Boolean) {
-        // no-op, LeakCanary is disabled by default
-    }
-
     private fun setupPush() {
         // Sets the PushFeature as the singleton instance for push messages to go to.
         // We need the push feature setup here to deliver messages in the case where the service
@@ -439,6 +446,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
     }
 
     private fun setupCrashReporting() {
+        android.util.Log.d("FenixLog", "StartupStep: -0.5. setupCrashReporting")
         components
             .analytics
             .crashReporter
@@ -672,6 +680,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
                 when (Config.channel.isMozillaOnline) {
                     true -> "MozillaOnline"
                     false -> "Mozilla"
+                    else -> "Mozilla"
                 },
             )
 
@@ -683,7 +692,11 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
             if (settings.contileContextId.isEmpty()) {
                 settings.contileContextId = TopSites.contextId.generateAndSet().toString()
             } else {
-                TopSites.contextId.set(UUID.fromString(settings.contileContextId))
+                try {
+                    TopSites.contextId.set(UUID.fromString(settings.contileContextId))
+                } catch (e: IllegalArgumentException) {
+                    settings.contileContextId = TopSites.contextId.generateAndSet().toString()
+                }
             }
 
             mozillaProducts.set(
@@ -739,6 +752,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
                 when (settings.toolbarPosition) {
                     ToolbarPosition.BOTTOM -> CustomizationFragment.Companion.Position.BOTTOM.name
                     ToolbarPosition.TOP -> CustomizationFragment.Companion.Position.TOP.name
+                    else -> ""
                 },
             )
 

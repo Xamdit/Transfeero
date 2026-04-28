@@ -92,7 +92,6 @@ Tiktiwin tigejdanin yuzzlen ur nṣeḥḥi ara
 
     <!-- Total cookie protection "contextual feature recommendation" (CFR) -->
     <!-- Text for the message displayed in the contextual feature recommendation popup promoting the total cookie protection feature. -->
-    <string name="tcp_cfr_message">Tamahilt-nneɣ n tbaḍnit iǧehden aṭas akka ar tura iɛezzel ineḍfaren gar yismal.</string>
     <!-- Text displayed that links to website containing documentation about the "Total cookie protection" feature. -->
     <string name="tcp_cfr_learn_more">Issin ugar ɣef ummesten asemday mgal inagan n tuqqna</string>
 

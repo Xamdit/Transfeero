@@ -89,7 +89,6 @@
 
     <!-- Total cookie protection "contextual feature recommendation" (CFR) -->
     <!-- Text for the message displayed in the contextual feature recommendation popup promoting the total cookie protection feature. -->
-    <string name="tcp_cfr_message">Tính năng bảo mật mạnh mẽ nhất của chúng tôi nhưng vẫn tách biệt các trình theo dõi trên nhiều trang web.</string>
     <!-- Text displayed that links to website containing documentation about the "Total cookie protection" feature. -->
     <string name="tcp_cfr_learn_more">Tìm hiểu về trình chống cookie chung</string>
 

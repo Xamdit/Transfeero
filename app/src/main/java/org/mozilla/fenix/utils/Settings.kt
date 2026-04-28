@@ -304,6 +304,11 @@ class Settings(private val appContext: Context) : PreferencesHolder {
         default = !Config.channel.isMozillaOnline,
     )
 
+    var ignoreMailNotificationGuard by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_mail_notification_guard_ignore),
+        default = false,
+    )
+
     var isExperimentationEnabled by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_experimentation),
         default = true,
@@ -326,7 +331,7 @@ class Settings(private val appContext: Context) : PreferencesHolder {
 
     var shouldUseLightTheme by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_light_theme),
-        default = true,
+        default = false,
     )
 
     var shouldUseAutoSize by booleanPreference(
@@ -401,7 +406,7 @@ class Settings(private val appContext: Context) : PreferencesHolder {
 
     var isFirstNimbusRun: Boolean by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_is_first_run),
-        default = false,
+        default = true,
     )
 
     var nimbusLastFetchTime: Long by longPreference(
@@ -551,7 +556,7 @@ class Settings(private val appContext: Context) : PreferencesHolder {
     var shouldUseCookieBanner by lazyFeatureFlagPreference(
         appContext.getPreferenceKey(R.string.pref_key_cookie_banner_v1),
         featureFlag = true,
-        default = { false },
+        default = { cookieBannersSection[CookieBannersSection.FEATURE_SETTING_VALUE] == 1 },
     )
 
     var userOptOutOfReEngageCookieBannerDialog by booleanPreference(
@@ -826,7 +831,7 @@ class Settings(private val appContext: Context) : PreferencesHolder {
     var shouldUseBottomToolbar by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_toolbar_bottom),
         // Default accessibility users to top toolbar
-        default = false,
+        default = !touchExplorationIsEnabled && !switchServiceIsEnabled,
     )
 
     val toolbarPosition: ToolbarPosition
@@ -1372,7 +1377,7 @@ class Settings(private val appContext: Context) : PreferencesHolder {
     var showHomeOnboardingDialog by lazyFeatureFlagPreference(
         appContext.getPreferenceKey(R.string.pref_key_should_show_home_onboarding_dialog),
         featureFlag = true,
-        default = { false },
+        default = { mr2022Sections[Mr2022Section.HOME_ONBOARDING_DIALOG_EXISTING_USERS] == true },
     )
 
     /**

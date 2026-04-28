@@ -149,11 +149,11 @@ class DefaultToolbarIntegration(
 
     override fun start() {
         super.start()
-        cfrPresenter.start()
+        // cfrPresenter.start() // Disabled in PKGO
     }
 
     override fun stop() {
-        cfrPresenter.stop()
+        // cfrPresenter.stop() // Disabled in PKGO
         super.stop()
     }
 }

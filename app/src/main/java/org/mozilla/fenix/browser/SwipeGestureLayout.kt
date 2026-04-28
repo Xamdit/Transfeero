@@ -72,8 +72,8 @@ class SwipeGestureLayout @JvmOverloads constructor(
             distanceX: Float,
             distanceY: Float,
         ): Boolean {
-            val start = e1.let { event -> PointF(event.rawX, event.rawY) }
-            val next = e2.let { event -> PointF(event.rawX, event.rawY) }
+            val start = PointF(e1.rawX, e1.rawY)
+            val next = PointF(e2.rawX, e2.rawY)
 
             if (activeListener == null && !handledInitialScroll) {
                 activeListener = listeners.firstOrNull { listener ->
